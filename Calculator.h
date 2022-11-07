@@ -1,4 +1,9 @@
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
+#include <cmath>
+#include <limits>
 
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
