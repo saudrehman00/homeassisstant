@@ -4,33 +4,24 @@ TARGET := Assistant
 
 all: $(TARGET)
 
-$(TARGET): $(TARGET).cpp Login.o Authenticate.o LoginForm.o Database.o List.o ListUI.o
-	$(CC) $^ -o $@ $(FLAGS)
+$(TARGET): $(TARGET).o Login.o
+	$(CC) -o $@ $^ -lwthttp -lwt
 	touch $(TARGET)
 
-Login.o: Authenticate.o LoginForm.o
-	$(CC) -c $^ $(FLAGS)
-	touch Login.o
+$(TARGET).o: Assistant.cpp
+	$(CC) -o $^
 
-LoginForm.o: gui/LoginForm.cpp
-	$(CC) -c $^ $(FLAGS)
-	touch LoginForm.o
+Login.o: Authenticate.o LoginForm.o
+	$(CC) -c $^
+	touch Login.o
 
 Authenticate.o: auth/Authenticate.cpp
 	$(CC) -c $^ $(FLAGS)
 	touch Authenticate.o
 
-Database.o: data/db/Database.cpp
+LoginForm.o: gui/LoginForm.cpp
 	$(CC) -c $^ $(FLAGS)
-	touch Database.o
-
-List.o: data/list/List.cpp data/list/ListMap.cpp
-	$(CC) -c $^ $(FLAGS)
-	touch List.o
-
-ListUI.o: gui/ListUI.cpp
-	$(CC) -c $^ $(FLAGS)
-	touch ListUI.o.o
+	touch LoginForm.o
 
 clean:
 	-rm *.o $(objects)
