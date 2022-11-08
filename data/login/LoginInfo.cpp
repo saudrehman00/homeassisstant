@@ -12,12 +12,12 @@ using namespace std;
 namespace {
     // work in progress method
     string encrypt(string password) {
-        return "a";
+        return password;
     }
 
     // work in progress method
     string decrypt(string encryptedPass) {
-        return "a";
+        return encryptedPass;
     }
 
     // loginTime() gets the current system time

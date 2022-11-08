@@ -41,9 +41,11 @@ void Authenticate::startAuth() {
         if (exists && page == "Login") {
              cerr << "\nAuthenticate: checking password.\n";
             if (info.authenticate()) {
-                // cerr << "\nAuthenticate: password correct.\n";
+                cerr << "\nAuthenticate: password correct.\n";
                 app->root()->removeWidget(f);
-                // start assistant app
+                app->root()->addNew<ListUI>();
+            } else {
+                f->getHelp()->setText("Please check that your username or password is correct.");
             }
         } else if (exists && page == "Register") {
             f->getHelp()->setText("That username already exists!");
