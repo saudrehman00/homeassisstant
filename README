@@ -16,3 +16,17 @@ README
     Before restarting the main application after a compile, enter:
         $ fuser -k 9090/tcp
     to kill the web process.
+
+    CALCULATOR
+    To compile and run the calculator use:
+        $ make Calculator
+        $ ./Calculator
+    
+    It will prompt you through command line to enter a number, choose an operation, then another number. User can exit the calculator by choosing 8 for the operation (as shown in the operation list) or by cancelling the program with CTRL+C
+
+    PROFILE CREATION, REMOVING, AND USER OBJECTS
+    To compile and run the profile creator use:
+        $ make Profiles
+        $ ./Profiles
+
+    Since this is just the foundations for the back-end of profile management, there is no interactable prototype. In the Test.cpp which the executable "Profiles" uses, several profiles are created with certain passwords and usernames, then displayed, then one is removed, and the program tries to display them again, showing the profiles adding, removing, and displaying capabilities.
