@@ -30,6 +30,7 @@ class List {
         std::string getScehdule();
         std::string getDateAdded();
         std::string getDesc();
+        std::string getType();
         void finish();
         void editDesc(std::string newDesc);
         void editType(std::string newType);

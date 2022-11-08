@@ -13,21 +13,20 @@
 #include <mutex>
 #include <memory>
 #include "LogMessage.h"
-#include "Database.h"
+#include "../db/Database.h"
 
 class Logger {
     public:
-        static const Logger& instance();
-        void log(std::string msg, std::string app);
+        static Logger& instance();
+        void log(std::string msg);
         std::vector<LogMessage> read_all();
 
     private:
         Database *_db;
-        string loggerName;
         Logger();
         ~Logger();
-        Logger(const Logger& other) {};
-        Logger& operator=(const Logger& other) {};
+        Logger(const Logger& other) = delete;
+        Logger& operator=(const Logger& other) = delete;
 };
 
 #endif

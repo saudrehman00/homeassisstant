@@ -7,7 +7,7 @@
 #include "Logger.h"
 using namespace std;
 
-const Logger& Logger::instance() {
+Logger& Logger::instance() {
     static Logger instance;
     return instance;
 }   
@@ -18,7 +18,7 @@ const Logger& Logger::instance() {
 Logger::Logger() {
     char *err = 0;
     // create a new sqlite table with the name "app" if it does not exist
-    string create_table_cmd = "create table if not exists" + loggerName + "(timestamp varchar(255), message varchar(255))";
+    string create_table_cmd = "create table if not exists Logger (timestamp varchar(255), message varchar(255))";
     sqlite3_exec(_db->getConnection(), create_table_cmd.c_str(), nullptr, 0, &err);
 
     if (err != SQLITE_OK) {
@@ -35,14 +35,14 @@ Logger::~Logger() {}
 // system time to the database in the table called app
 // @param msg is the log message
 // @return nothing
-void Logger::log(string msg, string app) {
+void Logger::log(string msg) {
     time_t now = time(0); // gets the current system time
     string time = ctime(&now); // change to c++ string for manipulation
     // remove \n that is generated at the end of a new time_t for formatting
     time.replace(time.length()-1, time.length(), "\0");
 
     // insert the log message into the Logger's database
-    string insert_cmd = "insert into " + loggerName + " values (\"" + app + "\", \"" + time + "\", \"" + msg + "\")";
+    string insert_cmd = "insert into Logger values (\"" + time + "\", \"" + msg + "\")";
     char *err = 0;
     sqlite3_exec(_db->getConnection(), insert_cmd.c_str(), nullptr, 0, &err);
 
@@ -57,7 +57,7 @@ void Logger::log(string msg, string app) {
 // @return history is a vector containing LogMessage objects
 vector<LogMessage> Logger::read_all() {
     int err = 0;  // string pointer used for sqlite errors
-    string read_all_cmd = "select * from " + loggerName; // sqlite statement to get all data from table
+    string read_all_cmd = "select * from Logger"; // sqlite statement to get all data from table
     const int len = read_all_cmd.length();
     sqlite3_stmt *stmnt;
     vector<LogMessage> history; // stores found log messages to be returned

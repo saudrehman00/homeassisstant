@@ -20,10 +20,8 @@ unique_ptr<WApplication> createApplication(const WEnvironment &env) {
     app->messageResourceBundle().use(app->appRoot() + "templates");
     app->useStyleSheet("loginStyle.css");
 
-    /* start auth process
     Authenticate a;
     a.startAuth();
-    */
 
     app->root()->addNew<ListUI>();
 

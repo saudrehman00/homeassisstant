@@ -10,6 +10,9 @@
 using namespace std;
 
 namespace {
+    // getToday() gets today's date
+    // @param nothing
+    // @return nothing
     string getToday() {
         time_t now = time(0); // gets the current system time
         string time = ctime(&now); // change to c++ string for manipulation
@@ -49,11 +52,18 @@ string List::getDateAdded() {
     return dateAdded;
 }
 
-// getDesc(itemName) gets the description of an item in chkList
+// getDesc() gets the description of this List
 // @param nothing
 // @return todo is the description of the item
 string List::getDesc() {
     return desc;
+}
+
+// getType() gets the type of this List
+// @param nothing
+// @return todo is the description of the item
+string List::getType() {
+    return type;
 }
 
 // finish(itemName) marks itemName as complete in this List

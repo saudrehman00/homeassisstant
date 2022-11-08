@@ -10,7 +10,7 @@
 #include <string>
 #include "../Data.h"
 
-class LoginInfo : public Data {
+class LoginInfo {
     private:
         // pointer to profile
         std::string username;

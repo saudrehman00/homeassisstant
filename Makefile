@@ -1,32 +1,36 @@
 CC := g++
-FLAGS := -lwthttp -lwt
+FLAGS := -lwthttp -lwt -lsqlite3
 TARGET := Assistant
 
 all: $(TARGET)
 
-$(TARGET): $(TARGET).cpp Login.o Data.o Components.o
-	$(CC) Assistant.cpp $^ -o $@ $(FLAGS)
+$(TARGET): $(TARGET).cpp Login.o Authenticate.o LoginForm.o Database.o List.o ListUI.o
+	$(CC) $^ -o $@ $(FLAGS)
 	touch $(TARGET)
 
 Login.o: Authenticate.o LoginForm.o
 	$(CC) -c $^ $(FLAGS)
 	touch Login.o
 
-Authenticate.o: auth/Authenticate.h auth/Authenticate.cpp
-	$(CC) -c auth/Authenticate.cpp $(FLAGS)
-	touch Authenticate.o
-
-LoginForm.o: auth/LoginForm.h auth/LoginForm.cpp
-	$(CC) -c auth/LoginForm.cpp $(FLAGS)
+LoginForm.o: gui/LoginForm.cpp
+	$(CC) -c $^ $(FLAGS)
 	touch LoginForm.o
 
-Data.o: data/LoginInfo.h data/db/Database.h data/LoginInfo.cpp data/db/Database.cpp
-	$(CC) -c data/LoginInfo.cpp data/db/Database.cpp -lsqlite3
-	touch Data.o
+Authenticate.o: auth/Authenticate.cpp
+	$(CC) -c $^ $(FLAGS)
+	touch Authenticate.o
 
-Components.o: components/ChecklistUI.h components/ChecklistUI.cpp
-	$(CC) -c components/ChecklistUI.cpp $(FLAGS)
-	touch Components.o
+Database.o: data/db/Database.cpp
+	$(CC) -c $^ $(FLAGS)
+	touch Database.o
+
+List.o: data/list/List.cpp data/list/ListMap.cpp
+	$(CC) -c $^ $(FLAGS)
+	touch List.o
+
+ListUI.o: gui/ListUI.cpp
+	$(CC) -c $^ $(FLAGS)
+	touch ListUI.o.o
 
 clean:
 	-rm *.o $(objects)

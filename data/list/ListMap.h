@@ -3,12 +3,12 @@
 
 #include <unordered_map>
 #include <string>
-#include "Checklist.h"
-#include "Data.h"
+#include "List.h"
+#include "../Data.h"
 
 class ListMap : public Data {
     private:
-        std::unordered_map<std::string, Checklist> lists;
+        std::unordered_map<std::string, List> lists;
         Database db;
         // pointer to user
 
@@ -16,6 +16,10 @@ class ListMap : public Data {
         ListMap();
         ~ListMap();
         void linkProfile(std::string profileName);
-        void saveData();
+        void saveData(std::string username);
+        void delData(std::string username);
+        void add(List list);
+        void del(List list);
+        List get(std::string key);
 };
 #endif

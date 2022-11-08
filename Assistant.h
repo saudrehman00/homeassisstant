@@ -12,6 +12,7 @@
 #include <Wt/WString.h>
 #include <Wt/WContainerWidget.h>
 #include <Wt/WBootstrap5Theme.h>
+#include "data/logger/Logger.h"
 #include "auth/Authenticate.h"
 #include "gui/ListUI.h"
 

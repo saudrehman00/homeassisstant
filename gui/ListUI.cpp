@@ -11,7 +11,7 @@ namespace {
 	const int HEADER_ROW = 0;
 }
 
-ListUI::ListUI() : WTemplate{tr("List")}, listCount(0) {
+ListUI::ListUI() : WTemplate{tr("list")}, listCount(0) {
 	WApplication *app = WApplication::instance();
 	addFunction("id", &WTemplate::Functions::id);
 	addFunction("tr", &WTemplate::Functions::tr);
@@ -55,10 +55,8 @@ ListUI::ListUI() : WTemplate{tr("List")}, listCount(0) {
 	table->columnAt(ITEM_COL)->setWidth(WLength("55%"));
 	table->columnAt(TYPE_COL)->setWidth(WLength("20%"));
 	table->columnAt(DATE_COL)->setWidth(WLength("15%"));
-	table->columnAt(DATE_COL)->setStyleClass("d-flex justify-content-center align-items-center");
 	table->setStyleClass("table-hover");
 	table->rowAt(HEADER_ROW)->setStyleClass("lead rounded fw-normal bg-light");
-	table->columnAt(DATE_COL)->setStyleClass("lead rounded fw-normal bg-light d-flex justify-content-center align-items-center");
 }
 
 ListUI::~ListUI() {
@@ -85,30 +83,38 @@ void ListUI::add() {
 	});
 	cbFilter->addItem(type);
 
-	List list(type, desc);
-	string key = list.getDateAdded();
-	lists.emplace(key, list);
+	List l(type, desc);
+	string date = l.getDateAdded();
+	lists.add(l);
 
 	WLineEdit* rowDesc = table->elementAt(listCount, ITEM_COL)->addNew<WLineEdit>(WString(desc));
 	WLineEdit* rowType = table->elementAt(listCount, TYPE_COL)->addNew<WLineEdit>(WString(type));
-	table->elementAt(listCount, DATE_COL)->addNew<WText>(WString(list.getDateAdded()));
+	table->elementAt(listCount, DATE_COL)->addNew<WText>(WString(date));
 	WPushButton* rmv = table->elementAt(listCount, RMV_COL)->addWidget(make_unique<WPushButton>("Remove"));
 
 	int row = table->rowAt(listCount)->rowNum();
 	rmv->clicked().connect([=] {
 		table->removeRow(row);
+		lists.del(l);
 		listCount--;
 	});
 	rowDesc->keyWentUp().connect([=] {
-		lists.at(key).editDesc(rowDesc->text().toUTF8());
+		lists.get(date).editDesc(rowDesc->text().toUTF8());
 	});
 	rowType->keyWentUp().connect([=] {
-		lists.at(key).editType(rowType->text().toUTF8());
+		lists.get(date).editType(rowType->text().toUTF8());
 	});
 }
 
+// load() loads all of the users saved lists
+// @param nothing
+// @return nothing
+void ListUI::load() {
+
+}
+
 // getTypeInput(pu) adds a new List type
-// @param pu is the reference to the popup menu
+// @param popup is the reference to the popup menu
 // @return the text of the selected item as string
 string ListUI::getTypeInput(WPopupMenu* popup) {
 	if (popup->result()) {
