@@ -12,6 +12,9 @@ int main(int argc, char* argv[]){
     pC.displayProfile(1);
     pC.displayProfile(2);
     pC.displayProfile(3);
+    pC.removeProfile(2);
+    pC.displayProfile(3);
+    pC.displayProfile(2);
 
 
 }
