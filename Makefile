@@ -33,11 +33,11 @@ ListUI.o: gui/ListUI.cpp
 	touch ListUI.o
 
 Calculator: calculator/Calculator.cpp
-	$(CC) -c $^ $(FLAGS)
+	$(CC) -c $^ 
 	touch Calculator
 
 Profiles: data/user/ProfileCreator.cpp
-	$(CC) -c $^ $(FLAGS)
+	$(CC) -c $^ 
 	touch Profiles
 
 clean:
