@@ -29,5 +29,13 @@ ListMap.o: data/list/ListMap.h data/list/ListMap.cpp
 List.o: data/list/List.h data/list/List.cpp
 	$(CC) -c data/list/List.cpp
 
+Calculator: calculator/Calculator.cpp
+	$(CC) -c $^ 
+	touch Calculator
+
+Profiles: data/user/ProfileCreator.cpp
+	$(CC) -c $^ 
+	touch Profiles
+    
 clean:
 	-rm *.o $(objects)
