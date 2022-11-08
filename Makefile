@@ -4,7 +4,7 @@ TARGET := Assistant
 
 all: $(TARGET)
 
-$(TARGET): $(TARGET).cpp Login.o Authenticate.o LoginForm.o Database.o List.o ListUI.o
+$(TARGET): $(TARGET).cpp Login.o Authenticate.o LoginForm.o Database.o List.o ListUI.o 
 	$(CC) $^ -o $@ $(FLAGS)
 	touch $(TARGET)
 
@@ -31,14 +31,6 @@ List.o: data/list/List.cpp data/list/ListMap.cpp
 ListUI.o: gui/ListUI.cpp
 	$(CC) -c $^ $(FLAGS)
 	touch ListUI.o
-
-Calculator.o: calculator/Calculator.cpp
-	$(CC) -c $^ $(FLAGS)
-	touch Calculator.o
-
-Profiles.o: data/user/ProfileCreator.cpp
-	$(CC) -c $^ $(FLAGS)
-	touch Profiles.o
 
 clean:
 	-rm *.o $(objects)
