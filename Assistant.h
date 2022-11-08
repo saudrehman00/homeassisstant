@@ -13,6 +13,7 @@
 #include <Wt/WContainerWidget.h>
 #include <Wt/WBootstrap5Theme.h>
 #include "auth/Authenticate.h"
+#include "gui/ListUI.h"
 
 class Assistant: public Wt::WApplication{
     public:

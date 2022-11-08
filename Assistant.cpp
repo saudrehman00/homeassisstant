@@ -5,7 +5,6 @@
 */
 
 #include "Assistant.h"
-#include "gui/ChecklistUI.h"
 
 using namespace Wt;
 using namespace std;
@@ -26,7 +25,7 @@ unique_ptr<WApplication> createApplication(const WEnvironment &env) {
     a.startAuth();
     */
 
-    app->root()->addNew<ChecklistUI>();
+    app->root()->addNew<ListUI>();
 
     return app;
 }
