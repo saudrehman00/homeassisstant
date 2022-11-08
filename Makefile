@@ -30,12 +30,10 @@ List.o: data/list/List.h data/list/List.cpp
 	$(CC) -c data/list/List.cpp
 
 Calculator: calculator/Calculator.cpp
-	$(CC) -c $^ 
-	touch Calculator
-
+	$(CC) Calculator.cpp -o Calculator
+    
 Profiles: data/user/ProfileCreator.cpp
-	$(CC) -c $^ 
-	touch Profiles
+	$(CC) Profiles.cpp -o Profiles
     
 clean:
 	-rm *.o $(objects)
