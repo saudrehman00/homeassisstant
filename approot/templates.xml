@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<messages>
+
+  <message id="login">
+    <div class="row vh-100 vw-100">
+      <div class="col-sm-12 my-auto d-flex justify-content-center">
+        <div class="card bg-dark text-white" style="width:400px; height:550px; border-radius: 5%">
+          <div class="card-body align-items-center mx-5">
+
+            <div class="text-center mt-3">
+              <h1>${title}</h1>
+              <p>${help}</p>
+            </div>
+
+            <form class="row form-floating mt-5">
+              ${userInput}
+              <label for="userInput">Username</label>
+            </form>
+            <form class="row form-floating mt-4">
+              ${passInput}
+              <label for="passInput">Password</label>
+            </form>
+            <div class="container text-center mt-5">
+              ${okBtn}
+              <div class="mt-5">
+                ${bottomTxt}
+                ${linkBtn}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </message>
+
+  <message id="checklist">
+    <div class="vh-100">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+
+          <div class="card" style="border-radius: 1rem; background-color: #eff1f2;">
+            <div class="card-body py-4 px-md-5">
+
+              <p class="h1 text-dark text-center mt-3 mb-4 pb-3">
+                  What's on the list for today?
+                </p>
+
+              <div class="card row card-block flex-row d-flex justify-content-center">
+                <div class="card-body row d-flex flex-row justify-content-center align-items-center">
+                  <div class="col">
+                    ${addListField}
+                  </div>
+                  <div class="col d-flex">
+                    <div class="col">
+                      <div class="input-group">
+                        ${popupBtn}${addTypeField}
+                      </div>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                      ${addBtn}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <hr class="my-4" />
+              <div class="d-flex justify-content-start align-items-center mb-4 pt-2 pb-3">
+                <p class="small mb-0 me-2 text-muted">Filter</p>
+                <div>${cbFilter}</div>
+                <p class="small mb-0 ms-4 me-2 text-muted">Sort</p>
+                <div>${cbSort}</div>
+                <a href="#!" style="color: #23af89;" data-mdb-toggle="tooltip" title="Ascending">
+                  <i
+                    class="fas fa-sort-amount-down-alt ms-2"></i>
+                </a>
+              </div>
+
+              <div>
+                ${table}
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </message>
+
+</messages>
