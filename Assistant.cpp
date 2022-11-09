@@ -18,7 +18,7 @@ unique_ptr<WApplication> createApplication(const WEnvironment &env) {
     app->setTitle("Boogle Home");
     app->setTheme(theme);
     app->messageResourceBundle().use(app->appRoot() + "templates");
-    app->useStyleSheet("loginStyle.css");
+    app->useStyleSheet("style.css");
 
     // start auth process
     Authenticate a;

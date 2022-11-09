@@ -1,7 +1,7 @@
 /* Jun Shao
 * 251258566
 * November 7
-*  Header file containing member and function delcarations for LoginInfo
+* Header file containing member and function delcarations for LoginInfo
 */
 
 #ifndef LOGININFO_H

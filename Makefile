@@ -4,9 +4,12 @@ TARGET := Assistant
 
 all: $(TARGET)
 
-$(TARGET): Authenticate.o LoginForm.o LoginInfo.o Database.o ListUI.o ListMap.o List.o
+$(TARGET): Authenticate.o LoginForm.o LoginInfo.o Database.o ListUI.o ListMap.o List.o Main.o
 	$(CC) -o $(TARGET) Assistant.cpp $^ $(FLAGS)
 	make clean
+
+Main.o: gui/Main.h gui/Main.cpp
+	$(CC) -c gui/Main.cpp
 
 Authenticate.o: auth/Authenticate.h auth/Authenticate.cpp
 	$(CC) -c auth/Authenticate.cpp

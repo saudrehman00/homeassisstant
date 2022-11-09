@@ -1,17 +1,35 @@
 README
-    This project requires the Wt (Witty) webtool kit library. 
-    To build and install this library, cd to wt-4.8.2/build and enter the following commands:
+    This project was built and compiled on a Linux system (Ubuntu 22.04.1) for prototyping. 
+    Final deployment will be compiled on a Raspberry Pi.
+    
+    This project requires the Wt (Witty) webtool kit, Boost, Cmake, and Curlpp libraries.
+    Enter the following commands to check if you can install the Boost and Curlpp libraries from command line:
+        $ sudo apt-get install libboost-all-dev
+        $ sudo apt-get install libcurlpp-dev
+        $ sudo apt-get install cmake
+    Otherwise, manual installation is required:
+    https://www.boost.org/doc/libs/1_80_0/more/getting_started/index.html
+    http://www.curlpp.org/
+    https://cmake.org/install/
+
+    To build and install the Wt library, cd to wt-4.8.2/build and enter the following commands:
         $ make
         $ make install
     Full instructions can be found at https://www.webtoolkit.eu/wt/doc/reference/html/InstallationUnix.html
 
-    This project was built and compiled on a Linux system (Ubuntu 22.04.1) for prototyping. 
-    Final deployment will be compiled on a Raspberry Pi.
+    
+    For this prototype, there are components which have not yet been integrated into the main graphical interface.
+    For ease of use, there are several files which can be individually ran and tested for their functionalities.
 
-    To run the main application (login testing and shows main landing page), cd to the root directory (group34) and enter:
+    For user stories related to querying from data APIs, the related files will be found in the 'web' directory.
+    To compile the program, enter 
+        $ make
+    and run the file named 'test'.
+
+    To run the main application (login testing, logging, main landing page, and list creations), cd to the root directory (group34) and enter:
         $ make
         $ ./Assistant --docroot docroot  --approot approot --http-address 0.0.0.0 --http-port 9090
-    and head to the local host ip address in any browser (127.0.0.1:9090).
+    Afterwards, head to the local host ip address in any browser (127.0.0.1:9090). Other features have not been implemented.
 
     Before restarting the main application after a compile, enter:
         $ fuser -k 9090/tcp

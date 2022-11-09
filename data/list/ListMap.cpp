@@ -1,3 +1,10 @@
+/* Jun Shao
+ * 251258566
+ * November 7
+ * List is an object that contains the logic
+ * and data for performing operations on multiple lists
+ */
+
 #include "ListMap.h"
 
 using namespace std;

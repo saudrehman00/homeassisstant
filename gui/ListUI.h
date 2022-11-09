@@ -1,3 +1,9 @@
+/* Jun Shao
+* 251258566
+* November 7 2022
+* Header file containing member and function delcarations for ListUI
+*/
+
 #ifndef LISTUI_H
 #define LISTUI_H
 
@@ -15,6 +21,7 @@
 #include <memory>
 #include <string>
 #include "../data/list/ListMap.h"
+#include "Main.h"
 
 class ListUI : public Wt::WTemplate {
     private:
@@ -25,6 +32,7 @@ class ListUI : public Wt::WTemplate {
         Wt::WLineEdit* addTypeField;
         Wt::WPushButton* addBtn;
         Wt::WPushButton* popupBtn;
+        Wt::WPushButton* backBtn;
         Wt::WTable* table;
         int listCount;
         ListMap lists;

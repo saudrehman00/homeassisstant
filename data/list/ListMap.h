@@ -1,3 +1,9 @@
+/* Jun Shao
+ * 251258566
+ * November 7
+ * Header file containing member and function delcarations for ListMap
+ */
+
 #ifndef LISTMAP_H
 #define LISTMAP_h
 

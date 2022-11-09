@@ -1,3 +1,10 @@
+/* Jun Shao
+* 251258566
+* November 7 2022
+* ListUI contains the logic for rendering the todo list UI
+* and for interacting with the user input from the UI
+*/
+
 #include "ListUI.h"
 
 using namespace std;
@@ -38,6 +45,12 @@ ListUI::ListUI() : WTemplate{tr("list")}, listCount(0) {
 	addBtn = bindWidget("addBtn", make_unique<WPushButton>("Add"));
 	addBtn->setStyleClass("btn btn-primary bg-secondary");
 	addBtn->clicked().connect(this, &ListUI::add);
+
+	backBtn = bindWidget("backBtn", make_unique<WPushButton>("Back"));
+	backBtn->clicked().connect([=]{
+        app->root()->removeWidget(this);
+		app->root()->addNew<Main>();
+	});
 
 	cbFilter = bindWidget("cbFilter", make_unique<WComboBox>());
 

@@ -10,7 +10,8 @@
 #include <functional>
 #include "../data/login/LoginInfo.h"
 #include "../gui/LoginForm.h"
-#include "../gui/ListUI.h"
+#include "../gui/Main.h"
+//#include "../gui/ListUI.h"
 
 class Authenticate {
     public:
