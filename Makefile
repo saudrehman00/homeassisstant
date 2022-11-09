@@ -32,5 +32,13 @@ ListMap.o: data/list/ListMap.h data/list/ListMap.cpp
 List.o: data/list/List.h data/list/List.cpp
 	$(CC) -c data/list/List.cpp
 
+Calculator: 
+	$(CC) calculator/Calculator.cpp -o Calculator
+    
+Profiles: 
+	$(CC) data/user/Test.cpp data/user/User.cpp data/user/ProfileCreator.cpp -o Profiles
+    
 clean:
 	-rm *.o $(objects)
+	-rm Calculator
+	-rm Profiles
