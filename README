@@ -54,3 +54,7 @@ README
 
     Since this is just the foundations for the back-end of profile management, there is no interactable prototype. 
     In the Test.cpp which the executable "Profiles" uses, several profiles are created with certain passwords and usernames, then displayed, then one is removed, and the program tries to display them again, showing the profiles adding, removing, and displaying capabilities.
+
+    -------------------------------------------ALARM------------------------------------------------------------------------------------------------
+    To compile and run the alarm cd 'time' and enter:
+        $ g++ alarm.cpp -o alarm
