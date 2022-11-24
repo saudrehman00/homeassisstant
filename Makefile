@@ -4,7 +4,7 @@ TARGET := Assistant
 
 all: $(TARGET)
 
-$(TARGET): Authenticate.o LoginForm.o LoginInfo.o Database.o ListUI.o ListMap.o List.o Main.o
+$(TARGET): Authenticate.o LoginForm.o LoginInfo.o Database.o ListUI.o ListMap.o List.o ClockUI.o ClockPage.o SettingsUI.o LocationPage.o Main.o 
 	$(CC) -o $(TARGET) Assistant.cpp $^ $(FLAGS)
 	make clean
 
@@ -32,13 +32,17 @@ ListMap.o: data/list/ListMap.h data/list/ListMap.cpp
 List.o: data/list/List.h data/list/List.cpp
 	$(CC) -c data/list/List.cpp
 
-Calculator: 
-	$(CC) calculator/Calculator.cpp -o Calculator
-    
-Profiles: 
-	$(CC) data/user/Test.cpp data/user/User.cpp data/user/ProfileCreator.cpp -o Profiles
-    
+ClockUI.o: gui/clock/ClockUI.h gui/clock/ClockUI.cpp
+	$(CC) -c gui/clock/ClockUI.cpp
+
+ClockPage.o:  gui/clock/ClockPage.h gui/clock/ClockPage.cpp
+	$(CC) -c gui/clock/ClockPage.cpp
+
+SettingsUI.o: gui/settings/SettingsUI.h gui/settings/SettingsUI.cpp
+	$(CC) -c gui/settings/SettingsUI.cpp
+
+LocationPage.o:  gui/settings/LocationPage.h gui/settings/LocationPage.cpp
+	$(CC) -c gui/settings/LocationPage.cpp
+
 clean:
 	-rm *.o $(objects)
-	-rm Calculator
-	-rm Profiles

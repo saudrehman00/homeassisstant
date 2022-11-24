@@ -14,7 +14,6 @@ using namespace Wt;
 // @return nothing
 LoginForm::LoginForm() : WTemplate{tr("login")} {
     WApplication *app = WApplication::instance();
-    addFunction("id", &WTemplate::Functions::id);
     addFunction("tr", &WTemplate::Functions::tr);
 
     // components for username input
@@ -30,7 +29,7 @@ LoginForm::LoginForm() : WTemplate{tr("login")} {
     passInput->setId("passInput");
 
     // components for input validation
-    auto validator = std::make_shared<WValidator>(true);
+    auto validator = make_shared<WValidator>(true);
     userInput->setValidator(validator);
     passInput->setValidator(validator);
 

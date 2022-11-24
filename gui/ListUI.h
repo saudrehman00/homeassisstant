@@ -10,39 +10,34 @@
 #include <Wt/WLineEdit.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WPopupMenu.h>
-#include <Wt/WComboBox.h>
-#include <Wt/WTemplate.h>
 #include <Wt/WApplication.h>
 #include <Wt/WValidator.h>
-#include <Wt/WSignal.h>
-#include <Wt/WText.h>
-#include <Wt/WTable.h>
-#include <Wt/WTableCell.h>
-#include <memory>
-#include <string>
+#include <Wt/WTextArea.h>
+#include <Wt/WLabel.h>
+#include <Wt/WContainerWidget.h>
+#include <Wt/WDialog.h>
+#include <vector>
 #include "../data/list/ListMap.h"
-#include "Main.h"
 
-class ListUI : public Wt::WTemplate {
+class ListUI : public Wt::WDialog {
     private:
+        Wt::WLineEdit* search;
         Wt::WPopupMenu* popup;
-        Wt::WComboBox* cbFilter;
-        Wt::WComboBox* cbSort;
-        Wt::WLineEdit* addListField;
-        Wt::WLineEdit* addTypeField;
         Wt::WPushButton* addBtn;
-        Wt::WPushButton* popupBtn;
         Wt::WPushButton* backBtn;
-        Wt::WTable* table;
-        int listCount;
+        Wt::WPushButton* popupBtn;
         ListMap lists;
+        std::string getTypeInput(Wt::WPopupMenu* popup);
+        void create();
+        void save(std::string note, std::string type);
+        void update(Wt::WLabel* contentLabel, Wt::WLabel* typeLabel, Wt::WLabel* dateLabel);
+        void addType(Wt::WLineEdit* typeEdit);
+        void filter(std::string type);
+        void load();
 
     public:
         ListUI();
         ~ListUI();
-        void add();
-        void load();
-        std::string getTypeInput(Wt::WPopupMenu* popup);
 };
 
 #endif

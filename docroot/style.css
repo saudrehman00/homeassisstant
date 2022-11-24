@@ -46,214 +46,23 @@ body {
   width: 70px;
 }
 
-.btn-square-lists {
-  background-color: rgb(21, 126, 65);
-  border: none;
-  width: 125px !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  height: 125px !important;
-  text-align: center;
-  padding: 0px;
-  font-size: 12px;
-}
-
-
-.btn-square-settings {
-  background-color: darkgoldenrod;
-  border: none;
-  width: 125px !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  height: 125px !important;
-  text-align: center;
-  padding: 0px;
-  font-size: 12px;
-}
-
-.btn-square-alarm {
-  background-color: rgb(50, 149, 172);
-  width: 125px !important;
-  border: none;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  height: 125px !important;
-  text-align: center;
-  padding: 0px;
-  font-size: 12px;
-}
-
-
-.btn-square-devices {
-  background-color: rgb(117, 60, 143);
-  width: 125px !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  height: 125px !important;
-  text-align: center;
-  border: none;
-  padding: 0px;
-  font-size: 12px;
-}
-
-
-.btn-square-timer {
-  background-color: rgb(164, 50, 50);
-  width: 125px !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  height: 125px !important;
-  text-align: center;
-  border: none;
-  padding: 0px;
-  font-size: 12px;
-}
-
-
-.switch {
-
-  position: absolute;
-  left: 420px;
-  display: block;
-  width: 50px;
-  height: 10px;
-  padding: 3px;
-  margin: 0 10px 20px 0;
-  background: linear-gradient(to bottom, #eeeeee, #FFFFFF 25px);
-  background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF 25px);
-  border-radius: 18px;
-  box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  box-sizing: content-box;
-}
-
-.switch-input {
-  position: absolute;
+.sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
-  opacity: 0;
-  box-sizing: content-box;
+  background-color: #b4b0a6;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
 
-.switch-label {
-  position: relative;
-  display: block;
-  height: inherit;
-  font-size: 10px;
-  text-transform: uppercase;
-  background: #eceeef;
-  border-radius: inherit;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
-  box-sizing: content-box;
+.content {
+  margin-left: 200px;
+  /* Same as the width of the sidenav */
 }
 
-.switch-label:before,
-.switch-label:after {
-  position: absolute;
-  top: 50%;
-  margin-top: -.5em;
-  line-height: 1;
-  -webkit-transition: inherit;
-  -moz-transition: inherit;
-  -o-transition: inherit;
-  transition: inherit;
-  box-sizing: content-box;
-}
-
-.switch-label:before {
-  content: attr(data-off);
-  right: 11px;
-  color: #aaaaaa;
-  text-shadow: 0 1px rgba(255, 255, 255, 0.5);
-}
-
-.switch-label:after {
-  content: attr(data-on);
-  left: 11px;
-  color: #FFFFFF;
-  text-shadow: 0 1px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-}
-
-.switch-input:checked~.switch-label {
-  background: #E1B42B;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
-}
-
-.switch-input:checked~.switch-label:before {
-  opacity: 0;
-}
-
-.switch-input:checked~.switch-label:after {
-  opacity: 1;
-}
-
-.switch-handle {
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 5px;
-  height: 5px;
-  background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
-  background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
-  border-radius: 100%;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
-}
-
-.switch-handle:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -6px 0 0 -6px;
-  width: 5px;
-  height: 12px;
-  background: linear-gradient(to bottom, #eeeeee, #FFFFFF);
-  background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF);
-  border-radius: 7px;
-  box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
-}
-
-.switch-input:checked~.switch-handle {
-  left: 50px;
-  box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* Transition
-      ========================== */
-.switch-label,
-.switch-handle {
-  transition: All 0.3s ease;
-  -webkit-transition: All 0.3s ease;
-  -moz-transition: All 0.3s ease;
-  -o-transition: All 0.3s ease;
-}
-
-.slider {
-
-  position: absolute;
-  top: 100%;
-  left: 470px;
-  transform: translate(-50%, -50%);
-
-  background: #fcfcfc;
-  border-radius: 20px;
-  display: flex;
-
-}
-
-.slider label {
-  font-size: 5px;
-  font-weight: 400;
-  font-family: Open Sans;
-  padding-left: 10px;
-  color: black;
-}
-
-.slider input[type="range"] {
-
-  height: 2px;
-  background: black;
-  border: none;
-  outline: none;
+.sticky {
+  background-color: #fff7d1 !important;
 }

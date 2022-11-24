@@ -12,14 +12,38 @@ using namespace Wt;
 
 Main::Main() : WTemplate{tr("main")} {
     WApplication *app = WApplication::instance();
-    addFunction("id", &WTemplate::Functions::id);
-    addFunction("tr", &WTemplate::Functions::tr);
-    openListUI = bindWidget("openListUI", make_unique<WPushButton>("Lists"));
-    openListUI->setStyleClass("btn-square-lists");
-    openListUI->clicked().connect([=]{
-        app->root()->removeWidget(this);
-		app->root()->addNew<ListUI>();
-	});
+
+    app->internalPathChanged().connect(this, &Main::handlePathChange);
+    app->setInternalPath("/main");
+    
+    openListUI = bindWidget("openListUI", make_unique<WPushButton>("List"));
+    openListUI->setIcon("../images/list.png");
+    openListUI->clicked().connect([=] {
+        WDialog* listsWindow = app->root()->addNew<ListUI>();
+        listsWindow->show();
+    });
+
+    openClockUI = bindWidget("openClockUI", make_unique<WPushButton>("Clock"));
+    openClockUI->setIcon("../images/clock.png");
+    openClockUI->setLink(WLink(LinkType::InternalPath, "/clock"));
+
+    openSettingsUI= bindWidget("openSettingsUI", make_unique<WPushButton>("Settings"));
+    openSettingsUI->setIcon("../images/settings.png");
+    openSettingsUI->setLink(WLink(LinkType::InternalPath, "/settings"));
 }
 
 Main::~Main() {}
+
+void Main::handlePathChange() {
+    Wt::WApplication *app = Wt::WApplication::instance();
+    if (app->internalPath() == "/main") {
+        app->root()->clear();
+        app->root()->addNew<Main>();
+    } else if (app->internalPath() == "/clock") {
+        this->setHidden(true);
+        app->root()->addNew<ClockUI>();
+    } else if (app->internalPath() == "/settings") {
+        this->setHidden(true);
+        app->root()->addNew<SettingsUI>();
+    }
+}

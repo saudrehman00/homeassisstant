@@ -37,68 +37,38 @@
     </div>
   </message>
 
-  <message id="list">
-    <div class="vh-100">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-
-          <div class="card" style="border-radius: 1rem; background-color: #eff1f2;">
-            <div class="card-body py-4 px-md-5">
-              ${backBtn}
-              <p class="h1 text-dark text-center mt-3 mb-4 pb-3">
-                  What's on the list for today?
-                </p>
-
-              <div class="card row card-block flex-row d-flex justify-content-center">
-                <div class="card-body row d-flex flex-row justify-content-center align-items-center">
-                  <div class="col">
-                    ${addListField}
-                  </div>
-                  <div class="col d-flex">
-                    <div class="col">
-                      <div class="input-group">
-                        ${popupBtn}${addTypeField}
-                      </div>
-                    </div>
-                    <div class="col d-flex justify-content-center">
-                      ${addBtn}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <hr class="my-4" />
-              <div class="d-flex justify-content-start align-items-center mb-4 pt-2 pb-3">
-                <p class="small mb-0 me-2 text-muted">Filter</p>
-                <div>${cbFilter}</div>
-                <p class="small mb-0 ms-4 me-2 text-muted">Sort</p>
-                <div>${cbSort}</div>
-                <a href="#!" style="color: #23af89;" data-mdb-toggle="tooltip" title="Ascending">
-                  <i
-                    class="fas fa-sort-amount-down-alt ms-2"></i>
-                </a>
-              </div>
-
-              <div>
-                ${table}
-              </div>
-
-            </div>
-          </div>
-        </div>
+  <message id="menupage">
+    <div class="sidebar">
+      <div class="pb-4">
+        ${backBtn}
       </div>
+      ${sidebar}
+    </div>
+    <div class="content">
+      ${content}
+    </div>
+  </message>
+
+  <message id="clockpage">
+    <div>
+      ${addClockBtn}
+    </div>
+    ${clocks}
+  </message>
+
+  <message id="locationpage">
+    <div class="googlemaps-controls">
+      ${content}
     </div>
   </message>
 
   <message id="main">
-
     <div class="vh-100 vw-100">
       <button type="button">X</button>
 
       <center>
-        <h1 class="title" style="color:rgb(34, 62, 91);">Hello, Jessica.</h1>
+        <h1 class="title" style="color:rgb(34, 62, 91);">Hello ${username}</h1>
       </center>
-
 
       <div class="container">
         <div class="row">
@@ -111,101 +81,20 @@
               <h1 style="color:rgb(34, 62, 91);font-size: 20px">London, ON</h1>
             </div>
           </div>
-          <div class="col-sm-4" style="border:1px solid black;">
-            <div class="row" style="border:1px solid black;">
-              <button type="button" class="btn btn-primary btn-square-alarm">
-                Alarm
-                <img class="icon" src="../images/alarm.png"></img>
-              </button>
-              <button type="button" class="btn btn-primary btn-square-devices">
-                Devices
-                <img class="icon" src="../images/device.png"></img>
-              </button>
-            </div>
-            <div class="row" style="border:1px solid black;">
-              <button type="button" class="btn btn-primary btn-square-timer">
-                Timer
-                <img class="icon" src="../images/timer.png"></img>
-              </button>
-              <button type="button" class="btn btn-primary btn-square-settings">
-                Settings
-                <img class="icon" src="../images/settings.png"></img>
-              </button>
-              <button>
-                ${openListUI}
-                <img class="icon" src="../images/lists.png"></img>
-              </button>
-            </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="col-sm-4" style="border:1px solid black;">
+          <div class="row" style="border:1px solid black;">
+              ${openClockUI}
+              ${openListUI}
+              ${openSettingsUI}
           </div>
         </div>
       </div>
 
-      <hr>
-        <center>
-          <b class="living-room" style="color:rgb(34, 62, 91);">My Home</b>
-        </center>
-      </hr>
-
-
-      <div class="row">
-
-        <img class="bulb" src="../images/bulb.png">
-          <h1 class="bulb" style="font-size:10px"> Lamp</h1>
-        </img>
-        <h1 class="adjust">
-          <label class="switch">
-            <input class="switch-input" type="checkbox" />
-            <span class="switch-label" data-on="On" data-off="Off"></span>
-            <span class="switch-handle"></span>
-          </label>
-        </h1>
-      </div>
-      <div class="row">
-        <img class="bulb" src="../images/bulb.png">
-          <h1 class="bulb" style="font-size:10px">   My Room </h1>
-        </img>
-        <h1 class="adjust">
-          <label class="switch">
-            <input class="switch-input" type="checkbox" />
-            <span class="switch-label" data-on="On" data-off="Off"></span>
-            <span class="switch-handle"></span>
-          </label>
-        </h1>
-      </div>
-      <div class="row">
-        <img class="bulb" src="../images/bulb.png">
-          <h1 class="bulb" style="font-size:10px">   Patio</h1>
-        </img>
-        <h1 class="adjust">
-          <label class="switch">
-            <input class="switch-input" type="checkbox" />
-            <span class="switch-label" data-on="On" data-off="Off"></span>
-            <span class="switch-handle"></span>
-          </label>
-        </h1>
-      </div>
-      <div class="row">
-        <img class="volume" src="../images/volume.png" style="width: 5%; height: 5%;">
-          <h1 class="volume_text" style="font-size:10px">  Volume</h1>
-        </img>
-
-        <div class="slider">
-          <label for="fader"></label>
-          <input type="range" min="0" max="100" value="50" id="fader"
-            step="20" list="volsettings" />
-          <datalist id="volsettings">
-            <option>0</option>
-            <option>20</option>
-            <option>40</option>
-            <option>60</option>
-            <option>80</option>
-            <option>100</option>
-          </datalist>
-        </div>
-
-      </div>
     </div>
-
   </message>
 
 </messages>

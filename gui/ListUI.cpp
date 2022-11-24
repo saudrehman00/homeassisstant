@@ -1,137 +1,249 @@
 /* Jun Shao
-* 251258566
-* November 7 2022
-* ListUI contains the logic for rendering the todo list UI
-* and for interacting with the user input from the UI
-*/
+ * 251258566
+ * November 7 2022
+ * List contains the logic for rendering the todo list UI
+ * and for interacting with the user input from the UI
+ */
 
 #include "ListUI.h"
 
 using namespace std;
 using namespace Wt;
 
-namespace {
-	const int ITEM_COL = 0;
-	const int TYPE_COL = 1;
-	const int DATE_COL = 2;
-	const int RMV_COL = 3;
-	const int HEADER_ROW = 0;
-}
+ListUI::ListUI()
+{
+	setWindowTitle("Sticky Notes");
+	setModal(false);
+	setResizable(true);
+	setMinimumSize("350", "500");
+	setMaximumSize("1920", "500");
+	contents()->setOverflow(Overflow::Scroll, Orientation::Vertical);
+	contents()->addStyleClass("form-group");
+	footer()->setStyleClass("d-flex flex-row mb-3 mx-3");
 
-ListUI::ListUI() : WTemplate{tr("list")}, listCount(0) {
-	WApplication *app = WApplication::instance();
-	addFunction("id", &WTemplate::Functions::id);
-	addFunction("tr", &WTemplate::Functions::tr);
-	shared_ptr<WValidator> validator = std::make_shared<WValidator>(true);
+	backBtn = titleBar()->addNew<WPushButton>();
+	backBtn->addStyleClass("btn-close");
+	backBtn->setToolTip("Close window", TextFormat::XHTML);
+	backBtn->clicked().connect(this, &WDialog::reject);
 
-	addListField = bindWidget("addListField", make_unique<WLineEdit>());
-	addListField->setStyleClass("form-control form-control-lg");
-	addListField->setId("addListField");
-	addListField->setPlaceholderText("New list");
-    addListField->setValidator(validator);
+	addBtn = footer()->addNew<WPushButton>("+");
+	addBtn->setToolTip("New note", TextFormat::XHTML);
+	addBtn->setStyleClass("btn btn-primary bg-secondary");
+	addBtn->clicked().connect(this, &ListUI::create);
 
-	addTypeField = bindWidget("addTypeField", make_unique<WLineEdit>());
-	addTypeField->setStyleClass("form-control form-control-lg");
-	addTypeField->setPlaceholderText("New type");
-	addTypeField->setId("addTypeField");
-	addTypeField->setValidator(validator);
+	search = footer()->addNew<WLineEdit>();
+	search->setPlaceholderText("Filter...");
+	search->keyWentUp().connect( [=] {
+		filter(search->text().toUTF8());
+	});
 
-	unique_ptr<WPopupMenu> popupPtr  = make_unique<WPopupMenu>();
+	unique_ptr<WPopupMenu> popupPtr = make_unique<WPopupMenu>();
 	popup = popupPtr.get();
 	popup->setHideOnSelect(true);
-	popupBtn = bindWidget("popupBtn", make_unique<WPushButton>());
+	popupBtn = footer()->addNew<WPushButton>();
 	popupBtn->setMenu(move(popupPtr));
-
-	addBtn = bindWidget("addBtn", make_unique<WPushButton>("Add"));
-	addBtn->setStyleClass("btn btn-primary bg-secondary");
-	addBtn->clicked().connect(this, &ListUI::add);
-
-	backBtn = bindWidget("backBtn", make_unique<WPushButton>("Back"));
-	backBtn->clicked().connect([=]{
-        app->root()->removeWidget(this);
-		app->root()->addNew<Main>();
+	WMenuItem *item = popup->addItem("All");
+	item->setCloseable(false);
+	item->clicked().connect([=] {
+		search->setText("All");
 	});
-
-	cbFilter = bindWidget("cbFilter", make_unique<WComboBox>());
-
-	cbSort = bindWidget("cbSort", make_unique<WComboBox>());
-	cbSort->addItem("Add date");
-	cbSort->addItem("Calendar date");
-
-	table = bindWidget("table", make_unique<WTable>());
-	table->setHeaderCount(1);
-	table->setWidth(WLength("100%"));
-	table->elementAt(HEADER_ROW, ITEM_COL)->addNew<Wt::WText>("To do");
-	table->elementAt(HEADER_ROW, TYPE_COL)->addNew<Wt::WText>("Type");
-	table->elementAt(HEADER_ROW, DATE_COL)->addNew<Wt::WText>("Date added");
-	table->elementAt(HEADER_ROW, RMV_COL)->addNew<Wt::WText>();
-	table->columnAt(ITEM_COL)->setWidth(WLength("55%"));
-	table->columnAt(TYPE_COL)->setWidth(WLength("20%"));
-	table->columnAt(DATE_COL)->setWidth(WLength("15%"));
-	table->setStyleClass("table-hover");
-	table->rowAt(HEADER_ROW)->setStyleClass("lead rounded fw-normal bg-light");
 }
 
-ListUI::~ListUI() {
-	
+ListUI::~ListUI()
+{
 }
 
-// add() adds a new List list and a new type if necessary
+void ListUI::filter(string type) {
+	int count = contents()->count();
+	for (int i = 0; i < count; i++) {
+		WWidget* w = contents()->widget(i);
+		if (w->objectName() == type) {
+			w->show();
+		} else if (type == "All") {
+			w->show();
+		} else {
+			w->hide();
+		}
+	}
+}
+
+void ListUI::addType(WLineEdit* typeEdit) {
+	vector<WMenuItem *> items = popup->items();
+	bool found = false;
+	for (WMenuItem *i : items) {
+		if (i->text() == typeEdit->text().toUTF8()) {
+			found = true;
+			break;
+		}
+	}
+	if (!found) {
+		WMenuItem *item = popup->addItem(typeEdit->text().toUTF8());
+		item->setCloseable(true);
+		item->clicked().connect([=]{
+			search->setText(typeEdit->text().toUTF8());
+		});
+	}
+}
+
+// create() adds a new List list and a new type if necessary
 // @param nothing
 // @return nothing
-void ListUI::add() {
-	listCount++;
-	string type = addTypeField->text().toUTF8();
-	string desc = addListField->text().toUTF8();
-	WMenuItem *item = popup->addItem(type);
-	item->setCheckable(true);
-	item->triggered().connect([=] {
-		if(item->isChecked()) {
-			cbFilter->removeItem(cbFilter->findText(type));
-			item->close();
-		}
-	});
-	item->clicked().connect([=]{
-		addTypeField->setText(type);
-	});
-	cbFilter->addItem(type);
+void ListUI::create()
+{
+	shared_ptr<WValidator> validator = std::make_shared<WValidator>(true);
+	hide();
 
-	List l(type, desc);
+	WDialog *note = contents()->addChild(make_unique<WDialog>());
+	note->setWindowTitle("New note");
+	note->rejectWhenEscapePressed();
+	note->setMovable(false);
+
+	WTextArea *content = note->contents()->addNew<WTextArea>();
+	content->setPlaceholderText("Take a note...");
+	content->setValidator(validator);
+
+	WLineEdit *type = note->titleBar()->addNew<WLineEdit>();
+	type->setPlaceholderText("Type of note");
+	type->setValidator(validator);
+
+	WPushButton *save = note->footer()->addNew<WPushButton>("Save");
+	save->setDefault(true);
+	save->disable();
+	WPushButton *cancel = note->footer()->addNew<WPushButton>("Cancel");
+
+	save->clicked().connect([=]
+							{
+        if (type->validate() == ValidationState::Valid)
+            note->accept(); });
+
+	type->keyWentUp().connect([=]
+							  { save->setDisabled(type->validate() != ValidationState::Valid); });
+
+	content->keyWentUp().connect([=]
+							  { save->setDisabled(type->validate() != ValidationState::Valid); });
+
+	cancel->clicked().connect(note, &WDialog::reject);
+
+	note->finished().connect([=] {
+        if (note->result() == DialogCode::Accepted) {
+			ListUI::save(content->text().toUTF8(), type->text().toUTF8());
+			vector<WMenuItem *> items = popup->items();
+			bool found = false;
+			addType(type);
+		}
+        removeChild(note);
+		show(); 
+	});
+
+	note->show();
+}
+
+// save() save the sticky note and display it in the list
+// @param nothing
+// @return nothing
+void ListUI::save(string content, string type)
+{
+	List l(type, content);
 	string date = l.getDateAdded();
 	lists.add(l);
 
-	WLineEdit* rowDesc = table->elementAt(listCount, ITEM_COL)->addNew<WLineEdit>(WString(desc));
-	WLineEdit* rowType = table->elementAt(listCount, TYPE_COL)->addNew<WLineEdit>(WString(type));
-	table->elementAt(listCount, DATE_COL)->addNew<WText>(WString(date));
-	WPushButton* rmv = table->elementAt(listCount, RMV_COL)->addWidget(make_unique<WPushButton>("Remove"));
+	WContainerWidget *sticky = contents()->addNew<WContainerWidget>();
+	WContainerWidget *top = sticky->addNew<WContainerWidget>();
+	WContainerWidget *bot = sticky->addNew<WContainerWidget>();
 
-	int row = table->rowAt(listCount)->rowNum();
-	rmv->clicked().connect([=] {
-		table->removeRow(row);
+	sticky->setObjectName(type);
+	bot->addStyleClass("d-flex flex-row justify-content-between");
+	top->addStyleClass("row");
+	sticky->addStyleClass("sticky py-2 my-3 px-2");
+	WLabel* contentLabel = top->addNew<WLabel>(content);
+	contentLabel->addStyleClass("overflow-hidden text-truncate");
+	contentLabel->setMaximumSize("500", "50");
+	WLabel* typeLabel = top->addNew<WLabel>(type);
+	typeLabel->addStyleClass("overflow-hidden text-truncate pt-1");
+	typeLabel->setMinimumSize("80", "50");
+	typeLabel->setMaximumSize("80", "50");
+	WLabel* dateLabel = bot->addNew<WLabel>(date);
+	WPushButton* del = bot->addNew<WPushButton>();
+	del->setStyleClass("btn-close");
+	del->clicked().connect([=] { 
+		contents()->removeChild(sticky);
 		lists.del(l);
-		listCount--;
 	});
-	rowDesc->keyWentUp().connect([=] {
-		lists.get(date).editDesc(rowDesc->text().toUTF8());
+	sticky->clicked().connect([=] { update(contentLabel, typeLabel, dateLabel); });
+}
+
+// update() update the sticky note and display it in the list
+// @param nothing
+// @return nothing
+void ListUI::update(WLabel* contentLabel, WLabel* typeLabel, WLabel* dateLabel)
+{
+	string date = dateLabel->text().toUTF8();
+	string oldContent = contentLabel->text().toUTF8();
+	string oldType = typeLabel->text().toUTF8();
+	shared_ptr<WValidator> validator = std::make_shared<WValidator>(true);
+	hide();
+
+	WDialog *note = contents()->addChild(make_unique<WDialog>());
+	note->setWindowTitle("Edit note");
+	note->rejectWhenEscapePressed();
+	note->setMovable(false);
+
+	WTextArea *content = note->contents()->addNew<WTextArea>();
+	content->setText(oldContent);
+	content->setValidator(validator);
+
+	WLineEdit *type = note->titleBar()->addNew<WLineEdit>();
+	type->setText(oldType);
+	type->setValidator(validator);
+
+	unique_ptr<WPopupMenu> popupPtr = make_unique<WPopupMenu>();
+	WPopupMenu *popup = popupPtr.get();
+	popup->setHideOnSelect(true);
+	WPushButton *popupBtn = note->titleBar()->addNew<WPushButton>();
+	popupBtn->setMenu(move(popupPtr));
+
+	WPushButton *save = note->footer()->addNew<WPushButton>("Save");
+	save->setDefault(true);
+	save->disable();
+	WPushButton *cancel = note->footer()->addNew<WPushButton>("Cancel");
+
+	save->clicked().connect([=] {
+        if (type->validate() == ValidationState::Valid) {
+			note->accept(); 
+		} 
 	});
-	rowType->keyWentUp().connect([=] {
-		lists.get(date).editType(rowType->text().toUTF8());
+
+	type->keyWentUp().connect([=] { 
+		save->setDisabled(type->validate() != ValidationState::Valid); 
 	});
+
+	content->keyWentUp().connect([=] { 
+		save->setDisabled(type->validate() != ValidationState::Valid); 
+	});
+
+	cancel->clicked().connect(note, &WDialog::reject);
+
+	note->finished().connect([=] {
+        if (note->result() == DialogCode::Accepted) {
+			if (oldContent != content->text().toUTF8()) {
+				lists.get(date).editDesc(content->text().toUTF8());
+				contentLabel->setText(content->text().toUTF8());
+			}
+			if (oldType != type->text().toUTF8()) {
+				lists.get(date).editType(type->text().toUTF8());
+				typeLabel->setText(type->text().toUTF8());
+			}
+		}
+        removeChild(note);
+		show(); 
+	});
+
+	note->show();
 }
 
 // load() loads all of the users saved lists
 // @param nothing
 // @return nothing
-void ListUI::load() {
-
-}
-
-// getTypeInput(pu) adds a new List type
-// @param popup is the reference to the popup menu
-// @return the text of the selected item as string
-string ListUI::getTypeInput(WPopupMenu* popup) {
-	if (popup->result()) {
-		return popup->result()->text().toUTF8();
-	}
-	return "";
+void ListUI::load()
+{
 }
