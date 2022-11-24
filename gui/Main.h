@@ -13,12 +13,14 @@
 #include "ListUI.h"
 #include "clock/ClockUI.h"
 #include "settings/SettingsUI.h"
+#include "CalculatorUI.h"
 
 class Main : public Wt::WTemplate {
     private:
         Wt::WPushButton* openListUI;
         Wt::WPushButton* openClockUI;
         Wt::WPushButton* openSettingsUI;
+        Wt::WPushButton* openCalculatorUI;
         void handlePathChange();
     public:
         Main();

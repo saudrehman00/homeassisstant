@@ -12,7 +12,7 @@ SettingsUI::SettingsUI() : WTemplate{tr("menupage")} {
     content = bindWidget("content", make_unique<WStackedWidget>());
 
     sidebar = bindWidget("sidebar", make_unique<WMenu>(content));
-    sidebar->addItem("../images/location.png", "Location", make_unique<LocationPage>());
+    sidebar->addItem("../images/location.png", "Location", make_unique<LocationUI>());
     sidebar->setStyleClass("nav nav-pills flex-column");
 }
 

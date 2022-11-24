@@ -10,8 +10,7 @@
 using namespace std;
 using namespace Wt;
 
-ListUI::ListUI()
-{
+ListUI::ListUI() {
 	setWindowTitle("Sticky Notes");
 	setModal(false);
 	setResizable(true);
@@ -21,7 +20,7 @@ ListUI::ListUI()
 	contents()->addStyleClass("form-group");
 	footer()->setStyleClass("d-flex flex-row mb-3 mx-3");
 
-	backBtn = titleBar()->addNew<WPushButton>();
+	WPushButton *backBtn = titleBar()->addNew<WPushButton>();
 	backBtn->addStyleClass("btn-close");
 	backBtn->setToolTip("Close window", TextFormat::XHTML);
 	backBtn->clicked().connect(this, &WDialog::reject);
@@ -49,9 +48,7 @@ ListUI::ListUI()
 	});
 }
 
-ListUI::~ListUI()
-{
-}
+ListUI::~ListUI() {}
 
 void ListUI::filter(string type) {
 	int count = contents()->count();

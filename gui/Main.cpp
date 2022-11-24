@@ -23,6 +23,13 @@ Main::Main() : WTemplate{tr("main")} {
         listsWindow->show();
     });
 
+    openCalculatorUI= bindWidget("openCalculatorUI", make_unique<WPushButton>("Calculator"));
+    openCalculatorUI->setIcon("../images/calculator.png");
+    openCalculatorUI->clicked().connect([=] {
+        WDialog* calculatorWindow = app->root()->addNew<CalculatorUI>();
+        calculatorWindow->show();
+    });
+
     openClockUI = bindWidget("openClockUI", make_unique<WPushButton>("Clock"));
     openClockUI->setIcon("../images/clock.png");
     openClockUI->setLink(WLink(LinkType::InternalPath, "/clock"));

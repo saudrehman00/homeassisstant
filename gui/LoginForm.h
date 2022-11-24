@@ -10,8 +10,7 @@
 #include <Wt/WLineEdit.h>
 #include <Wt/WAnimation.h>
 #include <Wt/WPushButton.h>
-#include <Wt/WTemplate.h>
-#include <Wt/WApplication.h>
+#include <Wt/WTemplate.h> 
 #include <Wt/WValidator.h>
 #include <Wt/WSignal.h>
 #include <Wt/WText.h>

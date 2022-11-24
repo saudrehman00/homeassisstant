@@ -10,7 +10,6 @@
 #include <Wt/WLineEdit.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WPopupMenu.h>
-#include <Wt/WApplication.h>
 #include <Wt/WValidator.h>
 #include <Wt/WTextArea.h>
 #include <Wt/WLabel.h>
@@ -24,7 +23,6 @@ class ListUI : public Wt::WDialog {
         Wt::WLineEdit* search;
         Wt::WPopupMenu* popup;
         Wt::WPushButton* addBtn;
-        Wt::WPushButton* backBtn;
         Wt::WPushButton* popupBtn;
         ListMap lists;
         std::string getTypeInput(Wt::WPopupMenu* popup);

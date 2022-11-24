@@ -88,6 +88,7 @@
               ${openClockUI}
               ${openListUI}
               ${openSettingsUI}
+              ${openCalculatorUI}
           </div>
         </div>
       </div>
