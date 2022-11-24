@@ -81,6 +81,8 @@
         "typeinfo": "cpp",
         "variant": "cpp",
         "Home.C": "cpp",
-        "WMenu.C": "cpp"
+        "WMenu.C": "cpp",
+        "JavascriptExample.C": "cpp",
+        "http-client.C": "cpp"
     }
 }

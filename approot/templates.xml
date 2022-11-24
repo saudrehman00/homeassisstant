@@ -57,9 +57,7 @@
   </message>
 
   <message id="locationpage">
-    <div class="googlemaps-controls">
       ${content}
-    </div>
   </message>
 
   <message id="main">

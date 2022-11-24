@@ -4,7 +4,6 @@ using namespace std;
 using namespace Wt;
 
 ClockPage::ClockPage(string clockName, string clockFormat) : WTemplate{tr("clockpage")} {
-    WApplication *app = WApplication::instance();
     addFunction("tr", &WTemplate::Functions::tr);
 
     clocks = bindWidget("clocks", make_unique<WContainerWidget>());

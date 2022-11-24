@@ -4,7 +4,6 @@ using namespace std;
 using namespace Wt;
 
 SettingsUI::SettingsUI() : WTemplate{tr("menupage")} {
-    WApplication *app = WApplication::instance();
     addFunction("tr", &WTemplate::Functions::tr);
 
     backBtn = bindWidget("backBtn", make_unique<WPushButton>("Back"));

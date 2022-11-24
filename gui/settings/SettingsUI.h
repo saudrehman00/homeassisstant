@@ -7,6 +7,7 @@
 #include <Wt/WStackedWidget.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WContainerWidget.h>
+#include <Wt/WHBoxLayout.h>
 #include <Wt/WTextArea.h>
 #include "LocationPage.h"
 

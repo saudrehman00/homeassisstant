@@ -15,6 +15,7 @@ class LocationPage : public Wt::WTemplate {
     private:
         Wt::WLabel *help;
         Wt::WGoogleMap *map;
+        Wt::WLineEdit *input;
         Wt::WContainerWidget *content;
         void googleMapDoubleClicked(Wt::WGoogleMap::Coordinate c);
 

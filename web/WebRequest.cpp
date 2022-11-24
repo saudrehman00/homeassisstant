@@ -85,7 +85,7 @@ int main()
     WebRequest myNewsAPICall(hostnameN);
     myNewsAPICall.makeGetRequest();
 
-    std::string hostnameL = "https://nominatim.openstreetmap.org/search?q=Western University Ontario&format=json";
+    std::string hostnameL = "https://maps.googleapis.com/maps/api/geocode/json?address=University%20Western%20Ontario&key=AIzaSyBsaxHAEYOD0stq-0Smzwr1lGQ14KkOxKg";
     WebRequest myNewsAPICall(hostnameL);
     myNewsAPICall.makeGetRequest();
 }

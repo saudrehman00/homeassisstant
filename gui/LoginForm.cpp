@@ -13,7 +13,6 @@ using namespace Wt;
 // @param nothing
 // @return nothing
 LoginForm::LoginForm() : WTemplate{tr("login")} {
-    WApplication *app = WApplication::instance();
     addFunction("tr", &WTemplate::Functions::tr);
 
     // components for username input
