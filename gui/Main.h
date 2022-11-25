@@ -13,7 +13,8 @@
 #include "ListUI.h"
 #include "clock/ClockUI.h"
 #include "settings/SettingsUI.h"
-#include "CalculatorUI.h"
+#include "math/CalculatorUI.h"
+#include "math/ConversionUI.h"
 
 class Main : public Wt::WTemplate {
     private:
@@ -21,6 +22,7 @@ class Main : public Wt::WTemplate {
         Wt::WPushButton* openClockUI;
         Wt::WPushButton* openSettingsUI;
         Wt::WPushButton* openCalculatorUI;
+        Wt::WPushButton* openConversionUI;
         void handlePathChange();
     public:
         Main();

@@ -30,6 +30,13 @@ Main::Main() : WTemplate{tr("main")} {
         calculatorWindow->show();
     });
 
+    openConversionUI= bindWidget("openConversionUI", make_unique<WPushButton>("Unit Conversion"));
+    openConversionUI->setIcon("../images/change.png");
+    openConversionUI->clicked().connect([=] {
+        WDialog* conversionWindow = app->root()->addNew<ConversionUI>();
+        conversionWindow->show();
+    });
+
     openClockUI = bindWidget("openClockUI", make_unique<WPushButton>("Clock"));
     openClockUI->setIcon("../images/clock.png");
     openClockUI->setLink(WLink(LinkType::InternalPath, "/clock"));

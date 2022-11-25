@@ -60,6 +60,34 @@
       ${content}
   </message>
 
+  <message id="converter">
+    <div class="row mx-2 d-flex flex-row justify-content-center">
+      ${type class="form-control w-50 bg-secondary text-white"}
+    </div>
+    <div class="row mt-5 mx-2">
+      <div class="col-md">
+        <div class="input-group">
+          ${left}
+          <div class="input-group-append">
+            ${leftSel class="form-control bg-secondary text-white"}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-1 fs-2 bg-white text-center">=</div>
+
+      <div class="col-md">
+        <div class="input-group">
+          ${right}
+          <div class="input-group-append">
+            ${rightSel class="form-control bg-secondary text-white"}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row"></div>
+  </message>
+
   <message id="main">
     <div class="vh-100 vw-100">
       <button type="button">X</button>
@@ -89,6 +117,7 @@
               ${openListUI}
               ${openSettingsUI}
               ${openCalculatorUI}
+              ${openConversionUI}
           </div>
         </div>
       </div>
