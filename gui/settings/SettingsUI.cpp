@@ -8,6 +8,9 @@ SettingsUI::SettingsUI() : WTemplate{tr("menupage")} {
 
     backBtn = bindWidget("backBtn", make_unique<WPushButton>("Back"));
 	backBtn->setLink(WLink(LinkType::InternalPath, "/main"));
+    backBtn->clicked().connect([=] {
+        this->parent()->removeChild(this);
+    });
 
     content = bindWidget("content", make_unique<WStackedWidget>());
 

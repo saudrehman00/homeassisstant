@@ -8,6 +8,7 @@
 #define MAIN_H
 
 #include <Wt/WTemplate.h>
+#include <Wt/WContainerWidget.h>
 #include <Wt/WApplication.h>
 #include <Wt/WPushButton.h>
 #include "ListUI.h"
@@ -18,12 +19,16 @@
 
 class Main : public Wt::WTemplate {
     private:
+        bool sideClosed;
         Wt::WPushButton* openListUI;
         Wt::WPushButton* openClockUI;
         Wt::WPushButton* openSettingsUI;
         Wt::WPushButton* openCalculatorUI;
         Wt::WPushButton* openConversionUI;
         void handlePathChange();
+        void openNav();
+        void closeNav();
+
     public:
         Main();
         ~Main();
