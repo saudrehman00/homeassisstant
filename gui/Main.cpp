@@ -74,6 +74,8 @@ Main::Main() : WTemplate{tr("main")} {
     openSettingsUI->setIcon("../images/main/settings.png");
     openSettingsUI->setStyleClass("sidebarbtn");
     openSettingsUI->setLink(WLink(LinkType::InternalPath, "/settings"));
+
+    WContainerWidget *weather = bindWidget("weather", make_unique<WeatherUI>());
 }
 
 Main::~Main() {}

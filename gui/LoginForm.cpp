@@ -38,15 +38,15 @@ LoginForm::LoginForm() : WTemplate{tr("login")} {
 
     // components for text helping the user
     help = bindWidget("help", make_unique<WText>("Please fill in your information."));
-    help->setStyleClass("text-white-50 mt-4");
+    help->setStyleClass("text-dark-50 mt-4");
 
     // components for the submission button
     okBtn = bindWidget("okBtn", make_unique<WPushButton>("Submit"));
-    okBtn->setStyleClass("btn btn-outline-light btn");
+    okBtn->setStyleClass("btn-dark text-white btn-outline-secondary");
 
     // components for the button changing forms
     linkBtn = bindWidget("linkBtn", make_unique<WPushButton>("Register"));
-    linkBtn->setStyleClass("btn btn-link text-white-50 fw-bold");
+    linkBtn->setStyleClass("btn-link text-dark-50 fw-bold");
     
     // components for text helping to navigate the user
     bottomTxt = bindWidget("bottomTxt", make_unique<WText>("New here?"));

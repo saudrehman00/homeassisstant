@@ -1,4 +1,8 @@
 body {
+  background-color: #212529;
+}
+
+.beige {
   background-color: #CCC8BF;
 }
 
@@ -16,9 +20,9 @@ body {
 .sidebarbtn {
   text-align: right;
   width: 100%;
-  background-color: #f8f9fa;
+  background-color: #CCC8BF;
   font-weight: 500;
-  border: white;
+  border: #CCC8BF;
   color: black;
   display: flex;
   gap: 27%;
@@ -48,5 +52,14 @@ body {
 
 .content {
   padding: 16px;
-  background-color: #CCC8BF;
+  background-color: #212529;
+}
+
+.high-font {
+  font-size: large;
+}
+
+.low-font {
+  font-size: medium;
+  color: rgb(153, 153, 153);
 }
