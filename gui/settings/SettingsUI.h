@@ -11,11 +11,6 @@
 #include "LocationUI.h"
 
 class SettingsUI : public Wt::WTemplate {
-    private:
-        Wt::WMenu* sidebar;
-        Wt::WStackedWidget* content;
-        Wt::WPushButton* backBtn;
-    
     public:
         SettingsUI();
         ~SettingsUI();

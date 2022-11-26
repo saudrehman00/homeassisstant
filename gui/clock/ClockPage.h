@@ -13,7 +13,6 @@
 
 class ClockPage : public Wt::WTemplate {
     private:
-        Wt::WPushButton* addClockBtn;
         Wt::WContainerWidget* clocks;
         std::string clockName;
         std::string clockFormat;

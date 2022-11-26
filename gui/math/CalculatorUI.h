@@ -17,8 +17,8 @@ class CalculatorUI : public Wt::WDialog {
         double second;
         Wt::WLineEdit *input;
         Wt::WContainerWidget *btnArea;
-        std::unordered_map<std::string, Wt::WPushButton*> btns;
         Wt::WPushButton *operand;
+        std::unordered_map<std::string, Wt::WPushButton*> btns;
         void append(std::string s);
         void operate(std::string btn);
         void compute();

@@ -7,12 +7,12 @@ LocationUI::LocationUI() : WContainerWidget() {
     WVBoxLayout *layout = setLayout(make_unique<WVBoxLayout>());
     setHeight(900);
 
-    top = layout->addWidget(make_unique<WContainerWidget>());
+    WContainerWidget *top = layout->addWidget(make_unique<WContainerWidget>());
     top->setStyleClass("mx-5");
-    help = top->addWidget(make_unique<WLabel>("Enter your location information or click on the map to utilize location services such as showing the weather."));
-    location = top->addWidget(make_unique<WLineEdit>());
+    WLabel *help = top->addWidget(make_unique<WLabel>("Enter your location information or click on the map to utilize location services such as showing the weather."));
+    WLineEdit *location = top->addWidget(make_unique<WLineEdit>());
     location->setWidth(500);
-    save = top->addWidget(make_unique<WPushButton>("Save"));
+    WPushButton *save = top->addWidget(make_unique<WPushButton>("Save"));
     
     map = layout->addWidget(make_unique<WGoogleMap>(GoogleMapsVersion::v3));
     map->setMapTypeControl(MapTypeControl::Default);

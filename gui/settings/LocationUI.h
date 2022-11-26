@@ -14,10 +14,6 @@ using namespace Wt;
 class LocationUI : public Wt::WContainerWidget {
     private:
         Wt::WGoogleMap *map;
-        Wt::WLabel *help;
-        Wt::WLineEdit *location;
-        Wt::WContainerWidget *top;
-        Wt::WPushButton *save;
         Wt::WGoogleMap::Coordinate *c;
         void googleMapClicked(Wt::WGoogleMap::Coordinate c);
         void saveLocation();

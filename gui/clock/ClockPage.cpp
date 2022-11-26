@@ -8,7 +8,7 @@ ClockPage::ClockPage(string clockName, string clockFormat) : WTemplate{tr("clock
 
     clocks = bindWidget("clocks", make_unique<WContainerWidget>());
 
-    addClockBtn = bindWidget("addClockBtn", make_unique<WPushButton>("Add"));
+    WPushButton *addClockBtn = bindWidget("addClockBtn", make_unique<WPushButton>("Add"));
     addClockBtn->clicked().connect(this, &ClockPage::showDialog);
     addClockBtn->setStyleClass("mx-5 my-5");
 

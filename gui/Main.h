@@ -11,6 +11,7 @@
 #include <Wt/WContainerWidget.h>
 #include <Wt/WApplication.h>
 #include <Wt/WPushButton.h>
+#include <any>
 #include "ListUI.h"
 #include "clock/ClockUI.h"
 #include "settings/SettingsUI.h"
@@ -19,15 +20,9 @@
 
 class Main : public Wt::WTemplate {
     private:
+        Wt::WApplication *app;
         bool sideClosed;
-        Wt::WPushButton* openListUI;
-        Wt::WPushButton* openClockUI;
-        Wt::WPushButton* openSettingsUI;
-        Wt::WPushButton* openCalculatorUI;
-        Wt::WPushButton* openConversionUI;
         void handlePathChange();
-        void openNav();
-        void closeNav();
 
     public:
         Main();

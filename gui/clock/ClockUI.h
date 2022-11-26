@@ -11,11 +11,6 @@
 #include "ClockPage.h"
 
 class ClockUI : public Wt::WTemplate {
-    private:
-        Wt::WMenu* sidebar;
-        Wt::WStackedWidget* content;
-        Wt::WPushButton* backBtn;
-
     public:
         ClockUI();
         ~ClockUI();

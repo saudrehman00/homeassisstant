@@ -11,13 +11,12 @@ using namespace std;
 using namespace Wt;
 
 Main::Main() : WTemplate{tr("main")} {
-    WApplication *app = WApplication::instance();
     sideClosed = false;
-
+    app = WApplication::instance();
     app->internalPathChanged().connect(this, &Main::handlePathChange);
     app->setInternalPath("/main");
     
-    WContainerWidget *sidebar = bindWidget("sidebar", make_unique<WContainerWidget>());
+    Wt::WContainerWidget *sidebar = bindWidget("sidebar", make_unique<WContainerWidget>());
     WContainerWidget *backArea = sidebar->addNew<WContainerWidget>();
     backArea->setStyleClass("row d-flex flex-row justify-content-center");
 
@@ -33,7 +32,7 @@ Main::Main() : WTemplate{tr("main")} {
         }
     });
 
-    openListUI = sidebar->addNew<WPushButton>("List");
+    WPushButton *openListUI = sidebar->addNew<WPushButton>("List");
     openListUI->setStyleClass("sidebarbtn");
     openListUI->setIcon("../images/list.png");
     openListUI->clicked().connect([=] {
@@ -41,7 +40,7 @@ Main::Main() : WTemplate{tr("main")} {
         listsWindow->show();
     });
 
-    openCalculatorUI= sidebar->addNew<WPushButton>("Calculator");
+    WPushButton *openCalculatorUI= sidebar->addNew<WPushButton>("Calculator");
     openCalculatorUI->setIcon("../images/calculator.png");
     openCalculatorUI->setStyleClass("sidebarbtn");
     openCalculatorUI->clicked().connect([=] {
@@ -49,7 +48,7 @@ Main::Main() : WTemplate{tr("main")} {
         calculatorWindow->show();
     });
 
-    openConversionUI= sidebar->addNew<WPushButton>("Unit Conversion");
+    WPushButton *openConversionUI= sidebar->addNew<WPushButton>("Unit Conversion");
     openConversionUI->setIcon("../images/change.png");
     openConversionUI->setStyleClass("sidebarbtn");
     openConversionUI->clicked().connect([=] {
@@ -57,12 +56,12 @@ Main::Main() : WTemplate{tr("main")} {
         conversionWindow->show();
     });
 
-    openClockUI = sidebar->addNew<WPushButton>("Clock");
+    WPushButton *openClockUI = sidebar->addNew<WPushButton>("Clock");
     openClockUI->setIcon("../images/clock.png");
     openClockUI->setStyleClass("sidebarbtn");
     openClockUI->setLink(WLink(LinkType::InternalPath, "/clock"));
 
-    openSettingsUI= sidebar->addNew<WPushButton>("Settings");
+    WPushButton *openSettingsUI= sidebar->addNew<WPushButton>("Settings");
     openSettingsUI->setIcon("../images/settings.png");
     openSettingsUI->setStyleClass("sidebarbtn");
     openSettingsUI->setLink(WLink(LinkType::InternalPath, "/settings"));
@@ -71,7 +70,6 @@ Main::Main() : WTemplate{tr("main")} {
 Main::~Main() {}
 
 void Main::handlePathChange() {
-    Wt::WApplication *app = Wt::WApplication::instance();
     if (app->internalPath() == "/main") {
         this->setHidden(false);
     } else {
@@ -82,11 +80,4 @@ void Main::handlePathChange() {
             app->root()->addNew<SettingsUI>();
         }
     }
-}
-
-void Main::closeNav() {
-}
-
-void Main::openNav() {
-    
 }
