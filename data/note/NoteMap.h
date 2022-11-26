@@ -14,16 +14,16 @@
 
 class NoteMap : public Data {
     private:
+        std::string username;
         std::unordered_map<std::string, Note> notes;
+        std::unordered_map<std::string, Note> batchToDel;
         Database db;
-        // pointer to user
 
     public:
-        NoteMap();
+        NoteMap(std::string username);
         ~NoteMap();
-        void linkProfile(std::string profileName);
-        void saveData(std::string username);
-        void delData(std::string username);
+        void saveData();
+        void delData();
         void add(Note list);
         void del(Note list);
         Note get(std::string key);

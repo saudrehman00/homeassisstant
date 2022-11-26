@@ -10,7 +10,13 @@
 using namespace std;
 using namespace Wt;
 
+namespace {
+    const int OPENSIDEWIDTH = 250;
+    const int CLOSEDSIDEWIDTH = 63;
+}
+
 Main::Main() : WTemplate{tr("main")} {
+    addStyleClass("content-open");
     sideClosed = false;
     app = WApplication::instance();
     app->internalPathChanged().connect(this, &Main::handlePathChange);
@@ -25,23 +31,26 @@ Main::Main() : WTemplate{tr("main")} {
     close->clicked().connect([=] {
         if (sideClosed) {
             sideClosed = false;
-            sidebar->setWidth(250);
+            sidebar->setWidth(OPENSIDEWIDTH);
+            setStyleClass("content-open");
         } else {
             sideClosed = true;
-            sidebar->setWidth(63);
+            sidebar->setWidth(CLOSEDSIDEWIDTH);
+            setStyleClass("content-closed");
         }
     });
 
-    WPushButton *openListUI = sidebar->addNew<WPushButton>("List");
+    WPushButton *openListUI = sidebar->addNew<WPushButton>("Notes");
     openListUI->setStyleClass("sidebarbtn");
-    openListUI->setIcon("../images/list.png");
+    openListUI->setIcon("../images/main/list.png");
     openListUI->clicked().connect([=] {
-        WDialog* listsWindow = app->root()->addNew<ListUI>();
+        string username = "a";
+        WDialog* listsWindow = app->root()->addNew<NoteUI>(username);
         listsWindow->show();
     });
 
     WPushButton *openCalculatorUI= sidebar->addNew<WPushButton>("Calculator");
-    openCalculatorUI->setIcon("../images/calculator.png");
+    openCalculatorUI->setIcon("../images/main/calculator.png");
     openCalculatorUI->setStyleClass("sidebarbtn");
     openCalculatorUI->clicked().connect([=] {
         WDialog* calculatorWindow = app->root()->addNew<CalculatorUI>();
@@ -49,7 +58,7 @@ Main::Main() : WTemplate{tr("main")} {
     });
 
     WPushButton *openConversionUI= sidebar->addNew<WPushButton>("Unit Conversion");
-    openConversionUI->setIcon("../images/change.png");
+    openConversionUI->setIcon("../images/main/change.png");
     openConversionUI->setStyleClass("sidebarbtn");
     openConversionUI->clicked().connect([=] {
         WDialog* conversionWindow = app->root()->addNew<ConversionUI>();
@@ -57,12 +66,12 @@ Main::Main() : WTemplate{tr("main")} {
     });
 
     WPushButton *openClockUI = sidebar->addNew<WPushButton>("Clock");
-    openClockUI->setIcon("../images/clock.png");
+    openClockUI->setIcon("../images/main/clock.png");
     openClockUI->setStyleClass("sidebarbtn");
     openClockUI->setLink(WLink(LinkType::InternalPath, "/clock"));
 
     WPushButton *openSettingsUI= sidebar->addNew<WPushButton>("Settings");
-    openSettingsUI->setIcon("../images/settings.png");
+    openSettingsUI->setIcon("../images/main/settings.png");
     openSettingsUI->setStyleClass("sidebarbtn");
     openSettingsUI->setLink(WLink(LinkType::InternalPath, "/settings"));
 }

@@ -10,7 +10,7 @@
 using namespace std;
 using namespace Wt;
 
-NoteUI::NoteUI() {
+NoteUI::NoteUI(string username) : notes(username) {
 	setWindowTitle("Sticky Notes");
 	setModal(false);
 	setResizable(true);
@@ -23,7 +23,11 @@ NoteUI::NoteUI() {
 	WPushButton *backBtn = titleBar()->addNew<WPushButton>();
 	backBtn->addStyleClass("btn-close");
 	backBtn->setToolTip("Close window", TextFormat::XHTML);
-	backBtn->clicked().connect(this, &WDialog::reject);
+	backBtn->clicked().connect([=] {
+		notes.delData();
+		notes.saveData();
+		this->reject();
+	});
 
 	WPushButton *addBtn = footer()->addNew<WPushButton>("+");
 	addBtn->setToolTip("New note", TextFormat::XHTML);

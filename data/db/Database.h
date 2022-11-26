@@ -16,13 +16,15 @@ class Database {
     private:
         sqlite3 *db;
         std::string table;
+        std::string keyAttribute;
 
     public:
-        Database(std::string table, std::vector<std::string> attributes);
+        Database(std::string table, std::string keyAttribute, std::vector<std::string> attributes);
         ~Database();
         sqlite3* getConnection();
         void saveData(std::vector<std::vector<std::string>> dataRow);
         void saveData(std::vector<std::string> row);
+        void delData(std::string key);
         bool exists(std::string table, std::vector<std::string> row);
 };
 

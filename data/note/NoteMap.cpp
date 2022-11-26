@@ -10,34 +10,33 @@
 using namespace std;
 
 // ListMap() is the constructor for a ListMap object
-// @param nothing
+// @param username is the username of the user
 // @return nothing
-NoteMap::NoteMap(): db("Lists", {"username", "desc", "type", "dateAdded"}) {}
+NoteMap::NoteMap(std::string username): db("Notes", "dateAdded", {"username", "desc", "type", "dateAdded"}) {
+    this->username = username;
+}
 
 // ~ListMap() is the destructor for a ListMap object
 // @param nothing
 // @return nothing
 NoteMap::~NoteMap() {}
 
-// work in progress method
-void NoteMap::linkProfile(std::string profileName) {
-
-}
-
 // saveData() saves the user's lists to the database
 // @param username is the username of this session
 // @return nothing
-void NoteMap::saveData(std::string username) {
-    for (auto& [key, value]: notes) {
-        db.saveData({username, value.getDesc(), value.getType(), value.getDateAdded()});
+void NoteMap::saveData() {
+    for (auto& [key, note]: notes) {
+        db.saveData({username, note.getDesc(), note.getType(), note.getDateAdded()});
     }
 }
 
 // delData() deletes the user's lists from the database
 // @param username is the username of this session
 // @return nothing
-void NoteMap::delData(std::string username) {
-    
+void NoteMap::delData() {
+    for (auto& [key, note]: batchToDel) {
+        db.delData(note.getDateAdded());
+    }
 }
 
 // add() add a list to this map
@@ -54,6 +53,7 @@ void NoteMap::add(Note list) {
 void NoteMap::del(Note list) {
     string key = list.getDateAdded();
 	notes.erase(key);
+    batchToDel.emplace(key, list);
 }
 
 // get() get a list from this map

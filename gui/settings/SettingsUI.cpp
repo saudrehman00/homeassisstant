@@ -15,7 +15,7 @@ SettingsUI::SettingsUI() : WTemplate{tr("menupage")} {
     WStackedWidget *content = bindWidget("content", make_unique<WStackedWidget>());
 
     WMenu *sidebar = bindWidget("sidebar", make_unique<WMenu>(content));
-    sidebar->addItem("../images/location.png", "Location", make_unique<LocationUI>());
+    sidebar->addItem("../images/settings/location.png", "Location", make_unique<LocationUI>());
     sidebar->setStyleClass("nav nav-pills flex-column");
 }
 

@@ -33,7 +33,7 @@ class NoteUI : public Wt::WDialog {
         void createNote();
 
     public:
-        NoteUI();
+        NoteUI(std::string username);
         ~NoteUI();
 };
 

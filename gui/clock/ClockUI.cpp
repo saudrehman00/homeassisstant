@@ -15,8 +15,8 @@ ClockUI::ClockUI() : WTemplate{tr("menupage")} {
     WStackedWidget *content = bindWidget("content", make_unique<WStackedWidget>());
 
     WMenu *sidebar = bindWidget("sidebar", make_unique<WMenu>(content));
-    sidebar->addItem("../images/timer.png", "Timer", make_unique<ClockPage>("Timer", "hh:mm:ss"));
-    sidebar->addItem("../images/alarm.png", "Alarm", make_unique<ClockPage>("Alarm", "h:mm:ss AP"));
+    sidebar->addItem("../images/clock/timer.png", "Timer", make_unique<ClockPage>("Timer", "hh:mm:ss"));
+    sidebar->addItem("../images/clock/alarm.png", "Alarm", make_unique<ClockPage>("Alarm", "h:mm:ss AP"));
     sidebar->setStyleClass("nav nav-pills flex-column");
 }
 

@@ -89,29 +89,16 @@
   </message>
 
   <message id="main">
-    <div class="vh-100 vw-100">
-      <button type="button">X</button>
-
+    <div class="vh-100 content">
       <center>
         <h1 class="title" style="color:rgb(34, 62, 91);">Hello ${username}</h1>
       </center>
 
-      <div class="container">
-        <div class="row">
-          <div class="col" style="border:1px solid black;">
-            <div class="row">
-              <img class="weather" src="../images/temperature.png">23°C</img>
-              <img class="weather" src="../images/weather.png" width="50" height="50">Cloudy.</img>
-            </div>
-            <div class="row">
-              <h1 style="color:rgb(34, 62, 91);font-size: 20px">London, ON</h1>
-            </div>
-          </div>
-        </div>
-      </div>
+      ${sidebar class="sidebar bg-light"}
     </div>
-
-    ${sidebar class="sidebar bg-light"}
-
+  </message>
+  
+  <message id="weather">
+    ${label}
   </message>
 </messages>

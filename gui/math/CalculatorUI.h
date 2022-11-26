@@ -1,7 +1,6 @@
 #ifndef CALCULATORUI_H
 #define CALCULATORUI_H
 
-#include <Wt/WGridLayout.h>
 #include <Wt/WLineEdit.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WLabel.h>

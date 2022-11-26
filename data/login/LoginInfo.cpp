@@ -35,7 +35,8 @@ namespace {
 // LoginInfo(username, password) is the constructor for a LoginInfo object
 // @param nothing
 // @return nothing
-LoginInfo::LoginInfo(string username, string password): username(username), db("LoginInfo", {"username", "encryptedPassword"}) {
+LoginInfo::LoginInfo(string username, string password) : 
+username(username), db("LoginInfo", "username", {"username", "encryptedPassword"}) {
     encryptedPassword = encrypt(password);
     lastLogin = "";
 }

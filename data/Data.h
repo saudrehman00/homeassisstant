@@ -12,8 +12,8 @@
 
 class Data {
     public:
-        virtual void saveData(std::string username) = 0;
-        virtual void delData(std::string username) = 0;
+        virtual void saveData() = 0;
+        virtual void delData() = 0;
 };
 
 #endif
