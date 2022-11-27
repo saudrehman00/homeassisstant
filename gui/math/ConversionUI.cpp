@@ -146,16 +146,16 @@ void ConversionUI::convertUnits(string field){
     }
 
     if(field == "left"){
-        right->setText(to_string(convert(leftD, leftDropText, rightDropText)));
+        right->setText(cleanText(convert(leftD, leftDropText, rightDropText)));
     }
     if(field == "right"){
-        left->setText(to_string(convert(rightD, rightDropText, leftDropText)));
+        left->setText(cleanText(convert(rightD, rightDropText, leftDropText)));
     }
     if(field == "selL"){
-        right->setText(to_string(convert(leftD, leftDropText, rightDropText)));
+        right->setText(cleanText(convert(leftD, leftDropText, rightDropText)));
     }
     if(field == "selR"){
-        left->setText(to_string(convert(rightD, rightDropText, leftDropText)));
+        left->setText(cleanText(convert(rightD, rightDropText, leftDropText)));
     }
     
 }
