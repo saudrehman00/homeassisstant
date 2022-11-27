@@ -26,7 +26,9 @@ const double DAY = 86400;
 const double HOUR = 3600;
 const double MINUTE = 60;
 const double SECOND = 1;
-const double MILLISECOND = 1000;
+const double MILLISECOND = 0.001;
+
+
 
 ConversionUI::ConversionUI() {
     setWindowTitle("Unit conversion");
@@ -52,7 +54,7 @@ ConversionUI::ConversionUI() {
     type->addItem("mass");
     type->addItem("temperature");
     type->addItem("time");
-    type->addItem("volume");
+    //type->addItem("volume");
 
     //start the program with length selected
     createDropdowns("length");
