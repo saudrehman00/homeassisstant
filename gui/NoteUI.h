@@ -24,13 +24,13 @@ class NoteUI : public Wt::WDialog {
         Wt::WPopupMenu* popup;
         NoteMap notes;
         std::string getTypeInput(Wt::WPopupMenu* popup);
-        void create();
+        void createDialog();
         void save(std::string note, std::string type);
         void update(Wt::WLabel* contentLabel, Wt::WLabel* typeLabel, Wt::WLabel* dateLabel);
         void addType(Wt::WLineEdit* typeEdit);
         void filter(std::string type);
         void load();
-        void createNote();
+        void renderNote(Note note);
 
     public:
         NoteUI(std::string username);

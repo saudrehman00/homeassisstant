@@ -9,6 +9,7 @@
 
 #include <unordered_map>
 #include <string>
+#include <vector>
 #include "Note.h"
 #include "../Data.h"
 
@@ -24,8 +25,10 @@ class NoteMap : public Data {
         ~NoteMap();
         void saveData();
         void delData();
+        void loadData();
         void add(Note list);
         void del(Note list);
         Note get(std::string key);
+        std::unordered_map<std::string, Note> getNotes();
 };
 #endif
