@@ -38,6 +38,7 @@ body {
   width: 250px;
   height: 100% !important;
   padding-top: 20px;
+  background-color: #CCC8BF;
 }
 
 .content-closed {
@@ -52,6 +53,7 @@ body {
 
 .content {
   padding: 16px;
+  margin-left: 250px;
   background-color: #212529;
 }
 

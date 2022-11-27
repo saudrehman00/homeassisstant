@@ -206,7 +206,7 @@ bool Database::exists(string table, vector<string> data)
 
 vector<vector<string>> Database::readAllUser(string username)
 {
-    int err = 0;                                  
+    int err = 0;                            
     string read_all_cmd = "SELECT * FROM " + table + " WHERE username='" + username + "'"; // sqlite statement to get all data from table
     const int len = read_all_cmd.length();
     sqlite3_stmt *stmnt;
@@ -222,10 +222,12 @@ vector<vector<string>> Database::readAllUser(string username)
     int i = 0;
     while (sqlite3_step(stmnt) == SQLITE_ROW)
     {
+        vector<string> row;
         for (int i = 0; i < cols; i++) {
             string cell = (const char *)sqlite3_column_text(stmnt, i);
-            data[i].push_back(cell);
+            row.push_back(cell);
         }
+        data.push_back(row);
     }
 
     err = sqlite3_finalize(stmnt);

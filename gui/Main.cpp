@@ -15,7 +15,7 @@ namespace {
     const int CLOSEDSIDEWIDTH = 63;
 }
 
-Main::Main(string username) : WTemplate{tr("main")} {
+Main::Main(string username) : WTemplate{tr("main")}, username(username) {
     addStyleClass("content-open");
     sideClosed = false;
     app = WApplication::instance();
@@ -75,6 +75,8 @@ Main::Main(string username) : WTemplate{tr("main")} {
     openSettingsUI->setLink(WLink(LinkType::InternalPath, "/settings"));
 
     WContainerWidget *weather = bindWidget("weather", make_unique<WeatherUI>());
+
+    WContainerWidget *news = bindWidget("news", make_unique<NewsUI>());
 }
 
 Main::~Main() {}
