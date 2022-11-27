@@ -204,10 +204,10 @@ bool Database::exists(string table, vector<string> data)
     return (found && (result == SQLITE_OK));
 }
 
-vector<vector<string>> Database::readAll()
+vector<vector<string>> Database::readAllUser(string username)
 {
     int err = 0;                                  
-    string read_all_cmd = "select * from " + table; // sqlite statement to get all data from table
+    string read_all_cmd = "SELECT * FROM " + table + " WHERE username='" + username + "'"; // sqlite statement to get all data from table
     const int len = read_all_cmd.length();
     sqlite3_stmt *stmnt;
     vector<vector<string>> data; // stores found log messages to be returned
