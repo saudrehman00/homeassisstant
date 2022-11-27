@@ -9,9 +9,11 @@
 #include <Wt/WRegExpValidator.h>
 #include <unordered_map>
 #include <string>
+#include "../../calculator/Calculator.h"
 
 class CalculatorUI : public Wt::WDialog {
     private:
+        Calculator calc;
         double first;
         double second;
         Wt::WLineEdit *input;
