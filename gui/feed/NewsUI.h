@@ -2,6 +2,7 @@
 #define NEWSUI_H
 
 #include "Feed.h"
+#include <Wt/WAnchor.h>
 
 class NewsUI : public Wt::WContainerWidget, public Feed {
     private:

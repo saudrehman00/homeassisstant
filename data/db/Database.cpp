@@ -105,6 +105,7 @@ void Database::saveData(vector<vector<string>> data)
 
         // insert the rows of data into the database
         string cmd = "INSERT INTO " + table + " VALUES (" + row + ")";
+        Logger::instance().log(cmd);
         sqlite3_exec(db, cmd.c_str(), nullptr, 0, &err);
 
         if (err != SQLITE_OK)
@@ -139,6 +140,7 @@ void Database::saveData(vector<string> data)
 
     // insert the rows of data into the database
     string cmd = "INSERT INTO " + table + " VALUES (" + row + ")"; // check its inserted in correct order
+    Logger::instance().log(cmd);
     sqlite3_exec(db, cmd.c_str(), nullptr, 0, &err);
 
     if (err != SQLITE_OK)
@@ -156,6 +158,7 @@ void Database::delData(string key)
     char *err = 0;
     // insert the rows of data into the database
     string cmd = "DELETE FROM " + table + " WHERE " + keyAttribute + "=" + "'" + key + "'";
+    Logger::instance().log(cmd);
     sqlite3_exec(db, cmd.c_str(), nullptr, 0, &err);
 
     if (err != SQLITE_OK)

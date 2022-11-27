@@ -22,11 +22,11 @@ class Logger {
         std::vector<LogMessage> read_all();
 
     private:
-        Database *_db;
+        sqlite3 *_db;
         Logger();
         ~Logger();
-        Logger(const Logger& other) = delete;
-        Logger& operator=(const Logger& other) = delete;
+        Logger(const Logger&) = delete;
+        Logger& operator=(const Logger&) = delete;
 };
 
 #endif
