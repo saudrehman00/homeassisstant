@@ -6,8 +6,8 @@ using namespace Wt;
 NewsUI::~NewsUI() {}
 
 NewsUI::NewsUI() : WContainerWidget() {
-    setHeight(550);
-    setStyleClass("text-white d-flex bg-light flex-row justify-content-center");
+    setHeight(600);
+    setStyleClass("text-white mt-4 d-flex bg-light flex-row justify-content-center");
 
     for (int i = 0; i < 7; i++) {
         WContainerWidget *article = this->addWidget(make_unique<WContainerWidget>());

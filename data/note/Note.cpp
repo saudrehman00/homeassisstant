@@ -30,6 +30,13 @@ Note::Note(string type, string desc): type(type), desc(desc) {
     dateAdded = getToday();
 }
 
+// List(type, desc) is the constructor for a List object
+// @param type is the type of the list
+// @param desc is the list description
+// @param dateAdded is the addition date
+// @return nothing
+Note::Note(string type, string desc, string dateAdded): type(type), desc(desc), dateAdded(dateAdded) {}
+
 // ~List() is the destructor for a List object
 // @param nothing
 // @return nothing

@@ -21,6 +21,7 @@ class Note {
 
     public:
         Note(std::string type, std::string desc);
+        Note(std::string type, std::string desc, std::string dateAdded);
         ~Note();
         std::string getDateAdded();
         std::string getDesc();

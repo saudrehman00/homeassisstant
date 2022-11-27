@@ -22,6 +22,7 @@
 class Main : public Wt::WTemplate {
     private:
         Wt::WApplication *app;
+        std::string username;
         bool sideClosed;
         void handlePathChange();
 

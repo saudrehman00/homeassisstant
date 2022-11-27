@@ -15,7 +15,7 @@ namespace {
     const int CLOSEDSIDEWIDTH = 63;
 }
 
-Main::Main(string username) : WTemplate{tr("main")} {
+Main::Main(string username) : WTemplate{tr("main")}, username(username) {
     addStyleClass("content-open");
     sideClosed = false;
     app = WApplication::instance();
