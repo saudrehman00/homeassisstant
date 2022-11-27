@@ -15,7 +15,7 @@ namespace {
     const int CLOSEDSIDEWIDTH = 63;
 }
 
-Main::Main() : WTemplate{tr("main")} {
+Main::Main(string username) : WTemplate{tr("main")} {
     addStyleClass("content-open");
     sideClosed = false;
     app = WApplication::instance();
@@ -44,7 +44,6 @@ Main::Main() : WTemplate{tr("main")} {
     openListUI->setStyleClass("sidebarbtn");
     openListUI->setIcon("../images/main/list.png");
     openListUI->clicked().connect([=] {
-        string username = "a";
         WDialog* listsWindow = app->root()->addNew<NoteUI>(username);
         listsWindow->show();
     });
