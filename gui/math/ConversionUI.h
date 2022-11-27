@@ -14,13 +14,23 @@
 
 class ConversionUI : public Wt::WDialog {
     private:
+        double leftD, rightD;;
+        double convert(double source, std::string sourceType, std::string resultType);
+        double matchType(std::string type);
+        std::string cleanText(std::string text);
+        std::string cleanText(double text);
         Wt::WLineEdit *left;
         Wt::WLineEdit *right;
         Wt::WComboBox *leftSel;
         Wt::WComboBox *rightSel;
         Wt::WComboBox *type;
+        void addItemBothSides(std::string item);
+        void createDropdowns(std::string type);
+        void convertUnits(std::string field);
         void getUnits();
         void getTypes();
+        void topListener();
+
     public:
         ConversionUI();
         ~ConversionUI();
