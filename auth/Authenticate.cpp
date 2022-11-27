@@ -43,7 +43,7 @@ void Authenticate::startAuth() {
             if (info.authenticate()) {
                 cerr << "\nAuthenticate: password correct.\n";
                 app->root()->removeWidget(f);
-                app->root()->addNew<Main>();
+                app->root()->addNew<Main>(username);
             } else {
                 f->getHelp()->setText("Please check that your username or password is correct.");
             }
