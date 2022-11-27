@@ -4,7 +4,6 @@ using namespace std;
 using namespace Wt;
 
 CalculatorUI::CalculatorUI() {
-    //cout << "i don't have aids" << endl;
     setWindowTitle("Calculator");
 	setModal(false);
 	setResizable(true);
