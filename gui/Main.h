@@ -17,7 +17,7 @@
 #include "settings/SettingsUI.h"
 #include "math/CalculatorUI.h"
 #include "math/ConversionUI.h"
-#include "weather/WeatherUI.h"
+#include "feed/WeatherUI.h"
 
 class Main : public Wt::WTemplate {
     private:
