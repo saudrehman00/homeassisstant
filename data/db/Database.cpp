@@ -11,7 +11,7 @@ using namespace std;
 // @param table is the table name of the data
 // @param attributes is the column names
 // @return nothing
-Database::Database(string table, string keyAttribute, vector<string> attributes) : db(nullptr), table(table), keyAttribute(keyAttribute)
+Database::Database(string table, string keyAttribute, vector<string> attributes) : cols(attributes.size()), db(nullptr), table(table), keyAttribute(keyAttribute)
 {
     char *err = 0;
     sqlite3_open("Data.db", &db); // open connection to db using its handle
@@ -45,7 +45,9 @@ Database::Database(string table, string keyAttribute, vector<string> attributes)
     if (err != SQLITE_OK)
     {
         cerr << "Table construction error: " << sqlite3_errmsg(db) << "\n";
-    } else {
+    }
+    else
+    {
         cerr << "\nTable opened: " + row + "\n";
     }
 }
@@ -200,4 +202,37 @@ bool Database::exists(string table, vector<string> data)
     }
 
     return (found && (result == SQLITE_OK));
+}
+
+vector<vector<string>> Database::readAll()
+{
+    int err = 0;                                  
+    string read_all_cmd = "select * from " + table; // sqlite statement to get all data from table
+    const int len = read_all_cmd.length();
+    sqlite3_stmt *stmnt;
+    vector<vector<string>> data; // stores found log messages to be returned
+
+    // query against a Logger's database row by row and store the resulting log message
+    err = sqlite3_prepare(db, read_all_cmd.c_str(), len, &stmnt, nullptr);
+    if (err != SQLITE_OK)
+    {
+        cerr << "Could not prepare: " << sqlite3_errmsg(db) << "\n";
+    }
+
+    int i = 0;
+    while (sqlite3_step(stmnt) == SQLITE_ROW)
+    {
+        for (int i = 0; i < cols; i++) {
+            string cell = (const char *)sqlite3_column_text(stmnt, i);
+            data[i].push_back(cell);
+        }
+    }
+
+    err = sqlite3_finalize(stmnt);
+    if (err != SQLITE_OK)
+    {
+        cerr << "Could not finalize: " << sqlite3_errmsg(db) << "\n";
+    }
+
+    return data;
 }
