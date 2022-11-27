@@ -26,7 +26,7 @@ class Main : public Wt::WTemplate {
         void handlePathChange();
 
     public:
-        Main(std::string username);
+        Main(string username);
         ~Main();
 };
 
