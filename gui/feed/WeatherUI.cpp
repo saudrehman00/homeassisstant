@@ -6,7 +6,7 @@ using namespace Wt;
 WeatherUI::WeatherUI() : WContainerWidget() {
     setStyleClass("text-white d-flex flex-row justify-content-center w-auto");
 
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 5; i++) {
         WContainerWidget *day = this->addWidget(make_unique<WContainerWidget>());
         day->setStyleClass("text-left mx-4 d-flex flex-column justify-content-between");
         buildFeedItem(day);

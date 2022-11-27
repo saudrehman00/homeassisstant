@@ -24,7 +24,7 @@ README
     --------------------------------------------MAIN APLICATION-------------------------------------------------------------------------------
     To run the main application (login testing, logging, main landing page, and list creations), cd to the root directory (group34) and enter:
         $ make
-        $ ./Assistant --docroot docroot  --approot approot --http-address 0.0.0.0 --http-port 9090
+        $ ./Assistant -c wt_config.xml --docroot="docroot;/resources,/style.css,/images"  --approot approot --http-address 0.0.0.0 --http-port 9090
     Afterwards, head to the local host ip address in any browser (127.0.0.1:9090). 
     Other features have not yet been implemented.
     Input CTRL^Z to stop the process

@@ -209,6 +209,7 @@ double ConversionUI::convert(double source, string sourceType, string resultType
             return (source-273.15)*9/5 + 32;
         }
     }
+    return 0;
 }
 
 double ConversionUI::matchType(string type){
@@ -278,6 +279,5 @@ double ConversionUI::matchType(string type){
     else if(type == "millisecond"){
         return MILLISECOND;
     }
-
-    
+    return 0;
 }

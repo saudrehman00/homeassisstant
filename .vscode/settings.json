@@ -84,6 +84,7 @@
         "WMenu.C": "cpp",
         "JavascriptExample.C": "cpp",
         "http-client.C": "cpp",
-        "*.js": "cpp"
+        "*.js": "cpp",
+        "newsrequestercpp": "cpp"
     }
 }

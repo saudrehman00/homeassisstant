@@ -1,22 +1,49 @@
 #include "Requester.h"
+#include "Request.h"
 
 using namespace curlpp::options;
 
-int main() 
+std::stringstream Requester::makeGetRequest(Request* request)
 {
+    std::stringstream ss;
+    try
+    {
+        // That's all that is needed to do cleanup of used resources (RAII style).
+        curlpp::Cleanup myCleanup;
 
-    // "lat": 42.9834,
-    // "lon": -81.233,
-    // https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
-    /*std::string hostnameW = "https://api.openweathermap.org/data/2.5/weather?lat=42.9834&lon=-81.233&appid=869a570166961fb2a676c717eb550b92";
-    NewsRequest myWeatherAPICall(hostnameW);
-    myWeatherAPICall.requestData(hostnameW);*/
+        // Our request to be sent.
+        curlpp::Easy myRequest;
 
-    std::string hostnameN = "https://newsapi.org/v2/top-headlines?country=ca&apiKey=4e6f18ed836d4194ac55c12097e5d6ca";
-    NewsRequest myWeatherAPICall(hostnameN);
-    myWeatherAPICall.requestData(hostnameN);
+        // Set the URL.
+        curlpp::options::Url myUrl(request->getHost());
+        // myRequest.setOpt<curlpp::options::Url>(hostname);
+        myRequest.setOpt(new HttpHeader(request->getHeaders()));
+        myRequest.setOpt(myUrl);
 
-    /*std::string hostnameL = "https://maps.googleapis.com/maps/api/geocode/json?address=University%20Western%20Ontario&key=AIzaSyBsaxHAEYOD0stq-0Smzwr1lGQ14KkOxKg";
-    WebRequest myNewsAPICall(hostnameL);
-    myNewsAPICall.makeGetRequest();*/
+        // Send request and get a result.
+        // By default the result goes to standard output.
+        // myRequest.perform();
+
+        // curlpp::options::WriteStream ws(&os);
+        // myRequest.setOpt(ws);
+        // myRequest.perform();
+        ss << myRequest;
+
+        // boost::property_tree::ptree pt;
+        // boost::property_tree::read_json(ss, pt);
+
+        // std::cout << ss.str() << std::endl;
+        // std::cout << pt.get_child << std::endl;
+    }
+
+    catch (curlpp::RuntimeError &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
+    catch (curlpp::LogicError &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+    return ss;
 }
