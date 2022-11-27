@@ -6,7 +6,7 @@ using namespace Wt;
 NewsUI::~NewsUI() {}
 
 NewsUI::NewsUI() : WContainerWidget() {
-    setHeight(600);
+    setHeight(550);
     setStyleClass("text-white mt-4 d-flex bg-light flex-row justify-content-center");
 
     for (int i = 0; i < 7; i++) {
@@ -18,19 +18,18 @@ NewsUI::NewsUI() : WContainerWidget() {
 }
 
 void NewsUI::buildFeedItem(WContainerWidget *article) {
-    WText *date = article->addWidget(make_unique<WText>("TODAY"));
-
-    WContainerWidget *temperature = article->addWidget(make_unique<WContainerWidget>());
-    temperature->setStyleClass("text-left d-flex flex-row");
+    WText *publisher = article->addWidget(make_unique<WText>("JOURNAL"));
     
-    WImage *image = temperature->addWidget(make_unique<WImage>(WLink("../images/weather/sun.png")));
-    image->setWidth(50);
-    image->setHeight(50);
+    // Create an anchor that links to a URL through an image.
+    WLink link = WLink("https://www.emweb.be/");
+    link.setTarget(LinkTarget::NewWindow);
+    unique_ptr<WAnchor> anchor = make_unique<WAnchor>(link);
+    anchor->addNew<WImage>(WLink("https://www.emweb.be/css/emweb_small.png"));
 
-    WText *high = temperature->addWidget(make_unique<WText>("MX°"));
-    high->setStyleClass("px-3 high-font");
-    WText *low = temperature->addWidget(make_unique<WText>("MN°"));
-    low->setStyleClass("low-font");
+    WText *title = article->addWidget(make_unique<WText>("ARTICLE"));
+    title->setStyleClass("px-3 high-font");
+    WText *date = article->addWidget(make_unique<WText>("DATE"));
+    date->setStyleClass("low-font");
 
     WText *condition = article->addWidget(make_unique<WText>("SUNNY"));
 }

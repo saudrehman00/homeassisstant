@@ -11,6 +11,7 @@
 #include <string>
 #include <sqlite3.h>
 #include <iostream>
+#include "../logger/Logger.h"
 
 class Database {
     private:

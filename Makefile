@@ -1,7 +1,11 @@
 CC := g++
 FLAGS := -lwthttp -lwt -lsqlite3 
 TARGET := Assistant
+<<<<<<< HEAD
+UTIL := Authenticate.o LoginInfo.o Database.o NoteMap.o Note.o SettingsUI.o Logger.o LogMessage.o
+=======
 UTIL := Authenticate.o LoginInfo.o Database.o NoteMap.o Note.o SettingsUI.o Calculator.o
+>>>>>>> fe59ee0e63c1399677c890db4e92eb49bad4822a
 GUI := Main.o LoginForm.o NoteUI.o ClockUI.o ClockPage.o LocationUI.o CalculatorUI.o ConversionUI.o WeatherUI.o NewsUI.o
 
 all: $(TARGET)
@@ -24,6 +28,12 @@ LoginInfo.o: data/login/LoginInfo.h data/login/LoginInfo.cpp
 
 Database.o: data/db/Database.h data/db/Database.cpp
 	$(CC) -c data/db/Database.cpp
+
+Logger.o: data/logger/Logger.h data/logger/Logger.cpp
+	$(CC) -c data/logger/Logger.cpp
+
+LogMessage.o: data/logger/LogMessage.h data/logger/LogMessage.cpp
+	$(CC) -c data/logger/LogMessage.cpp
 
 NoteUI.o: gui/NoteUI.h gui/NoteUI.cpp
 	$(CC) -c gui/NoteUI.cpp

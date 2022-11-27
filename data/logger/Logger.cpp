@@ -7,6 +7,7 @@
 #include "Logger.h"
 using namespace std;
 
+// Scott Meyer's singleton
 Logger& Logger::instance() {
     static Logger instance;
     return instance;
@@ -17,19 +18,41 @@ Logger& Logger::instance() {
 // @return nothing
 Logger::Logger() {
     char *err = 0;
+    sqlite3_open("Log.db", &_db); // open connection to db using its handle
+    if (err != SQLITE_OK)
+    {
+        cerr << "Database - Could not open Database: " << sqlite3_errmsg(_db) << "\n";
+    }
+    else
+    {
+        cerr << "Database opened."
+             << "\n";
+    }
     // create a new sqlite table with the name "app" if it does not exist
     string create_table_cmd = "create table if not exists Logger (timestamp varchar(255), message varchar(255))";
-    sqlite3_exec(_db->getConnection(), create_table_cmd.c_str(), nullptr, 0, &err);
+    sqlite3_exec(_db, create_table_cmd.c_str(), nullptr, 0, &err);
 
     if (err != SQLITE_OK) {
-        cerr << "Table construction error: " << sqlite3_errmsg(_db->getConnection()) << "\n";
+        cerr << "Table construction error: " << sqlite3_errmsg(_db) << "\n";
     }
 }
 
 // ~Logger() is the destructor for a Logger object
 // @param nothing
 // @return nothing
-Logger::~Logger() {}
+Logger::~Logger() {
+    char *err = 0;
+    sqlite3_close(_db); // close connection to "app" db with its handle
+    if (err != SQLITE_OK)
+    {
+        cerr << "Logger - Could not close Data.sql: " << sqlite3_errmsg(_db) << "\n";
+    }
+    else
+    {
+        cerr << "Logger - Data.db terminated and DB closed."
+             << "\n";
+    }
+}
 
 // log(msg, app) writes msg and the current
 // system time to the database in the table called app
@@ -44,10 +67,10 @@ void Logger::log(string msg) {
     // insert the log message into the Logger's database
     string insert_cmd = "insert into Logger values (\"" + time + "\", \"" + msg + "\")";
     char *err = 0;
-    sqlite3_exec(_db->getConnection(), insert_cmd.c_str(), nullptr, 0, &err);
+    sqlite3_exec(_db, insert_cmd.c_str(), nullptr, 0, &err);
 
     if (err != SQLITE_OK) {
-        cerr << "Logging error: " << sqlite3_errmsg(_db->getConnection()) << "\n";
+        cerr << "Logging error: " << sqlite3_errmsg(_db) << "\n";
     }
 }
 
@@ -63,9 +86,9 @@ vector<LogMessage> Logger::read_all() {
     vector<LogMessage> history; // stores found log messages to be returned
 
     // query against a Logger's database row by row and store the resulting log message
-    err = sqlite3_prepare(_db->getConnection(), read_all_cmd.c_str(), len, &stmnt, nullptr);
+    err = sqlite3_prepare(_db, read_all_cmd.c_str(), len, &stmnt, nullptr);
     if (err != SQLITE_OK) {
-        cerr << "Could not prepare: " << sqlite3_errmsg(_db->getConnection()) << "\n";
+        cerr << "Could not prepare: " << sqlite3_errmsg(_db) << "\n";
     }
 
     while (sqlite3_step(stmnt) == SQLITE_ROW) {
@@ -77,7 +100,7 @@ vector<LogMessage> Logger::read_all() {
 
     err = sqlite3_finalize(stmnt);
     if (err != SQLITE_OK) {
-        cerr << "Could not finalize: " << sqlite3_errmsg(_db->getConnection()) << "\n";
+        cerr << "Could not finalize: " << sqlite3_errmsg(_db) << "\n";
     }
     
     return history;

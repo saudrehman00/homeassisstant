@@ -44,6 +44,7 @@ void Authenticate::startAuth() {
                 cerr << "\nAuthenticate: password correct.\n";
                 app->root()->removeWidget(f);
                 app->root()->addNew<Main>(username);
+                Logger::instance().log(username + " started a session.");
             } else {
                 f->getHelp()->setText("Please check that your username or password is correct.");
             }

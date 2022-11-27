@@ -11,7 +11,7 @@
 #include "../data/login/LoginInfo.h"
 #include "../gui/LoginForm.h"
 #include "../gui/Main.h"
-//#include "../gui/ListUI.h"
+#include "../data/logger/Logger.h"
 
 class Authenticate {
     public:
