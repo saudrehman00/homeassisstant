@@ -9,6 +9,8 @@ CalculatorUI::CalculatorUI() {
 	setResizable(true);
 	setMinimumSize("350", "500");
     contents()->addStyleClass("form-group");
+
+    calc = Calculator();
     first = 0;
     second = 0;
     operand = nullptr;
@@ -67,15 +69,43 @@ void CalculatorUI::append(string s) {
 void CalculatorUI::operate(string btn) {
     first = stod(input->text().toUTF8());
     operand = btns[btn];
-    input->setText("0");
+    if(operand->text().toUTF8() == "√"){
+        first = calc.root(first);
+        string inputString = to_string(first);
+        inputString.erase(inputString.find_last_not_of('0') + 1, string::npos);
+        inputString.erase ( inputString.find_last_not_of('.') + 1, string::npos );
+        input->setText(inputString);
+    } else {
+        input->setText("0");
+    }
 }
 
 void CalculatorUI::compute() {
     if (operand != nullptr) {
+        string opStr = operand->text().toUTF8();
         second = stod(input->text().toUTF8());
-        cerr << "\n calculating " << first << " " + operand->text().toUTF8() + " " << second << "\n";
-        // first = new num;
-        // input->setText(new num);
+        cerr << "\n calculating " << first << " " + opStr + " " << second << "\n";
+        
+        //if statement logics
+        if(opStr == "+"){
+            first = calc.addition(first,second);
+        }
+        if(opStr == "-"){
+            first = calc.subtraction(first,second);
+        }
+        if(opStr == "x"){
+            first = calc.multiplication(first,second);
+        }
+        if(opStr == "÷"){
+            first = calc.division(first,second);
+        }
+        if(opStr == "^"){
+            first = calc.exponent(first,second);
+        }
+        string inputString = to_string(first);
+        inputString.erase(inputString.find_last_not_of('0') + 1, string::npos);
+        inputString.erase ( inputString.find_last_not_of('.') + 1, string::npos );
+        input->setText(inputString);
     }
 }
 
