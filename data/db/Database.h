@@ -26,7 +26,7 @@ class Database {
         void saveData(std::vector<std::vector<std::string>> dataRow);
         void saveData(std::vector<std::string> row);
         void delData(std::string key);
-        vector<vector<string>> readAllUser(std::string username);
+        std::vector<std::vector<std::string>> readAllUser(std::string username);
         bool exists(std::string table, std::vector<std::string> row);
 };
 
