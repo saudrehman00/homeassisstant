@@ -3,8 +3,6 @@
 
 #include <Wt/WLabel.h>
 #include <Wt/WText.h>
-#include <Wt/WHBoxLayout.h>
-#include <Wt/WVBoxLayout.h>
 #include <Wt/WContainerWidget.h>
 #include <Wt/WImage.h>
 #include <Wt/WFont.h>

@@ -4,8 +4,7 @@ using namespace std;
 using namespace Wt;
 
 WeatherUI::WeatherUI() : WContainerWidget() {
-    setHeight(150);
-    setStyleClass("text-white d-flex flex-row justify-content-center");
+    setStyleClass("text-white d-flex flex-row justify-content-center w-auto");
 
     for (int i = 0; i < 7; i++) {
         WContainerWidget *day = this->addWidget(make_unique<WContainerWidget>());

@@ -11,8 +11,8 @@ using namespace std;
 using namespace Wt;
 
 namespace {
-    const int OPENSIDEWIDTH = 250;
-    const int CLOSEDSIDEWIDTH = 63;
+    const string OPENSIDEWIDTH = "13%";
+    const string CLOSEDSIDEWIDTH = "3.44%";
 }
 
 Main::Main(string username) : WTemplate{tr("main")}, username(username) {
@@ -22,7 +22,9 @@ Main::Main(string username) : WTemplate{tr("main")}, username(username) {
     app->internalPathChanged().connect(this, &Main::handlePathChange);
     app->setInternalPath("/main");
     
-    Wt::WContainerWidget *sidebar = bindWidget("sidebar", make_unique<WContainerWidget>());
+    WLabel *welcome = bindWidget("username", make_unique<WLabel>(username));
+    
+    WContainerWidget *sidebar = bindWidget("sidebar", make_unique<WContainerWidget>());
     WContainerWidget *backArea = sidebar->addNew<WContainerWidget>();
     backArea->setStyleClass("row d-flex flex-row justify-content-center");
 

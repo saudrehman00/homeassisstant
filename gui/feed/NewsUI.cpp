@@ -6,30 +6,30 @@ using namespace Wt;
 NewsUI::~NewsUI() {}
 
 NewsUI::NewsUI() : WContainerWidget() {
-    setHeight(550);
-    setStyleClass("text-white mt-4 d-flex bg-light flex-row justify-content-center");
+    setStyleClass("text-white newsfeed mt-4 content");
 
-    for (int i = 0; i < 7; i++) {
-        WContainerWidget *article = this->addWidget(make_unique<WContainerWidget>());
-        article->setStyleClass("text-left mx-4 d-flex flex-column justify-content-between");
-        buildFeedItem(article);
-        articles.push_back(article);
+    for (int i = 0; i < 8; i++) {
+        buildFeedItem(this->addWidget(make_unique<WContainerWidget>()));
     }
 }
 
-void NewsUI::buildFeedItem(WContainerWidget *article) {
-    WText *publisher = article->addWidget(make_unique<WText>("JOURNAL"));
-    
+void NewsUI::buildFeedItem(WContainerWidget *newsFeed) {
+    newsFeed->setStyleClass("newscolor");
+
     // Create an anchor that links to a URL through an image.
     WLink link = WLink("https://www.emweb.be/");
     link.setTarget(LinkTarget::NewWindow);
-    unique_ptr<WAnchor> anchor = make_unique<WAnchor>(link);
-    anchor->addNew<WImage>(WLink("https://www.emweb.be/css/emweb_small.png"));
+    WAnchor *anchor = newsFeed->addWidget(make_unique<WAnchor>(link));
+    WImage * image = anchor->addNew<WImage>(WLink("https://www.emweb.be/css/emweb_small.png"));    
+    image->setMinimumSize(100, 100);
 
-    WText *title = article->addWidget(make_unique<WText>("ARTICLE"));
-    title->setStyleClass("px-3 high-font");
-    WText *date = article->addWidget(make_unique<WText>("DATE"));
-    date->setStyleClass("low-font");
+    WContainerWidget *publish = newsFeed->addWidget(make_unique<WContainerWidget>());
+    publish->setStyleClass("d-flex flex-row px-2 text-left mt-4 mb-3");
+    WText *site = publish->addWidget(make_unique<WText>("JOURNAL"));
+    site->setStyleClass("p-2");
+    WText *date = publish->addWidget(make_unique<WText>("DATE"));
+    date->setStyleClass("p-2 pl-2 low-font");
 
-    WText *condition = article->addWidget(make_unique<WText>("SUNNY"));
+    WText *title = newsFeed->addWidget(make_unique<WText>("ARTICLE"));
+    title->setStyleClass("px-3 mb-3 high-font");
 }

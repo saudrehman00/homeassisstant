@@ -39,12 +39,12 @@
 
   <message id="menupage">
     <div class="sidebar">
-      <div class="pb-4">
+      <div class="mb-5">
         ${backBtn}
       </div>
       ${sidebar}
     </div>
-    <div class="content">
+    <div class="content-open">
       ${content}
     </div>
   </message>
@@ -89,18 +89,19 @@
   </message>
 
   <message id="main">
-    <div class="overflow-hidden">
+    <div class="content">
       <center>
-        <h1 class="title" style="color:white;">Hello ${username}</h1>
+        <h1 class="title" style="color:white;">Hello, ${username}</h1>
       </center>
+
       <div class="row mt-5 d-flex justify-content-center align-items-center">
-        ${weather}
+          ${weather}
       </div>
-      <div class="row mt-5 d-flex justify-content-center align-items-center">
-        ${news}
+      <div class="row mt-5" style="height:650px">
+          ${news}
       </div>
-      ${sidebar class="sidebar beige"}
     </div>
+    ${sidebar class="sidebar beige"}
   </message>
 
 </messages>
