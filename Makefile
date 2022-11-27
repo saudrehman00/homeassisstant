@@ -1,12 +1,8 @@
 CC := g++
 FLAGS := -lwthttp -lwt -lsqlite3 
 TARGET := Assistant
-<<<<<<< HEAD
-OBJ := Authenticate.o LoginForm.o LoginInfo.o Database.o Main.o NoteUI.o NoteMap.o Note.o ClockUI.o ClockPage.o SettingsUI.o LocationUI.o CalculatorUI.o ConversionUI.o WeatherUI.o Calculator.o
-=======
 UTIL := Authenticate.o LoginInfo.o Database.o NoteMap.o Note.o SettingsUI.o Calculator.o
 GUI := Main.o LoginForm.o NoteUI.o ClockUI.o ClockPage.o LocationUI.o CalculatorUI.o ConversionUI.o WeatherUI.o NewsUI.o
->>>>>>> 063cc932ffdf0cfaf846adea938f22f7273e419b
 
 all: $(TARGET)
 
