@@ -75,6 +75,8 @@ Main::Main(string username) : WTemplate{tr("main")} {
     openSettingsUI->setLink(WLink(LinkType::InternalPath, "/settings"));
 
     WContainerWidget *weather = bindWidget("weather", make_unique<WeatherUI>());
+
+    WContainerWidget *news = bindWidget("news", make_unique<NewsUI>());
 }
 
 Main::~Main() {}

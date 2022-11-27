@@ -11,13 +11,13 @@
 #include <Wt/WContainerWidget.h>
 #include <Wt/WApplication.h>
 #include <Wt/WPushButton.h>
-#include <any>
 #include "NoteUI.h"
 #include "clock/ClockUI.h"
 #include "settings/SettingsUI.h"
 #include "math/CalculatorUI.h"
 #include "math/ConversionUI.h"
-#include "weather/WeatherUI.h"
+#include "feed/WeatherUI.h"
+#include "feed/NewsUI.h"
 
 class Main : public Wt::WTemplate {
     private:
@@ -26,7 +26,7 @@ class Main : public Wt::WTemplate {
         void handlePathChange();
 
     public:
-        Main();
+        Main(std::string username);
         ~Main();
 };
 

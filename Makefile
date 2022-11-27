@@ -1,11 +1,12 @@
 CC := g++
 FLAGS := -lwthttp -lwt -lsqlite3 
 TARGET := Assistant
-OBJ := Authenticate.o LoginForm.o LoginInfo.o Database.o Main.o NoteUI.o NoteMap.o Note.o ClockUI.o ClockPage.o SettingsUI.o LocationUI.o CalculatorUI.o ConversionUI.o WeatherUI.o
+UTIL := Authenticate.o LoginInfo.o Database.o NoteMap.o Note.o SettingsUI.o 
+GUI := Main.o LoginForm.o NoteUI.o ClockUI.o ClockPage.o LocationUI.o CalculatorUI.o ConversionUI.o WeatherUI.o NewsUI.o
 
 all: $(TARGET)
 
-$(TARGET): $(OBJ)
+$(TARGET): $(UTIL) $(GUI)
 	$(CC) -o $(TARGET) Assistant.cpp $^ $(FLAGS)
 	make clean
 
@@ -53,6 +54,9 @@ ConversionUI.o: gui/math/ConversionUI.h gui/math/ConversionUI.cpp
 
 WeatherUI.o: gui/feed/WeatherUI.h gui/feed/WeatherUI.cpp
 	$(CC) -c gui/feed/WeatherUI.cpp
+
+NewsUI.o: gui/feed/NewsUI.h gui/feed/NewsUI.cpp
+	$(CC) -c gui/feed/NewsUI.cpp
 
 clean:
 	-rm *.o $(objects)

@@ -10,14 +10,14 @@ WeatherUI::WeatherUI() : WContainerWidget() {
     for (int i = 0; i < 7; i++) {
         WContainerWidget *day = this->addWidget(make_unique<WContainerWidget>());
         day->setStyleClass("text-left mx-4 d-flex flex-column justify-content-between");
-        buildDay(day);
+        buildFeedItem(day);
         forecast.push_back(day);
     }
 }
 
 WeatherUI::~WeatherUI() {}
 
-void WeatherUI::buildDay(WContainerWidget *day) {
+void WeatherUI::buildFeedItem(WContainerWidget *day) {
     WText *date = day->addWidget(make_unique<WText>("TODAY"));
 
     WContainerWidget *temperature = day->addWidget(make_unique<WContainerWidget>());
