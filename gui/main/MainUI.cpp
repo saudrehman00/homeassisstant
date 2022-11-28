@@ -76,7 +76,17 @@ MainUI::MainUI(string username) : WTemplate{tr("main")}, username(username) {
     openSettingsUI->setStyleClass("sidebarbtn");
     openSettingsUI->setLink(WLink(LinkType::InternalPath, "/settings"));
 
+<<<<<<< HEAD:gui/main/MainUI.cpp
     weather = bindWidget("weather", make_unique<WeatherUI>(username));
+=======
+    WPushButton *accountSettingsUI= sidebar->addNew<WPushButton>("Account");
+    accountSettingsUI->setIcon("../images/main/accountS.png");
+    accountSettingsUI->setStyleClass("sidebarbtn");
+    accountSettingsUI->setLink(WLink(LinkType::InternalPath, "/account"));
+
+    WContainerWidget *weather = bindWidget("weather", make_unique<WeatherUI>());
+
+>>>>>>> 3839f4cfd142baa111165e41db289871653bedd4:gui/Main.cpp
     WContainerWidget *news = bindWidget("news", make_unique<NewsUI>());
 }
 
@@ -90,7 +100,13 @@ void MainUI::handlePathChange() {
         if (app->internalPath() == "/clock") {
             app->root()->addNew<ClockUI>();
         } else if (app->internalPath() == "/settings") {
+<<<<<<< HEAD:gui/main/MainUI.cpp
            SettingsUI *main = app->root()->addNew<SettingsUI>(this, username);
+=======
+            app->root()->addNew<SettingsUI>();
+        } else if (app->internalPath() == "/account") {
+            app->root()->addNew<AccountUI>(username);
+>>>>>>> 3839f4cfd142baa111165e41db289871653bedd4:gui/Main.cpp
         }
     }
 }
