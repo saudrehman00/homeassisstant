@@ -88,3 +88,7 @@ void LoginInfo::linkProfile(std::string profileName) {
 void LoginInfo::saveData() {
     db.saveData({username, encryptedPassword});
 }
+
+void LoginInfo::delData() {
+    
+}

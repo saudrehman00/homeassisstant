@@ -1,23 +1,24 @@
 CC := g++
-FLAGS := -lwthttp -lwt -lsqlite3 
+FLAGS := -lwthttp -lwt -lsqlite3 -L/usr/local/lib -lcurlpp -lcurl -I/usr/local/include
 TARGET := Assistant
-UTIL := Authenticate.o LoginInfo.o Database.o NoteMap.o Note.o SettingsUI.o Logger.o LogMessage.o Calculator.o
-GUI := Main.o LoginForm.o NoteUI.o ClockUI.o ClockPage.o LocationUI.o CalculatorUI.o ConversionUI.o WeatherUI.o NewsUI.o
+DATA := Database.o NoteMap.o Note.o Logger.o LogMessage.o LoginInfo.o LocationInfo.o
+UTIL := Authenticate.o Calculator.o Request.o Requester.o NewsRequester.o WeatherRequester.o GeoRequester.o Subject.o
+GUI := MainUI.o LoginForm.o NoteUI.o ClockUI.o SettingsUI.o ClockPage.o LocationUI.o CalculatorUI.o ConversionUI.o WeatherUI.o NewsUI.o
 
 all: $(TARGET)
 
-$(TARGET): $(UTIL) $(GUI)
+$(TARGET): $(DATA) $(UTIL) $(GUI)
 	$(CC) -o $(TARGET) Assistant.cpp $^ $(FLAGS)
 	make clean
 
-Main.o: gui/Main.h gui/Main.cpp
-	$(CC) -c gui/Main.cpp
+MainUI.o: gui/main/MainUI.h gui/main/MainUI.cpp
+	$(CC) -c gui/main/MainUI.cpp
 
 Authenticate.o: auth/Authenticate.h auth/Authenticate.cpp
 	$(CC) -c auth/Authenticate.cpp
 
-LoginForm.o: gui/LoginForm.h gui/LoginForm.cpp
-	$(CC) -c gui/LoginForm.cpp
+LoginForm.o: gui/login/LoginForm.h gui/login/LoginForm.cpp
+	$(CC) -c gui/login/LoginForm.cpp
 
 LoginInfo.o: data/login/LoginInfo.h data/login/LoginInfo.cpp
 	$(CC) -c data/login/LoginInfo.cpp
@@ -31,8 +32,8 @@ Logger.o: data/logger/Logger.h data/logger/Logger.cpp
 LogMessage.o: data/logger/LogMessage.h data/logger/LogMessage.cpp
 	$(CC) -c data/logger/LogMessage.cpp
 
-NoteUI.o: gui/NoteUI.h gui/NoteUI.cpp
-	$(CC) -c gui/NoteUI.cpp
+NoteUI.o: gui/note/NoteUI.h gui/note/NoteUI.cpp
+	$(CC) -c gui/note/NoteUI.cpp
 
 NoteMap.o: data/note/NoteMap.h data/note/NoteMap.cpp
 	$(CC) -c data/note/NoteMap.cpp
@@ -66,6 +67,27 @@ WeatherUI.o: gui/feed/WeatherUI.h gui/feed/WeatherUI.cpp
 
 NewsUI.o: gui/feed/NewsUI.h gui/feed/NewsUI.cpp
 	$(CC) -c gui/feed/NewsUI.cpp
+
+LocationInfo.o: data/location/LocationInfo.h data/location/LocationInfo.cpp
+	$(CC) -c data/location/LocationInfo.cpp
+
+Request.o: web/Request.h web/Request.cpp
+	$(CC) -c web/Request.cpp
+
+Requester.o: web/Requester.h web/Requester.cpp
+	$(CC) -c web/Requester.cpp
+
+NewsRequester.o: web/NewsRequester.h web/NewsRequester.cpp
+	$(CC) -c web/NewsRequester.cpp
+
+WeatherRequester.o: web/WeatherRequester.h web/WeatherRequester.cpp
+	$(CC) -c web/WeatherRequester.cpp
+
+GeoRequester.o: web/GeoRequester.h web/GeoRequester.cpp
+	$(CC) -c web/GeoRequester.cpp
+
+Subject.o: gui/settings/Subject.h gui/settings/Subject.cpp
+	$(CC) -c gui/settings/Subject.cpp
 
 clean:
 	-rm *.o $(objects)

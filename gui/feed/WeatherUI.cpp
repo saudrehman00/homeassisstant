@@ -3,33 +3,78 @@
 using namespace std;
 using namespace Wt;
 
-WeatherUI::WeatherUI() : WContainerWidget() {
+namespace
+{
+    const int HOURLY = 8;
+    const int DAILY = 5;
+    const int DATELEN = 11;
+    const int DATE = 0;
+    const int MAX = 1;
+    const int MIN = 2;
+    const int TYPE = 3;
+    const int COND = 4;
+}
+
+WeatherUI::WeatherUI(string username) : WContainerWidget(), username(username)
+{
     setStyleClass("text-white d-flex flex-row justify-content-center w-auto");
 
-    for (int i = 0; i < 5; i++) {
-        WContainerWidget *day = this->addWidget(make_unique<WContainerWidget>());
-        day->setStyleClass("text-left mx-4 d-flex flex-column justify-content-between");
-        buildFeedItem(day);
-        forecast.push_back(day);
+    icons["Clouds"] = "../images/weather/cloud.png";
+    icons["Rain"] = "../images/weather/rain.png";
+    icons["Snow"] = "../images/weather/snow.png";
+    icons["Clear"] = "../images/weather/sun.png";
+
+    LocationInfo info(username);
+    if (!info.getLat().empty())
+    {
+        WeatherRequester *wr = new WeatherRequester(info.getLat(), info.getLon());
+        Request r(wr->getHost(), wr);
+        weather = r.getData();
+
+        if (weather.size() > 0)
+        {
+            const int LEN = weather.size();
+            for (int i = 0; i < LEN; i++)
+            {
+                if (i % 8 == 0)
+                {
+                    WContainerWidget *day = this->addWidget(make_unique<WContainerWidget>());
+                    day->setStyleClass("text-left mx-4 d-flex flex-column justify-content-between");
+                    buildFeedItem(day, i);
+                    days.push_back(day);
+                }
+            }
+        }
+        else
+        {
+            this->addWidget(make_unique<WText>("Save your location settings to display weather forecasts."));
+        }
+    }
+    else
+    {
+        this->addWidget(make_unique<WText>("Save your location settings to display weather forecasts."));
     }
 }
 
 WeatherUI::~WeatherUI() {}
 
-void WeatherUI::buildFeedItem(WContainerWidget *day) {
-    WText *date = day->addWidget(make_unique<WText>("TODAY"));
+void WeatherUI::buildFeedItem(WContainerWidget *day, const int index)
+{
+    WText *date = day->addWidget(make_unique<WText>(weather[index][DATE].substr(0, DATELEN)));
 
-    WContainerWidget *temperature = day->addWidget(make_unique<WContainerWidget>());
-    temperature->setStyleClass("text-left d-flex flex-row");
-    
-    WImage *image = temperature->addWidget(make_unique<WImage>(WLink("../images/weather/sun.png")));
+    WContainerWidget *mid = day->addWidget(make_unique<WContainerWidget>());
+    mid->setStyleClass("text-left d-flex flex-row");
+
+    WImage *image = mid->addWidget(make_unique<WImage>(WLink(icons[weather[index][TYPE]])));
     image->setWidth(50);
     image->setHeight(50);
 
-    WText *high = temperature->addWidget(make_unique<WText>("MX°"));
+    WContainerWidget *temperature = mid->addWidget(make_unique<WContainerWidget>());
+    temperature->setStyleClass("d-flex flex-column text-center");
+    WText *high = temperature->addWidget(make_unique<WText>(weather[index][MAX] + "°"));
     high->setStyleClass("px-3 high-font");
-    WText *low = temperature->addWidget(make_unique<WText>("MN°"));
+    WText *low = temperature->addWidget(make_unique<WText>(weather[index][MIN] + "°"));
     low->setStyleClass("low-font");
 
-    WText *condition = day->addWidget(make_unique<WText>("SUNNY"));
+    WText *condition = day->addWidget(make_unique<WText>(weather[index][COND]));
 }

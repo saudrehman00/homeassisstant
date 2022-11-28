@@ -9,8 +9,8 @@
 
 #include <functional>
 #include "../data/login/LoginInfo.h"
-#include "../gui/LoginForm.h"
-#include "../gui/Main.h"
+#include "../gui/login/LoginForm.h"
+#include "../gui/main/MainUI.h"
 #include "../data/logger/Logger.h"
 
 class Authenticate {

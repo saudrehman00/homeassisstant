@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include <vector>
 
 class Requester;
 
@@ -14,7 +15,7 @@ class Request {
         void setRequester(Requester*);
         void setHost(std::string host);
         void setHeaders(std::list<std::string> headers);
-        void getData();
+        std::vector<std::vector<std::string>> getData();
         std::string getHost();
         std::list<std::string> getHeaders();
 

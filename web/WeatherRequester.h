@@ -6,9 +6,13 @@
 class Request;
 
 class WeatherRequester : public Requester {
+    private:
+        std::string host;
+
     public:
-        void getData(Request* request);
-        WeatherRequester();
+        std::vector<std::vector<std::string>> getData(Request* request);
+        std::string getHost();
+        WeatherRequester(std::string lat, std::string lon);
         ~WeatherRequester();
 };
 

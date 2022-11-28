@@ -16,12 +16,15 @@
 #include <time.h>
 #include <iostream>
 #include <iomanip>
+#include <vector>
+#include <list>
 
 class Request;
 
 class  Requester {
     public:
-        virtual void getData(Request* request) = 0;
+        virtual std::vector<std::vector<std::string>> getData(Request* request) = 0;
+        virtual std::string getHost() = 0;
         std::stringstream makeGetRequest(Request* request);
 };
 

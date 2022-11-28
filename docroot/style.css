@@ -76,3 +76,7 @@ body {
 .newscolor {
   background-color: rgb(41, 49, 57);
 }
+
+.link {
+  text-decoration: none !important;
+}

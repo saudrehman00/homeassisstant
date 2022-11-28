@@ -44,6 +44,6 @@ list<std::string> Request::getHeaders()
     return _headers;
 }
 
-void Request::getData() {
-    this->_requester->getData(this);
+vector<vector<string>> Request::getData() {
+    return this->_requester->getData(this);
 }

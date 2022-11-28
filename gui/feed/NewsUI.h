@@ -1,13 +1,17 @@
 #ifndef NEWSUI_H
 #define NEWSUI_H
 
-#include "Feed.h"
 #include <Wt/WAnchor.h>
+#include <Wt/WRectArea.h>
+#include <string>
+#include "Feed.h"
+#include "../../web/NewsRequester.h"
 
 class NewsUI : public Wt::WContainerWidget, public Feed {
     private:
         std::vector<Wt::WContainerWidget *> articles;
-        void buildFeedItem(Wt::WContainerWidget *newsFeed);
+        std::vector<std::vector<std::string>> news;
+        void buildFeedItem(Wt::WContainerWidget *article, const int index);
 
     public:
         NewsUI();

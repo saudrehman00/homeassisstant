@@ -10,7 +10,7 @@
 #include <string>
 #include "../Data.h"
 
-class LoginInfo {
+class LoginInfo : public Data {
     private:
         // pointer to profile
         std::string username;
@@ -28,6 +28,7 @@ class LoginInfo {
         std::string getLastLogin();
         void linkProfile(std::string username);
         void saveData();
+        void delData();
 };
 
 #endif

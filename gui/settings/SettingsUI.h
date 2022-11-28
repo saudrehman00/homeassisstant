@@ -8,12 +8,19 @@
 #include <Wt/WContainerWidget.h>
 #include <Wt/WHBoxLayout.h>
 #include <Wt/WTextArea.h>
+#include <unordered_map>
 #include "LocationUI.h"
 
+class MainUI;
+
 class SettingsUI : public Wt::WTemplate {
+    private:
+        std::string username;
+
     public:
-        SettingsUI();
+        SettingsUI(MainUI *main, string username);
         ~SettingsUI();
+        void addObserver(std::string name, Wt::WContainerWidget *c);
 };
 
 #endif

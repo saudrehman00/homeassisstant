@@ -97,7 +97,7 @@
       <div class="row mt-5 d-flex justify-content-center align-items-center">
           ${weather}
       </div>
-      <div class="row mt-5" style="height:650px">
+      <div class="row mt-5 overflow-auto" style="height:650px">
           ${news}
       </div>
     </div>
