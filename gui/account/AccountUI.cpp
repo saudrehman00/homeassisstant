@@ -87,7 +87,8 @@ void AccountUI::validatePassword(){
         if(data.at(0).at(0) == currP && data.at(0).at(0) == newP){
             //correct password
             db.delData(username);
-            help->setText("Account Deletion Successful. Please exit the app to finalize changes.");
+            help->setText("Account Deletion Successful.");
+            WApplication::instance()->redirect("http://127.0.0.1:9090/");
         } else {
             //wrong password
             help->setText("Incorrect Password. Please try again.");

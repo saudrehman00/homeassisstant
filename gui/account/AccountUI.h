@@ -1,6 +1,7 @@
 #ifndef ACCOUNTUI_H
 #define ACCOUNTUI_H
 
+#include <Wt/WApplication.h>
 #include <Wt/WTemplate.h>
 #include <Wt/WMenu.h>
 #include <Wt/WStackedWidget.h>
