@@ -19,6 +19,7 @@
 #include "../math/ConversionUI.h"
 #include "../feed/WeatherUI.h"
 #include "../feed/NewsUI.h"
+#include "../account/AccountUI.h"
 
 class MainUI : public Wt::WTemplate, public Observer {
     private:
