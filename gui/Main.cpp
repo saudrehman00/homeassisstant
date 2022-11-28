@@ -77,7 +77,7 @@ Main::Main(string username) : WTemplate{tr("main")}, username(username) {
     openSettingsUI->setLink(WLink(LinkType::InternalPath, "/settings"));
 
     WPushButton *accountSettingsUI= sidebar->addNew<WPushButton>("Account");
-    accountSettingsUI->setIcon("../images/main/settings.png");
+    accountSettingsUI->setIcon("../images/main/accountS.png");
     accountSettingsUI->setStyleClass("sidebarbtn");
     accountSettingsUI->setLink(WLink(LinkType::InternalPath, "/account"));
 
