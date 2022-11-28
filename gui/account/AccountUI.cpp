@@ -72,6 +72,8 @@ void AccountUI::validatePassword(){
             //wrong password
             help->setText("You entered the wrong password. Please try again.");
         }
+        currentPass->setText("");
+        newPass->setText("");
     }
     } else if (!okBool){
         string currP, newP;
@@ -86,11 +88,12 @@ void AccountUI::validatePassword(){
             //correct password
             db.delData(username);
             help->setText("Account Deletion Successful. Please exit the app to finalize changes.");
-
         } else {
             //wrong password
             help->setText("Incorrect Password. Please try again.");
         }
+        currentPass->setText("");
+        newPass->setText("");
     }
     }
 }
@@ -141,10 +144,4 @@ void AccountUI::deleting(){
     });
 
     animateShow(WAnimation(AnimationEffect::Fade));
-}
-
-void AccountUI::deleteAccount(){
-    
-    
-    
 }

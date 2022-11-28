@@ -33,7 +33,6 @@ class AccountUI : public Wt::WTemplate {
         void validatePassword();
         void changing();
         void deleting();
-        void deleteAccount();
 
     public:
         AccountUI(std::string username);
