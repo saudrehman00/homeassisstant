@@ -8,6 +8,7 @@ AccountUI::AccountUI(string username) : WTemplate{tr("changePass")}, db("LoginIn
     addFunction("tr", &WTemplate::Functions::tr);
 
     // components for username input
+
     currentPass = bindWidget("currentPass", make_unique<WLineEdit>());
     currentPass->setStyleClass("form-control form-outline bg-dark text-white");
     currentPass->setPlaceholderText("Current Password");
@@ -19,11 +20,6 @@ AccountUI::AccountUI(string username) : WTemplate{tr("changePass")}, db("LoginIn
     newPass->setPlaceholderText("New Password");
     newPass->setId("newPass");
 
-    // components for input validation
-    auto validator = make_shared<WValidator>(true);
-    currentPass->setValidator(validator);
-    newPass->setValidator(validator);
-
     // components for form title
     title = bindWidget("title", make_unique<WText>("Change Password"));
     title->setStyleClass("fw-bold");
@@ -34,7 +30,6 @@ AccountUI::AccountUI(string username) : WTemplate{tr("changePass")}, db("LoginIn
 
     okBtn = bindWidget("okBtn", make_unique<WPushButton>("Submit"));
     okBtn->setStyleClass("btn-dark text-white btn-outline-secondary");
-    okBtn->setLink(WLink(LinkType::InternalPath, "/main"));
     okBtn->clicked().connect([=] {
         validatePassword();
     });
@@ -47,13 +42,18 @@ AccountUI::AccountUI(string username) : WTemplate{tr("changePass")}, db("LoginIn
         this->parent()->removeChild(this);
     });
 
-    title->setText("Change Password");
-    help->setText("Please enter your current and desired new password.");
+    linkBtn = bindWidget("linkBtn", make_unique<WPushButton>("Delete Account"));
+    linkBtn->setStyleClass("btn-link text-dark-50 fw-bold");
+
+    changing();
+
+
 }
 
 AccountUI::~AccountUI() {}
 
 void AccountUI::validatePassword(){
+    if(okBool){
     string currP, newP;
     currP = getCurrPass();
     newP = getNewPass();
@@ -63,15 +63,35 @@ void AccountUI::validatePassword(){
         //cout << data.at(0).at(0) << endl;
         if(data.at(0).at(0) == currP){
             //correct password
+            cout << "what" << endl;
             db.delData(username);
             db.saveData({username, newP});
+            help->setText("Password Change Succesful.");
         } else {
+            cout << "wha@@t" << endl;
             //wrong password
             help->setText("You entered the wrong password. Please try again.");
-            currentPass->setPlaceholderText("Current Password");
-            newPass->setPlaceholderText("New Password");
-
         }
+    }
+    } else if (!okBool){
+        string currP, newP;
+    currP = getCurrPass();
+    newP = getNewPass();
+    cout << currP << " SSEES  " << newP << endl;
+    if(accountExists()){
+        //gets all entries in the logininfo table with the user's username
+        vector<vector<string>> data =  db.readAllUser(username);
+        //cout << data.at(0).at(0) << endl;
+        if(data.at(0).at(0) == currP && data.at(0).at(0) == newP){
+            //correct password
+            db.delData(username);
+            help->setText("Account Deletion Successful. Please exit the app to finalize changes.");
+
+        } else {
+            //wrong password
+            help->setText("Incorrect Password. Please try again.");
+        }
+    }
     }
 }
 
@@ -94,4 +114,37 @@ string AccountUI::getNewPass() {
 // @return bool whether or not the username is saved
 bool AccountUI::accountExists() {
     return db.exists("LoginInfo", {"username=\"" + username + "\""});
+}
+
+void AccountUI::changing(){
+    okBool = true;
+    animateHide(WAnimation(AnimationEffect::Fade));
+
+    title->setText("Change Password");
+    help->setText("Please enter your current password and then your desired new password.");
+    linkBtn->setText("Delete Account");
+    linkBtn->clicked().connect([=] {
+        deleting();
+    });
+
+    animateShow(WAnimation(AnimationEffect::Fade));
+}
+
+void AccountUI::deleting(){
+    okBool = false;
+    animateHide(WAnimation(AnimationEffect::Fade));
+    title->setText("Delete Account");
+    help->setText("Warning: Account deletion is permanent. Enter your password twice to confirm.");
+    linkBtn->setText("Change Password");
+    linkBtn->clicked().connect([=] {
+        changing();
+    });
+
+    animateShow(WAnimation(AnimationEffect::Fade));
+}
+
+void AccountUI::deleteAccount(){
+    
+    
+    
 }

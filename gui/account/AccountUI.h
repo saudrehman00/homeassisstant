@@ -17,18 +17,23 @@
 
 class AccountUI : public Wt::WTemplate {
     private:
+        bool okBool;
         bool accountExists();
         Database db;
         Wt::WLineEdit* currentPass;
         Wt::WLineEdit* newPass;
         Wt::WPushButton* okBtn;
         Wt::WPushButton* backBtn;
+        Wt::WPushButton* linkBtn;
         Wt::WText* help;
         Wt::WText* title;
         std::string getCurrPass();
         std::string getNewPass();
         std::string username;
         void validatePassword();
+        void changing();
+        void deleting();
+        void deleteAccount();
 
     public:
         AccountUI(std::string username);
