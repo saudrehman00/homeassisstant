@@ -1,14 +1,9 @@
 CC := g++
 FLAGS := -lwthttp -lwt -lsqlite3 -L/usr/local/lib -lcurlpp -lcurl -I/usr/local/include
 TARGET := Assistant
-<<<<<<< HEAD
 DATA := Database.o NoteMap.o Note.o Logger.o LogMessage.o LoginInfo.o LocationInfo.o
 UTIL := Authenticate.o Calculator.o Request.o Requester.o NewsRequester.o WeatherRequester.o GeoRequester.o Subject.o
-GUI := MainUI.o LoginForm.o NoteUI.o ClockUI.o SettingsUI.o ClockPage.o LocationUI.o CalculatorUI.o ConversionUI.o WeatherUI.o NewsUI.o
-=======
-UTIL := Authenticate.o LoginInfo.o Database.o NoteMap.o Note.o SettingsUI.o Logger.o LogMessage.o Calculator.o AccountUI.o
-GUI := Main.o LoginForm.o NoteUI.o ClockUI.o ClockPage.o LocationUI.o CalculatorUI.o ConversionUI.o WeatherUI.o NewsUI.o
->>>>>>> 3839f4cfd142baa111165e41db289871653bedd4
+GUI := MainUI.o LoginForm.o NoteUI.o ClockUI.o SettingsUI.o ClockPage.o LocationUI.o CalculatorUI.o ConversionUI.o WeatherUI.o NewsUI.o AccountUI.o
 
 all: $(TARGET)
 
@@ -73,7 +68,6 @@ WeatherUI.o: gui/feed/WeatherUI.h gui/feed/WeatherUI.cpp
 NewsUI.o: gui/feed/NewsUI.h gui/feed/NewsUI.cpp
 	$(CC) -c gui/feed/NewsUI.cpp
 
-<<<<<<< HEAD
 LocationInfo.o: data/location/LocationInfo.h data/location/LocationInfo.cpp
 	$(CC) -c data/location/LocationInfo.cpp
 
@@ -94,11 +88,9 @@ GeoRequester.o: web/GeoRequester.h web/GeoRequester.cpp
 
 Subject.o: gui/settings/Subject.h gui/settings/Subject.cpp
 	$(CC) -c gui/settings/Subject.cpp
-=======
-	
+
 AccountUI.o: gui/account/AccountUI.h gui/account/AccountUI.cpp
 	$(CC) -c gui/account/AccountUI.cpp
->>>>>>> 3839f4cfd142baa111165e41db289871653bedd4
 
 clean:
 	-rm *.o $(objects)
