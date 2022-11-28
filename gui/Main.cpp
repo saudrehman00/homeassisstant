@@ -76,6 +76,11 @@ Main::Main(string username) : WTemplate{tr("main")}, username(username) {
     openSettingsUI->setStyleClass("sidebarbtn");
     openSettingsUI->setLink(WLink(LinkType::InternalPath, "/settings"));
 
+    WPushButton *accountSettingsUI= sidebar->addNew<WPushButton>("Account");
+    accountSettingsUI->setIcon("../images/main/settings.png");
+    accountSettingsUI->setStyleClass("sidebarbtn");
+    accountSettingsUI->setLink(WLink(LinkType::InternalPath, "/account"));
+
     WContainerWidget *weather = bindWidget("weather", make_unique<WeatherUI>());
 
     WContainerWidget *news = bindWidget("news", make_unique<NewsUI>());
@@ -92,6 +97,8 @@ void Main::handlePathChange() {
             app->root()->addNew<ClockUI>();
         } else if (app->internalPath() == "/settings") {
             app->root()->addNew<SettingsUI>();
+        } else if (app->internalPath() == "/account") {
+            app->root()->addNew<AccountUI>(username);
         }
     }
 }
