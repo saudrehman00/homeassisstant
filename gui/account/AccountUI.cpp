@@ -58,8 +58,20 @@ void AccountUI::validatePassword(){
     currP = getCurrPass();
     newP = getNewPass();
     if(accountExists()){
+        //gets all entries in the logininfo table with the user's username
         vector<vector<string>> data =  db.readAllUser(username);
-        cout << data.at(0).at(0) << endl;
+        //cout << data.at(0).at(0) << endl;
+        if(data.at(0).at(0) == currP){
+            //correct password
+            db.delData(username);
+            db.saveData({username, newP});
+        } else {
+            //wrong password
+            help->setText("You entered the wrong password. Please try again.");
+            currentPass->setPlaceholderText("Current Password");
+            newPass->setPlaceholderText("New Password");
+
+        }
     }
 }
 
