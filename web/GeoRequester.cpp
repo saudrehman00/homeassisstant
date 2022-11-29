@@ -1,6 +1,7 @@
 #include "GeoRequester.h"
 
-using namespace std;
+using std::string;
+using std::vector;
 
 GeoRequester::~GeoRequester() {}
 

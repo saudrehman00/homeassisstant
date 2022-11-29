@@ -1,7 +1,10 @@
 #include "WeatherRequester.h"
 #include "Request.h"
 
-using namespace std;
+using std::string;
+using std::stringstream;
+using std::vector;
+using std::put_time;
 
 WeatherRequester::WeatherRequester(string lat, string lon)
 {

@@ -33,7 +33,7 @@ Database::Database(string table, string keyAttribute, vector<string> attributes)
     {
         string s = attributes.back();
         attributes.pop_back();
-        row += s + " varchar(255)";
+        row += s + " varchar(255)"; // column size argument
         row += ", ";
     }
 
@@ -98,10 +98,12 @@ void Database::saveData(vector<vector<string>> data)
     // parsing/formatting the data entries as a sql command
     int rows = data.size();
     int cols = data[0].size();
+    // iterate through table represented by 2d vector
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++)
         {
+            // include each table cell value
             string s = data[i].back();
             data.pop_back();
             row += "\"" + s + "\"";
@@ -137,8 +139,10 @@ void Database::saveData(vector<string> data)
 
     // parsing/formatting the data entries as a sql command
     int len = data.size();
+    // iterate through columns of the row of data
     for (int i = 0; i < len; i++)
     {
+        // include each cell from row
         string s = data.back();
         data.pop_back();
         row += "\"" + s + "\"";
@@ -195,8 +199,10 @@ bool Database::exists(vector<string> arguments)
 
     // parsing/formatting the conditions as a sql command
     int len = arguments.size();
+    // iterate through arguments
     for (int i = 0; i < len; i++)
     {
+        // include each separate argument
         string s = arguments.back();
         arguments.pop_back();
         cond += s;
@@ -246,6 +252,7 @@ vector<vector<string>> Database::readAllUser(string username)
         vector<string> row;
         for (int i = 0; i < cols; i++) // iterates columns
         {
+            // include each cell of table
             string cell = (const char *)sqlite3_column_text(stmnt, i);
             row.push_back(cell);
         }

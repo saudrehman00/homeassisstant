@@ -27,7 +27,8 @@ namespace
      */
     string decrypt(string encryptedPass)
     {
-        rotate(encryptedPass.begin(), encryptedPass.begin() + encryptedPass.size() - 13, encryptedPass.end());
+        rotate(encryptedPass.begin(), encryptedPass.begin() + 
+               encryptedPass.size() - 13, encryptedPass.end());
         return encryptedPass;
     }
 }
@@ -39,7 +40,8 @@ namespace
  * @param password is the session's password
  * @return nothing
  */
-LoginInfo::LoginInfo(string username, string password) : username(username), db("LoginInfo", "username", {"username", "encryptedPassword"})
+LoginInfo::LoginInfo(string username, string password) : 
+username(username), db("LoginInfo", "username", {"username", "encryptedPassword"})
 {
     encryptedPassword = encrypt(password);
 }
@@ -55,7 +57,7 @@ LoginInfo::~LoginInfo() {}
 
 /**
  * @brief Authenticate user info
- * @details Determines if the LoginInfo user info matches 
+ * @details Determines if the LoginInfo user info matches
  * an entry in the database
  * @param nothing
  * @return whether or not the user info is correct

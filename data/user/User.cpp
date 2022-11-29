@@ -1,6 +1,6 @@
 #include "User.h"
 
-using namespace std;
+using std::string;
 
 User::User(string name, string pw){
     username = name;

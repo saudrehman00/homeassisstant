@@ -12,20 +12,21 @@
 #include <cmath>
 #include "../Data.h"
 
-class LoginInfo : public Data {
-    private:
-        std::string username;
-        std::string encryptedPassword;
-        Database db;
-        
-    public:
-        LoginInfo(std::string username, std::string password);
-        ~LoginInfo();
-        bool authenticate();
-        bool exists();
-        void linkProfile(std::string username);
-        void saveData();
-        void delData();
+class LoginInfo : public Data
+{
+private:
+    std::string username;
+    std::string encryptedPassword;
+    Database db;
+
+public:
+    LoginInfo(std::string username, std::string password);
+    ~LoginInfo();
+    bool authenticate();
+    bool exists();
+    void linkProfile(std::string username);
+    void saveData();
+    void delData();
 };
 
 #endif

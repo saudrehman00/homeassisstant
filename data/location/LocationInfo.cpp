@@ -84,6 +84,9 @@ void LocationInfo::changeLocation(string lat, string lon)
  */
 void LocationInfo::loadData()
 {
+    // the table structure is lon | lat | username
+    // since the user only stores one location currently, there is only 1 row returned
+    // thus, lon is index 0 and lat is index 1
     vector<vector<string>> lists = db.readAllUser(username);
     if (!lists.empty()) {
         if (!lists.front().empty()) {

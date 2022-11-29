@@ -1,3 +1,10 @@
+/**
+ * @brief Geolocation API requester
+ * @details Contains the functionalities of sending
+ * requests to a geolocation API to obtain geocoordinate data
+ * @author Jun Shao
+ */
+
 #ifndef GEOREQUESTER_H
 #define GEOREQUESTER_H
 
@@ -5,16 +12,17 @@
 #include "Requester.h"
 #include "Request.h"
 
-class GeoRequester : public Requester {
-    private:
-        std::string host;
+class GeoRequester : public Requester
+{
+private:
+    std::string host;
 
-    public:
-        std::vector<std::vector<std::string>> getData(Request* request);
-        std::string getHost();
-        GeoRequester(std::string location);
-        GeoRequester(std::string lat, std::string lon);
-        ~GeoRequester();
+public:
+    std::vector<std::vector<std::string>> getData(Request *request);
+    std::string getHost();
+    GeoRequester(std::string location);
+    GeoRequester(std::string lat, std::string lon);
+    ~GeoRequester();
 };
 
 #endif

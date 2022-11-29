@@ -1,13 +1,38 @@
 #include "AddressRequester.h"
 
-using namespace std;
+using std::string;
+using std::vector;
 
+/**
+ * @brief Constructor
+ * @details Constructor for AddressRequester that initializes all members
+ * @param lat is the latitude coordinate
+ * @param lon is the longitude coordinate
+ * @return nothing
+ */
 AddressRequester::AddressRequester(string lat, string lon)
 {
     host =
-        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&key=AIzaSyBsaxHAEYOD0stq-0Smzwr1lGQ14KkOxKg";
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat +
+        "," + lon + "&key=AIzaSyBsaxHAEYOD0stq-0Smzwr1lGQ14KkOxKg";
 }
 
+/**
+ * @brief Default destructor
+ * @details Default destructor for AddressRequester but does nothing
+ * @param nothing
+ * @return nothing
+ */
+AddressRequester::~AddressRequester() {}
+
+/**
+ * @brief Get API data
+ * @details Queries against the host API endpoint and returns
+ * the data that was extracted as a table represented by 2d vector
+ * with columns separated by the data name/type
+ * @param request is the Request object
+ * @return the data table as 2d vector
+ */
 vector<vector<string>> AddressRequester::getData(Request *request)
 {
     boost::property_tree::ptree ptLocation;
@@ -16,9 +41,10 @@ vector<vector<string>> AddressRequester::getData(Request *request)
     auto itN = ptLocation;
     vector<vector<string>> all;
     vector<string> location;
+
+    // parsing json
     for (auto it2 = itN.begin(); it2 != itN.end(); ++it2)
     {
-        //  std::cout << " : " << it2->second.data() << std::endl;
         for (auto it3 = it2->second.begin(); it3 != it2->second.end(); ++it3)
         {
             if (it3->first == "compound_code")
@@ -34,6 +60,12 @@ vector<vector<string>> AddressRequester::getData(Request *request)
     return all;
 }
 
+/**
+ * @brief Get host
+ * @details Returns the host of the AddressRequester
+ * @param nothing
+ * @return the host of the AddressRequester as string
+ */
 string AddressRequester::getHost()
 {
     return host;

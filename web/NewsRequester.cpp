@@ -1,7 +1,9 @@
 #include "NewsRequester.h"
 #include "Request.h"
 
-using namespace std;
+using std::string;
+using std::stringstream;
+using std::vector;
 using namespace boost::posix_time;
 using namespace boost::gregorian;
 

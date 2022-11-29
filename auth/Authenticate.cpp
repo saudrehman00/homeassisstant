@@ -25,17 +25,17 @@ void Authenticate::startAuth()
     WApplication *app = WApplication::instance();
     LoginForm *f = app->root()->addNew<LoginForm>();
 
-    // function that determines if the main window should be launched
+    // operate on user input and start the authentication process
     auto verify = [f, app]
     {
         string username = f->getUserInput();
         string password = f->getPassInput();
         LoginInfo info(username, password);
 
-        // determines if the user is registering or logging in
         string page = f->getTitle();
         bool exists = info.exists(); // determines if the user exists
 
+        // determine if the user is registering or logging in
         if (exists && page == "Login")
         {
             cerr << "Authenticate: checking password." << endl;
