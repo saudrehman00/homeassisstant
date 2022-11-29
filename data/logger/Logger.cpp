@@ -5,22 +5,21 @@ using std::string;
 using std::vector;
 
 /**
- * @brief Singleton instance
- * @details Returns the instance of the Logger object that is shared globally
- * @param nothing
- * @return the instance of the Logger
+ * @brief Singleton instance.
+ * @details Returns the instance of the Logger object that is shared globally.
+ * @return The instance of the Logger.
  */
 Logger &Logger::instance()
 {
+    // Scott Meyer's singleton for thread safety
     static Logger instance;
     return instance;
 }
 
 /**
- * @brief Default constructor
- * @details Default constructor for a LogMessage object that initializes the db connection
- * @param nothing
- * @return nothing
+ * @brief Default constructor.
+ * @details Default constructor for a LogMessage object that initializes the db connection.
+ * @return Nothing.
  */
 Logger::Logger()
 {
@@ -46,10 +45,9 @@ Logger::Logger()
 }
 
 /**
- * @brief Default destructor
- * @details Default destructor for a LogMessage object that closes the db connection
- * @param nothing
- * @return nothing
+ * @brief Default destructor.
+ * @details Default destructor for a LogMessage object that closes the db connection.
+ * @return Nothing.
  */
 Logger::~Logger()
 {
@@ -67,10 +65,10 @@ Logger::~Logger()
 }
 
 /**
- * @brief Logs a message
- * @details Inserts a message as a string into the db
- * @param msg is the message as a string
- * @return nothing
+ * @brief Logs a message.
+ * @details Inserts a message as a string into the db.
+ * @param msg is the message as a string.
+ * @return Nothing.
  */
 void Logger::log(string msg)
 {
@@ -92,10 +90,9 @@ void Logger::log(string msg)
 }
 
 /**
- * @brief Load all log messages
- * @details Loads all log messages as LogMessage objects into a vector
- * @param nothing
- * @return a vector containing all stored log messages in the db
+ * @brief Load all log messages.
+ * @details Loads all log messages as LogMessage objects into a vector.
+ * @return A vector containing all stored log messages in the db.
  */
 vector<LogMessage> Logger::read_all()
 {

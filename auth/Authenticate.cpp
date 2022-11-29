@@ -6,19 +6,17 @@ using std::string;
 using Wt::WApplication;
 
 /**
- * @brief Default destructor
+ * @brief Default destructor.
  * @details Default destructor for deleting an Authenticate object
- * but does not do anything
- * @param nothing
- * @return nothing
+ * but does not do anything.
+ * @return Nothing.
  */
 Authenticate::~Authenticate() {}
 
 /**
- * @brief Simulate authentication behaviour
- * @details Gets user information from input and authenticates or registers
- * @param nothing
- * @return nothing
+ * @brief Simulate authentication behaviour.
+ * @details Gets user information from input and authenticates or registers.
+ * @return Nothing.
  */
 void Authenticate::startAuth()
 {

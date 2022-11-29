@@ -3,15 +3,37 @@
 using std::string;
 using std::vector;
 
+/**
+ * @brief Default destructor
+ * @details Default destructor for GeoRequester but does nothing
+ * @param nothing
+ * @return nothing
+ */
 GeoRequester::~GeoRequester() {}
 
+/**
+ * @brief Constructor
+ * @details Constructor for GeoRequester that initializes all members
+ * @param location is the location keyword
+ * @return nothing
+ */
 GeoRequester::GeoRequester(string location)
 {
     boost::replace_all(location, " ", "%20");
     host =
-        "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=AIzaSyBsaxHAEYOD0stq-0Smzwr1lGQ14KkOxKg";
+        "https://maps.googleapis.com/maps/api/geocode/json?address=" + location +
+        "&key=AIzaSyBsaxHAEYOD0stq-0Smzwr1lGQ14KkOxKg";
 }
 
+/**
+ * @brief Get geo-coordinate API data.
+ * @details Queries against the host API endpoint and returns
+ * the data that was extracted as a table represented by 2d vector.
+ * with columns separated by the data name/type.
+ * However, there is only 1 row as the request is for 1 location.
+ * @param request is the Request object.
+ * @return the geo-coordinate data table as 2d vector.
+ */
 vector<vector<string>> GeoRequester::getData(Request *request)
 {
     boost::property_tree::ptree ptLocation;
@@ -20,6 +42,8 @@ vector<vector<string>> GeoRequester::getData(Request *request)
     auto itN = ptLocation;
     vector<vector<string>> all;
     vector<string> coordinates;
+
+    // parsing json object
     for (auto it2 = itN.begin(); it2 != itN.end(); ++it2)
     {
         // std::cout << it2->first; // [1]
@@ -50,6 +74,12 @@ vector<vector<string>> GeoRequester::getData(Request *request)
     return all;
 }
 
+/**
+ * @brief Get host.
+ * @details Returns the host address of the AddressRequester.
+ * @param nothing
+ * @return the host of the AddressRequester as string.
+ */
 string GeoRequester::getHost()
 {
     return host;

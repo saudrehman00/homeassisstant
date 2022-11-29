@@ -1,7 +1,7 @@
 /**
- * @brief Authentication of inputted user information
+ * @brief Authentication of inputted user information.
  * @details Authenticate handles the logic and processes to
- * login users or registering new users after the user submits input
+ * login users or registering new users after the user submits input.
  * @author Jun Shao
  */
 

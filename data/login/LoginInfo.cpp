@@ -8,10 +8,10 @@ namespace
     const double p = 3;
 
     /**
-     * @brief ROT13 encrypt
-     * @details Encrypts a string message using a ROT13 cipher
-     * @param password is the string to encrypt
-     * @return the encrypted password
+     * @brief ROT13 encrypt.
+     * @details Encrypts a string message using a ROT13 cipher.
+     * @param password is the string to encrypt.
+     * @return The encrypted password.
      */
     string encrypt(string password)
     {
@@ -20,10 +20,10 @@ namespace
     }
 
     /**
-     * @brief ROT13 decrypt
-     * @details Decrypts a string message using a ROT13 cipher
-     * @param encryptedPass is the string to dencrypt
-     * @return the decrypted password
+     * @brief ROT13 decrypt.
+     * @details Decrypts a string message using a ROT13 cipher.
+     * @param encryptedPass is the string to dencrypt.
+     * @return The decrypted password.
      */
     string decrypt(string encryptedPass)
     {
@@ -34,11 +34,11 @@ namespace
 }
 
 /**
- * @brief Constructor
- * @details Constructor for a LoginInfo object that initializes members
- * @param username is the session's username
- * @param password is the session's password
- * @return nothing
+ * @brief Constructor.
+ * @details Constructor for a LoginInfo object that initializes members.
+ * @param username is the session's username.
+ * @param password is the session's password.
+ * @return Nothing.
  */
 LoginInfo::LoginInfo(string username, string password) : 
 username(username), db("LoginInfo", "username", {"username", "encryptedPassword"})
@@ -47,20 +47,18 @@ username(username), db("LoginInfo", "username", {"username", "encryptedPassword"
 }
 
 /**
- * @brief Default destructor
+ * @brief Default destructor.
  * @details Default destructor for a LoginInfo object
- * but does not do anything
- * @param nothing
- * @return nothing
+ * but does not do anything.
+ * @return Nothing.
  */
 LoginInfo::~LoginInfo() {}
 
 /**
- * @brief Authenticate user info
+ * @brief Authenticate user info.
  * @details Determines if the LoginInfo user info matches
- * an entry in the database
- * @param nothing
- * @return whether or not the user info is correct
+ * an entry in the database.
+ * @return Whether or not the user info is correct.
  */
 bool LoginInfo::authenticate()
 {
@@ -76,10 +74,9 @@ bool LoginInfo::authenticate()
 }
 
 /**
- * @brief Existence of username
- * @details Determines if the LoginInfo username exists in the database
- * @param nothing
- * @return whether or not the username exists
+ * @brief Existence of username.
+ * @details Determines if the LoginInfo username exists in the database.
+ * @return Whether or not the username exists.
  */
 bool LoginInfo::exists()
 {
@@ -87,10 +84,9 @@ bool LoginInfo::exists()
 }
 
 /**
- * @brief Save user info
- * @details Saves the LoginInfo user information to the database
- * @param nothing
- * @return nothing
+ * @brief Save user info.
+ * @details Saves the LoginInfo user information to the database.
+ * @return Nothing.
  */
 void LoginInfo::saveData()
 {

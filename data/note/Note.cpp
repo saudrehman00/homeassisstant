@@ -9,10 +9,9 @@ using std::vector;
 namespace
 {
     /**
-     * @brief Get today's date
-     * @details Returns the current calendar date string format from time_t
-     * @param nothing
-     * @return today's date
+     * @brief Get today's date.
+     * @details Returns the current calendar date string format from time_t.
+     * @return The date of when this function was called.
      */
     string getToday()
     {
@@ -25,11 +24,11 @@ namespace
 }
 
 /**
- * @brief Constructor
- * @details Constructor for a Note object that initializes members but not the date
- * @param type is the note type
- * @param desc is the note contents
- * @return nothing
+ * @brief Constructor.
+ * @details Constructor for a Note object that initializes members but not the date.
+ * @param type is the note type.
+ * @param desc is the note contents.
+ * @return Nothing.
  */
 Note::Note(string type, string desc) : type(type), desc(desc)
 {
@@ -37,28 +36,26 @@ Note::Note(string type, string desc) : type(type), desc(desc)
 }
 
 /**
- * @brief Constructor
- * @details Constructor for a Note object that initializes all members
- * @param type is the note type
- * @param desc is the note contents
- * @param date is the date the note was added
- * @return nothing
+ * @brief Constructor.
+ * @details Constructor for a Note object that initializes all members.
+ * @param type is the note type.
+ * @param desc is the note contents.
+ * @param date is the date the note was added.
+ * @return Nothing.
  */
 Note::Note(string type, string desc, string dateAdded) : type(type), desc(desc), dateAdded(dateAdded) {}
 
 /**
- * @brief Default destructor
- * @details Default destructor for a Note object but does not do anything
- * @param nothing
- * @return nothing
+ * @brief Default destructor.
+ * @details Default destructor for a Note object but does not do anything.
+ * @return Nothing.
  */
 Note::~Note() {}
 
 /**
- * @brief Get Note date added
- * @details Returns the current calendar date of when the Note was created
- * @param nothing
- * @return the date the Note was created
+ * @brief Get Note date added.
+ * @details Returns the current calendar date of when the Note was created.
+ * @return The date the Note was created.
  */
 string Note::getDateAdded()
 {
@@ -66,10 +63,9 @@ string Note::getDateAdded()
 }
 
 /**
- * @brief Get Note content
- * @details Returns the desc of the Note as a string
- * @param nothing
- * @return the desc of the note as string
+ * @brief Get Note content.
+ * @details Returns the desc of the Note as a string.
+ * @return The desc of the note as string.
  */
 string Note::getDesc()
 {
@@ -77,10 +73,9 @@ string Note::getDesc()
 }
 
 /**
- * @brief Get Note type
- * @details Returns the type of the Note as a string
- * @param nothing
- * @return the type of the note as string
+ * @brief Get Note type.
+ * @details Returns the type of the Note as a string.
+ * @return The type of the note as string.
  */
 string Note::getType()
 {
@@ -88,10 +83,10 @@ string Note::getType()
 }
 
 /**
- * @brief Change Note content
- * @details Changes the desc of the Note to a new one
- * @param newDesc is the new desc of the Note
- * @return nothing
+ * @brief Change Note content.
+ * @details Changes the desc of the Note to a new one.
+ * @param newDesc is the new desc of the Note.
+ * @return Nothing.
  */
 void Note::editDesc(string newDesc)
 {
@@ -100,10 +95,10 @@ void Note::editDesc(string newDesc)
 }
 
 /**
- * @brief Change Note type
- * @details Changes the type of the Note to a new one
- * @param newType is the new type of the Note
- * @return nothing
+ * @brief Change Note type.
+ * @details Changes the type of the Note to a new one.
+ * @param newType is the new type of the Note.
+ * @return Nothing.
  */
 void Note::editType(string newType)
 {

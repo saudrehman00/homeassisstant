@@ -4,11 +4,11 @@ using std::string;
 using std::vector;
 
 /**
- * @brief Constructor
- * @details Constructor for AddressRequester that initializes all members
- * @param lat is the latitude coordinate
- * @param lon is the longitude coordinate
- * @return nothing
+ * @brief Constructor.
+ * @details Constructor for AddressRequester that initializes all members.
+ * @param lat is the latitude coordinate.
+ * @param lon is the longitude coordinate.
+ * @return Nothing.
  */
 AddressRequester::AddressRequester(string lat, string lon)
 {
@@ -18,20 +18,20 @@ AddressRequester::AddressRequester(string lat, string lon)
 }
 
 /**
- * @brief Default destructor
- * @details Default destructor for AddressRequester but does nothing
+ * @brief Default destructor.
+ * @details Default destructor for AddressRequester but does nothing.
  * @param nothing
- * @return nothing
+ * @return Nothing.
  */
 AddressRequester::~AddressRequester() {}
 
 /**
- * @brief Get API data
+ * @brief Get address API data.
  * @details Queries against the host API endpoint and returns
- * the data that was extracted as a table represented by 2d vector
- * with columns separated by the data name/type
- * @param request is the Request object
- * @return the data table as 2d vector
+ * the data that was extracted as a table represented by 2d vector.
+ * with columns separated by the data name/type.
+ * @param request is the Request object.
+ * @return the address data table as 2d vector.
  */
 vector<vector<string>> AddressRequester::getData(Request *request)
 {
@@ -61,10 +61,10 @@ vector<vector<string>> AddressRequester::getData(Request *request)
 }
 
 /**
- * @brief Get host
- * @details Returns the host of the AddressRequester
+ * @brief Get host.
+ * @details Returns the host address of the AddressRequester.
  * @param nothing
- * @return the host of the AddressRequester as string
+ * @return the host of the AddressRequester as string.
  */
 string AddressRequester::getHost()
 {

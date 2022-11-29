@@ -1,7 +1,7 @@
 /**
- * @brief Sticky notes container
+ * @brief Sticky notes container.
  * @details The NoteMap object holds Note objects and performs
- * data operations such as saving and deleting them from the database
+ * data operations such as saving and deleting them from the database.
  * @author Jun Shao
  */
 

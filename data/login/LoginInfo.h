@@ -1,7 +1,7 @@
 /**
- * @brief User information handling
+ * @brief User information handling.
  * @details The LoginInfo object contains functionality for handling user data
- * by saving or deleting the data from the database as well as data authentication
+ * by saving or deleting the data from the database as well as data authentication.
  * @author Jun Shao
  */
 

@@ -5,10 +5,10 @@ using std::to_string;
 using std::vector;
 
 /**
- * @brief Constructor
- * @details Constructor for creating a LocationInfo object and initializing members
- * @param username is the session username
- * @return nothing
+ * @brief Constructor.
+ * @details Constructor for creating a LocationInfo object and initializing members.
+ * @param username is the session username.
+ * @return Nothing.
  */
 LocationInfo::LocationInfo(string username) : username(username), db("LocationInfo", "username", {"username", "lat", "lon"})
 {
@@ -16,19 +16,17 @@ LocationInfo::LocationInfo(string username) : username(username), db("LocationIn
 }
 
 /**
- * @brief Default destructor
+ * @brief Default destructor.
  * @details Default destructor for deleting a LocationInfo object 
- * but does not do anything
- * @param nothing
- * @return nothing
+ * but does not do anything.
+ * @return Nothing.
  */
 LocationInfo::~LocationInfo() {}
 
 /**
- * @brief Saves location information
- * @details Saves the currently stored location information of the user to the table
- * @param nothing
- * @return nothing
+ * @brief Saves location information.
+ * @details Saves the currently stored location information of the user to the table.
+ * @return Nothing.
  */
 void LocationInfo::saveData()
 {
@@ -36,10 +34,9 @@ void LocationInfo::saveData()
 }
 
 /**
- * @brief Deletes location information
- * @details Deletes the currently stored location information of the user in the table
- * @param nothing
- * @return nothing
+ * @brief Deletes location information.
+ * @details Deletes the currently stored location information of the user in the table.
+ * @return Nothing.
  */
 void LocationInfo::delData()
 {
@@ -47,11 +44,11 @@ void LocationInfo::delData()
 }
 
 /**
- * @brief Updates location information
- * @details Changes the location information of the user given double format
- * @param lat is the latitude coordinate of the new location
- * @param lon is the longitude coordainte of the new location
- * @return nothing
+ * @brief Updates location information.
+ * @details Changes the location information of the user given double format.
+ * @param lat is the latitude coordinate of the new location.
+ * @param lon is the longitude coordainte of the new location.
+ * @return Nothing.
  */
 void LocationInfo::changeLocation(double lat, double lon)
 {
@@ -62,11 +59,11 @@ void LocationInfo::changeLocation(double lat, double lon)
 }
 
 /**
- * @brief Updates location information
- * @details Changes the location information of the user given string format
- * @param lat is the latitude coordinate of the new location
- * @param lon is the longitude coordainte of the new location
- * @return nothing
+ * @brief Updates location information.
+ * @details Changes the location information of the user given string format.
+ * @param lat is the latitude coordinate of the new location.
+ * @param lon is the longitude coordainte of the new location.
+ * @return Nothing.
  */
 void LocationInfo::changeLocation(string lat, string lon)
 {
@@ -77,10 +74,9 @@ void LocationInfo::changeLocation(string lat, string lon)
 }
 
 /**
- * @brief Loads location information from table
- * @details Loads any previously saved location information of the user from the table
- * @param nothing
- * @return nothing
+ * @brief Loads location information from table.
+ * @details Loads any previously saved location information of the user from the table.
+ * @return Nothing.
  */
 void LocationInfo::loadData()
 {
@@ -97,20 +93,18 @@ void LocationInfo::loadData()
 }
 
 /**
- * @brief Get latitude
- * @details Gets the latitude coordinate that is currently saved
- * @param nothing
- * @return the latitude coordinate
+ * @brief Get latitude.
+ * @details Gets the latitude coordinate that is currently saved.
+ * @return The latitude coordinate.
  */
 string LocationInfo::getLat() {
     return _lat;
 }
 
 /**
- * @brief Get latitude
- * @details Gets the latitude coordinate that is currently saved
- * @param nothing
- * @return the latitude coordinate
+ * @brief Get latitude.
+ * @details Gets the latitude coordinate that is currently saved.
+ * @return The latitude coordinate.
  */
 string LocationInfo::getLon() {
     return _lon;

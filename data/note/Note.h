@@ -1,7 +1,7 @@
 /**
- * @brief Sticky note
+ * @brief Sticky note.
  * @details The Note object encapsulates the behaviour and state
- * that represents what a sticky note is generally
+ * that represents what a sticky note is generally.
  * @author Jun Shao
  */
 

@@ -1,8 +1,8 @@
 /**
- * @brief Manages user location information
+ * @brief Manages user location information.
  * @details The LocationInfo object stores, deletes, or changes
- * the associated users location information in the database and
- * also provides this information to clients
+ * the associated users location information in the database and.
+ * also provides this information to clients.
  * @author Jun Shao
  */
 

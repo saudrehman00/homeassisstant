@@ -1,7 +1,7 @@
 /**
- * @brief Messages with timestamps
+ * @brief Messages with timestamps.
  * @details The LogMessage object holds a message as a string
- * and a timestamp as a string
+ * and a timestamp as a string.
  * @author Jun Shao
  */
 

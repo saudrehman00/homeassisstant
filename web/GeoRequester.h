@@ -1,7 +1,7 @@
 /**
- * @brief Geolocation API requester
+ * @brief Geolocation API requester.
  * @details Contains the functionalities of sending
- * requests to a geolocation API to obtain geocoordinate data
+ * requests to a geolocation API to obtain geo-coordinate data.
  * @author Jun Shao
  */
 

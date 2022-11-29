@@ -1,7 +1,7 @@
 /**
- * @brief Storage and retrieval of SQL data
+ * @brief Storage and retrieval of SQL data.
  * @details Stores or deletes rows of data found in tables generated
- * by various objects using sqlite3
+ * by various objects using sqlite3.
  * @author Jun Shao
  */
 

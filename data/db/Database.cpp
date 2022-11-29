@@ -6,12 +6,12 @@ using std::string;
 using std::vector;
 
 /**
- * @brief Constructor
- * @details Constructor for creating a Database object and initializing members
- * @param table is the table name
- * @param keyAttribute is the primary key of the table
- * @param attributes is the list column headers
- * @return nothing
+ * @brief Constructor.
+ * @details Constructor for creating a Database object and initializing members.
+ * @param table is the table name.
+ * @param keyAttribute is the primary key of the table.
+ * @param attributes is the list column headers.
+ * @return Nothing.
  */
 Database::Database(string table, string keyAttribute, vector<string> attributes) : cols(attributes.size()), db(nullptr), table(table), keyAttribute(keyAttribute)
 {
@@ -54,10 +54,9 @@ Database::Database(string table, string keyAttribute, vector<string> attributes)
 }
 
 /**
- * @brief Default destructor
- * @details Default destructor for a Database object that closes the db connection
- * @param nothing
- * @return nothing
+ * @brief Default destructor.
+ * @details Default destructor for a Database object that closes the db connection.
+ * @return Nothing.
  */
 Database::~Database()
 {
@@ -74,10 +73,9 @@ Database::~Database()
 }
 
 /**
- * @brief Get sqlite3* to db
- * @details Returns the database connection
- * @param nothing
- * @return nothing
+ * @brief Get sqlite3* to db.
+ * @details Returns the database connection.
+ * @return Nothing.
  */
 sqlite3 *Database::getConnection()
 {
@@ -85,10 +83,10 @@ sqlite3 *Database::getConnection()
 }
 
 /**
- * @brief Save some data to db
- * @details Saves a data table represented by a 2d vector to an associated table
- * @param data is the 2d vector containing some data
- * @return nothing
+ * @brief Save some data to db.
+ * @details Saves a data table represented by a 2d vector to an associated table.
+ * @param data is the 2d vector containing some data.
+ * @return Nothing.
  */
 void Database::saveData(vector<vector<string>> data)
 {
@@ -127,10 +125,10 @@ void Database::saveData(vector<vector<string>> data)
 }
 
 /**
- * @brief Save some data to db
- * @details Saves a data row represented by a vector to an associated table
- * @param data is the vector containing some data
- * @return nothing
+ * @brief Save some data to db.
+ * @details Saves a data row represented by a vector to an associated table.
+ * @param data is the vector containing some data.
+ * @return Nothing.
  */
 void Database::saveData(vector<string> data)
 {
@@ -165,10 +163,10 @@ void Database::saveData(vector<string> data)
 }
 
 /**
- * @brief Deletes data from db
- * @details Deletes a row of data from an associated table given the entry's unique key
- * @param key is the key of the row
- * @return nothing
+ * @brief Deletes data from db.
+ * @details Deletes a row of data from an associated table given the entry's unique key.
+ * @param key is the key of the row.
+ * @return Nothing.
  */
 void Database::delData(string key)
 {
@@ -186,11 +184,11 @@ void Database::delData(string key)
 }
 
 /**
- * @brief Determines existence of data
+ * @brief Determines existence of data.
  * @details Determines if a row of data exists in an associated table
- * based on some given arguments used for matching
- * @param arguments is the vector containing conditions to match for
- * @return whether or not the row of data exists
+ * based on some given arguments used for matching.
+ * @param arguments is the vector containing conditions to match for.
+ * @return Whether or not the row of data exists.
  */
 bool Database::exists(vector<string> arguments)
 {
@@ -223,11 +221,11 @@ bool Database::exists(vector<string> arguments)
 }
 
 /**
- * @brief Gets all data from table
+ * @brief Gets all data from table.
  * @details Loads all rows of data in any table that is associated
- * with the given username and returns a 2d vector representation of it
- * @param username is the username of the data has to be associated with
- * @return the data table represented by a 2d vector
+ * with the given username and returns a 2d vector representation of it.
+ * @param username is the username of the data has to be associated with.
+ * @return The data table represented by a 2d vector.
  */
 vector<vector<string>> Database::readAllUser(string username)
 {

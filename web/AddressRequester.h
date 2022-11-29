@@ -1,7 +1,7 @@
 /**
- * @brief Reverse Geolocation API requester
+ * @brief Reverse Geolocation API requester.
  * @details Contains the functionalities of sending
- * requests to a reverse geolocation API to obtain address data
+ * requests to a reverse geolocation API to obtain address data.
  * @author Jun Shao
  */
 
