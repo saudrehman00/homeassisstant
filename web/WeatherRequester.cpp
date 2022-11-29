@@ -1,18 +1,44 @@
+/**
+ *  @author Saud Rehman
+ * 251025014
+ * @date November 29 2022
+ * @brief Contains logic to make request to news api and return data in usable format
+ */
+
 #include "WeatherRequester.h"
 #include "Request.h"
 
+using std::put_time;
 using std::string;
 using std::stringstream;
 using std::vector;
-using std::put_time;
 
+/**
+ * @brief Constructor.
+ * @details Constructor for WeatherRequester that initializes all members.
+ * @return Nothing.
+ */
 WeatherRequester::WeatherRequester(string lat, string lon)
 {
     host = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=869a570166961fb2a676c717eb550b92&units=metric";
 }
 
+/**
+ * @brief Default destructor.
+ * @details Default destructor for WeatherRequester but does nothing.
+ * @param nothing
+ * @return Nothing.
+ */
 WeatherRequester::~WeatherRequester() {}
 
+/**
+ * @brief Get weather API data.
+ * @details Queries against the host API endpoint and returns
+ * the data that was extracted as a table represented by 2d vector.
+ * with columns separated by the data name/type.
+ * @param request is the Request object.
+ * @return the weather data table as 2d vector.
+ */
 vector<vector<string>> WeatherRequester::getData(Request *request)
 {
     boost::property_tree::ptree ptWeather;
@@ -81,6 +107,12 @@ vector<vector<string>> WeatherRequester::getData(Request *request)
     return forecast;
 }
 
+/**
+ * @brief Get host.
+ * @details Returns the host address of the WeatherRequester.
+ * @param nothing
+ * @return the host of the WeatherRequester as string.
+ */
 string WeatherRequester::getHost()
 {
     return host;

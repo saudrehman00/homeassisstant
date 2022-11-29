@@ -1,3 +1,9 @@
+/**
+ *  @author Saud Rehman
+ * 251025014
+ * @date November 29 2022
+ * @brief Contains logic to make request to news api and return data in usable format
+ */
 #include "NewsRequester.h"
 #include "Request.h"
 
@@ -30,14 +36,33 @@ namespace
     }
 }
 
+/**
+ * @brief Constructor.
+ * @details Constructor for NewsRequester that initializes all members.
+ * @return Nothing.
+ */
 NewsRequester::NewsRequester()
 {
     headers.push_back("User-Agent: myproject");
     host = "https://newsapi.org/v2/top-headlines?country=ca&apiKey=4e6f18ed836d4194ac55c12097e5d6ca";
 }
 
+/**
+ * @brief Default destructor.
+ * @details Default destructor for NewsRequester but does nothing.
+ * @param nothing
+ * @return Nothing.
+ */
 NewsRequester::~NewsRequester() {}
 
+/**
+ * @brief Get news API data.
+ * @details Queries against the host API endpoint and returns
+ * the data that was extracted as a table represented by 2d vector.
+ * with columns separated by the data name/type.
+ * @param request is the Request object.
+ * @return the news data table as 2d vector.
+ */
 vector<vector<string>> NewsRequester::getData(Request *request)
 {
     boost::property_tree::ptree ptNews;
@@ -47,8 +72,8 @@ vector<vector<string>> NewsRequester::getData(Request *request)
     vector<vector<string>> all;
     for (auto it2 = itN.begin(); it2 != itN.end(); ++it2)
     {
-        //std::cout << it2->first; // [1]
-        // std::cout << " : " << it2->second.data() << std::endl;
+        // std::cout << it2->first; // [1]
+        //  std::cout << " : " << it2->second.data() << std::endl;
         for (auto it3 = it2->second.begin(); it3 != it2->second.end(); ++it3)
         {
             vector<string> article;
@@ -92,11 +117,23 @@ vector<vector<string>> NewsRequester::getData(Request *request)
     return all;
 }
 
+/**
+ * @brief Get host.
+ * @details Returns the host address of the NewsRequester.
+ * @param nothing
+ * @return the host of the NewsRequester as string.
+ */
 string NewsRequester::getHost()
 {
     return host;
 }
 
+/**
+ * @brief Get headers.
+ * @details Returns the headers of NewsRequester.
+ * @param nothing
+ * @return the headers of the NewsRequester as string.
+ */
 std::list<std::string> NewsRequester::getHeaders()
 {
     return headers;
