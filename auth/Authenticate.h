@@ -1,7 +1,7 @@
 /**
- * @brief Authentication and management of inputted user information
- * @details Authenticate contains the login to log in users after authentication of input or
- * registers new users by saving to the database
+ * @brief Authentication of inputted user information
+ * @details Authenticate handles the logic and processes to
+ * login users or registering new users after the user submits input
  * @author Jun Shao
  */
 

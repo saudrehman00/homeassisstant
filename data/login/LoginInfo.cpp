@@ -1,94 +1,100 @@
-/* Jun Shao
-* 251258566
-* November 7
-* LoginInfo is an object that contains the logic and data 
-* for checking usernames and passwords in the database
-*/
-
 #include "LoginInfo.h"
 
-using namespace std;
+using std::rotate;
+using std::string;
 
-namespace {
-    // work in progress method
-    string encrypt(string password) {
+namespace
+{
+    const double p = 3;
+
+    /**
+     * @brief ROT13 encrypt
+     * @details Encrypts a string message using a ROT13 cipher
+     * @param password is the string to encrypt
+     * @return the encrypted password
+     */
+    string encrypt(string password)
+    {
+        rotate(password.begin(), password.begin() + 13, password.end());
         return password;
     }
 
-    // work in progress method
-    string decrypt(string encryptedPass) {
+    /**
+     * @brief ROT13 decrypt
+     * @details Decrypts a string message using a ROT13 cipher
+     * @param encryptedPass is the string to dencrypt
+     * @return the decrypted password
+     */
+    string decrypt(string encryptedPass)
+    {
+        rotate(encryptedPass.begin(), encryptedPass.begin() + encryptedPass.size() - 13, encryptedPass.end());
         return encryptedPass;
     }
-
-    // loginTime() gets the current system time
-    // @param nothing
-    // @return time is the current system time
-    string loginTime() {
-        time_t now = time(0); // gets the current system time
-        string time = ctime(&now); // change to c++ string for manipulation
-        // remove \n that is generated at the end of a new time_t for formatting
-        time.replace(time.length()-1, time.length(), "\0");
-        return time;
-    }
 }
 
-// LoginInfo(username, password) is the constructor for a LoginInfo object
-// @param nothing
-// @return nothing
-LoginInfo::LoginInfo(string username, string password) : 
-username(username), db("LoginInfo", "username", {"username", "encryptedPassword"}) {
+/**
+ * @brief Constructor
+ * @details Constructor for a LoginInfo object that initializes members
+ * @param username is the session's username
+ * @param password is the session's password
+ * @return nothing
+ */
+LoginInfo::LoginInfo(string username, string password) : username(username), db("LoginInfo", "username", {"username", "encryptedPassword"})
+{
     encryptedPassword = encrypt(password);
-    lastLogin = "";
 }
 
-// ~LoginInfo() is the destructor for a LoginInfo object
-// @param nothing
-// @return nothing
+/**
+ * @brief Default destructor
+ * @details Default destructor for a LoginInfo object
+ * but does not do anything
+ * @param nothing
+ * @return nothing
+ */
 LoginInfo::~LoginInfo() {}
 
-
-// getLastLogin() gets the last login time of the user
-// @param nothing
-// @return lastLogin is the last login time of the logged user
-string LoginInfo::getLastLogin() {
-    return lastLogin;
-}
-
-// authenticate() determines the validity of
-//  the user credentials based on their inputted username and password
-// @param nothing
-// @return exists if the user credentials are correct
-bool LoginInfo::authenticate() {
+/**
+ * @brief Authenticate user info
+ * @details Determines if the LoginInfo user info matches 
+ * an entry in the database
+ * @param nothing
+ * @return whether or not the user info is correct
+ */
+bool LoginInfo::authenticate()
+{
     string matchUser = "username=\"" + username + "\"";
-    string matchPass = "encryptedPassword=\"" + encryptedPassword + "\"";
+    string matchPass = "encryptedPassword=\"" + decrypt(encryptedPassword) + "\"";
     // cerr << "\nLoginInfo: querying db.\n";
     bool correct = false;
-    if (db.exists({matchUser, matchPass})) {
-        lastLogin = loginTime();
+    if (db.exists({matchUser, matchPass}))
+    {
         correct = true;
     }
     return correct;
 }
 
-// exists() determines if the username exists in the database
-// @param nothing
-// @return bool whether or not the username is saved
-bool LoginInfo::exists() {
+/**
+ * @brief Existence of username
+ * @details Determines if the LoginInfo username exists in the database
+ * @param nothing
+ * @return whether or not the username exists
+ */
+bool LoginInfo::exists()
+{
     return db.exists({"username=\"" + username + "\""});
 }
 
-// work in progress method
-void LoginInfo::linkProfile(std::string profileName) {
-
-}
-
-// saveData() saves the username and encryptedPassword to the database
-// @param nothing
-// @return nothing
-void LoginInfo::saveData() {
+/**
+ * @brief Save user info
+ * @details Saves the LoginInfo user information to the database
+ * @param nothing
+ * @return nothing
+ */
+void LoginInfo::saveData()
+{
     db.saveData({username, encryptedPassword});
 }
 
-void LoginInfo::delData() {
-    
+void LoginInfo::delData()
+{
 }

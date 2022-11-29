@@ -1,11 +1,12 @@
-/* Jun Shao
- * 251258566
- * November 7
- * Header file containing member and function delcarations for Checklist
+/**
+ * @brief Sticky note
+ * @details The Note object encapsulates the behaviour and state
+ * that represents what a sticky note is generally
+ * @author Jun Shao
  */
 
-#ifndef LIST_H
-#define LIST_H
+#ifndef NOTE_H
+#define NOTE_H
 
 #include <string>
 #include <vector>

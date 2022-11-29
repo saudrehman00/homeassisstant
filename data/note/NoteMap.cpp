@@ -1,31 +1,35 @@
-/* Jun Shao
- * 251258566
- * November 7
- * List is an object that contains the logic
- * and data for performing operations on multiple lists
- */
-
 #include "NoteMap.h"
 
-using namespace std;
+using std::string;
+using std::unordered_map;
+using std::vector;
 
-// ListMap() is the constructor for a ListMap object
-// @param username is the username of the user
-// @return nothing
+/**
+ * @brief Constructor
+ * @details Constructor for a NoteMap object that initialzes all members
+ * @param username is the session username
+ * @return nothing
+ */
 NoteMap::NoteMap(std::string username) : db("Notes", "dateAdded", {"username", "desc", "type", "dateAdded"})
 {
     this->username = username;
     loadData();
 }
 
-// ~ListMap() is the destructor for a ListMap object
-// @param nothing
-// @return nothing
+/**
+ * @brief Default destructor
+ * @details Default destructor for a NoteMap object but does nothing
+ * @param nothing
+ * @return nothing
+ */
 NoteMap::~NoteMap() {}
 
-// saveData() saves the user's lists to the database
-// @param nothing
-// @return nothing
+/**
+ * @brief Save Notes
+ * @details Saves the Note objects in notes to the database
+ * @param nothing
+ * @return nothing
+ */
 void NoteMap::saveData()
 {
     for (auto &[key, note] : notes)
@@ -34,9 +38,13 @@ void NoteMap::saveData()
     }
 }
 
-// delData() deletes the user's lists from the database
-// @param nothing
-// @return nothing
+/**
+ * @brief Delete Notes
+ * @details Deletes the NoteMap's map of Note objects in batchToDel
+ * from the database which were intended to be removed by the user
+ * @param nothing
+ * @return nothing
+ */
 void NoteMap::delData()
 {
     for (auto &[key, note] : batchToDel)
@@ -45,9 +53,13 @@ void NoteMap::delData()
     }
 }
 
-// loadData() loads the user's old lists from the database
-// @param nothing
-// @return nothing
+/**
+ * @brief Load Notes
+ * @details Loads into notes the Note objects which were
+ * previously stored by the user and found in the database
+ * @param nothing
+ * @return nothing
+ */
 void NoteMap::loadData()
 {
     vector<vector<string>> lists = db.readAllUser(username);
@@ -57,18 +69,24 @@ void NoteMap::loadData()
     }
 }
 
-// add() add a note to this map
-// @param note is the note to add
-// @return nothing
+/**
+ * @brief Add Note
+ * @details Adds to notes a new Note
+ * @param note is the Note
+ * @return nothing
+ */
 void NoteMap::add(Note note)
 {
     string key = note.getDateAdded();
     notes.emplace(key, note);
 }
 
-// del() delete a note from this map
-// @param note is the note to remove
-// @return nothing
+/**
+ * @brief Delete Note
+ * @details Deletes a Note from notes and adds it to batchToDel
+ * @param note is the Note
+ * @return nothing
+ */
 void NoteMap::del(Note note)
 {
     string key = note.getDateAdded();
@@ -76,14 +94,24 @@ void NoteMap::del(Note note)
     batchToDel.emplace(key, note);
 }
 
-// get() get a note from this map
-// @param key is the unique identifier of the note
-// @return nothing
+/**
+ * @brief Get Note
+ * @details Returns the Note associated with a key
+ * @param key is the key of the Note
+ * @return the Note associated with the key
+ */
 Note NoteMap::get(string key)
 {
     return notes.at(key);
 }
 
-unordered_map<string, Note> NoteMap::getNotes() {
+/**
+ * @brief Get all Note
+ * @details Returns all of the Note objects in notes
+ * @param nothing
+ * @return the unordered_map of Note objects in notes
+ */
+unordered_map<string, Note> NoteMap::getNotes()
+{
     return this->notes;
 }

@@ -42,7 +42,6 @@ WeatherUI::WeatherUI(string username) : WContainerWidget(), username(username)
             const int LEN = weather.size();
             for (int i = 0; i < LEN; i++)
             {
-                cout << "rendering day: 1 of " + LEN << endl;
                 if (i % 8 == 0)
                 {
                     WContainerWidget *day = this->addWidget(make_unique<WContainerWidget>());
