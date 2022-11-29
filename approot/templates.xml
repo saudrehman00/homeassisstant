@@ -4,6 +4,7 @@
 <messages>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="styleshe" />
 
+  <!-- XML template for the login form-->
   <message id="login">
     <div class="row vh-100 vw-100">
       <div class="col-sm-12 my-auto d-flex justify-content-center">
@@ -37,6 +38,7 @@
     </div>
   </message>
 
+  <!-- XML template for a menu page-->
   <message id="menupage">
     <div class="sidebar">
       <div class="mb-5">
@@ -49,6 +51,7 @@
     </div>
   </message>
 
+  <!--XML template for adding a clock-based event-->
   <message id="clockpage">
     <div>
       ${addClockBtn}
@@ -56,10 +59,12 @@
     ${clocks}
   </message>
 
+  <!-- XML template for the location settings-->
   <message id="locationpage">
       ${content}
   </message>
 
+  <!-- XML template for the unit conversion app-->
   <message id="converter">
     <div class="row mx-2 d-flex flex-row justify-content-center">
       ${type class="form-control w-50 bg-secondary text-white"}
@@ -88,6 +93,7 @@
     <div class="row"></div>
   </message>
 
+  <!-- XML template for the main landing page-->
   <message id="main">
     <div class="content">
       <center>

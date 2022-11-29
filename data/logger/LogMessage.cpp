@@ -1,32 +1,41 @@
-/* Jun Shao
-* 251258566
-* September 18 2022
-* This file contains the LogMessage object implementation
-*/
-
 #include "LogMessage.h"
-using namespace std;
+using std::string;
 
-// LogMessage(new_time, new_msg) is the constructor for a LogMessage object
-// @param new_time new_msg are the initialization values
-// @return nothing
+/**
+ * @brief Constructor
+ * @details Constructor for a LogMessage object, intializing the msg and time
+ * @param new_time is the timestamp as string
+ * @param new_msg is the message as string
+ * @return nothing
+ */
 LogMessage::LogMessage(string new_time, string new_msg) : time(new_time), msg(new_msg) {}
 
-// ~LogMessage() is the destructor for a LogMessage object
-// @param nothing
-// @return nothing
+/**
+ * @brief Destructor
+ * @details Destructor for a LogMessage object but does not do anything
+ * @param nothing
+ * @return nothing
+ */
 LogMessage::~LogMessage() {}
 
-// getMessage() returns the value of the msg data member.
-// @param nothing
-// @return msg is the log message
-string LogMessage::getMessage() {
+/**
+ * @brief Get log message
+ * @details Returns the log message that was stored
+ * @param nothing
+ * @return msg member
+ */
+string LogMessage::getMessage()
+{
     return msg;
 }
 
-// getTime() returns the value of the time data member.
-// @param nothing
-// @return time is the log message's recorded time
-string LogMessage::getTime() {
+/**
+ * @brief Get log time
+ * @details Returns the log time that was stored
+ * @param nothing
+ * @return time member
+ */
+string LogMessage::getTime()
+{
     return time;
 }

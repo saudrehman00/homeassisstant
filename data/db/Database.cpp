@@ -1,28 +1,29 @@
-/* Jun Shao
- * 251258566
- * November 7
- * This file contains the Database object implementation
- */
-
 #include "Database.h"
-using namespace std;
 
-// Database(table, attributes) is the constructor for a Database object
-// @param table is the table name of the data
-// @param attributes is the column names
-// @return nothing
+using std::cerr;
+using std::endl;
+using std::string;
+using std::vector;
+
+/**
+ * @brief Constructor
+ * @details Constructor for creating a Database object and initializing members
+ * @param table is the table name
+ * @param keyAttribute is the primary key of the table
+ * @param attributes is the list column headers
+ * @return nothing
+ */
 Database::Database(string table, string keyAttribute, vector<string> attributes) : cols(attributes.size()), db(nullptr), table(table), keyAttribute(keyAttribute)
 {
     char *err = 0;
     sqlite3_open("Data.db", &db); // open connection to db using its handle
     if (err != SQLITE_OK)
     {
-        cerr << "Database - Could not open Database: " << sqlite3_errmsg(db) << "\n";
+        cerr << "Database - Could not open Database: " << sqlite3_errmsg(db) << endl;
     }
     else
     {
-        cerr << "Database opened."
-             << "\n";
+        cerr << "Database opened." << endl;
     }
 
     // parsing/formatting the column names as a sql command
@@ -44,44 +45,51 @@ Database::Database(string table, string keyAttribute, vector<string> attributes)
 
     if (err != SQLITE_OK)
     {
-        cerr << "Table construction error: " << sqlite3_errmsg(db) << "\n";
+        cerr << "Table construction error: " << sqlite3_errmsg(db) << endl;
     }
     else
     {
-        cerr << "\nTable opened: " + row + "\n";
+        cerr << "Table opened: " + table << endl;
     }
 }
 
-// ~Database() is the destructor for a Database object
-// @param nothing
-// @return nothing
+/**
+ * @brief Default destructor
+ * @details Default destructor for a Database object that closes the db connection
+ * @param nothing
+ * @return nothing
+ */
 Database::~Database()
 {
     char *err = 0;
     sqlite3_close(db); // close connection to "app" db with its handle
     if (err != SQLITE_OK)
     {
-        cerr << "Database - Could not close Data.sql: " << sqlite3_errmsg(db) << "\n";
+        cerr << "Database - Could not close Data.sql: " << sqlite3_errmsg(db) << endl;
     }
     else
     {
-        cerr << "\nDatabase - Data.db terminated and DB closed."
-             << "\n";
+        cerr << "Database - Data.db terminated and DB closed." << endl;
     }
 }
 
-// getConnection() gets the sqlite3 connection to the database
-// @param nothing
-// @return db the connection to the Data.sql database
+/**
+ * @brief Get sqlite3* to db
+ * @details Returns the database connection
+ * @param nothing
+ * @return nothing
+ */
 sqlite3 *Database::getConnection()
 {
     return db;
 }
 
-// saveData(data) saves data which represents
-// a table in the form of a 2d string array to the database
-// @param data is the list of rows of data to be saved
-// @return nothing
+/**
+ * @brief Save some data to db
+ * @details Saves a data table represented by a 2d vector to an associated table
+ * @param data is the 2d vector containing some data
+ * @return nothing
+ */
 void Database::saveData(vector<vector<string>> data)
 {
     char *err = 0;
@@ -110,16 +118,18 @@ void Database::saveData(vector<vector<string>> data)
 
         if (err != SQLITE_OK)
         {
-            cerr << "\nDatabase - error executing command: " + cmd + "\n"
-                 << sqlite3_errmsg(db) << "\n";
+            cerr << "Database - error executing command: " + cmd << endl
+                 << sqlite3_errmsg(db) << endl;
         }
     }
 }
 
-// saveData(data) saves data which represents
-// a row in the form of a string array to the database
-// @param data is the list of data to be saved
-// @return nothing
+/**
+ * @brief Save some data to db
+ * @details Saves a data row represented by a vector to an associated table
+ * @param data is the vector containing some data
+ * @return nothing
+ */
 void Database::saveData(vector<string> data)
 {
     char *err = 0;
@@ -145,52 +155,56 @@ void Database::saveData(vector<string> data)
 
     if (err != SQLITE_OK)
     {
-        cerr << "\nDatabase - error executing command: " + cmd + "\n"
-             << sqlite3_errmsg(db) << "\n";
+        cerr << "Database - error executing command: " + cmd << endl
+             << sqlite3_errmsg(db) << endl;
     }
 }
 
-// delData(key) deletes the row of data which has the keyAttribute key
-// @param key is the key of the data to be deleted
-// @return nothing
+/**
+ * @brief Deletes data from db
+ * @details Deletes a row of data from an associated table given the entry's unique key
+ * @param key is the key of the row
+ * @return nothing
+ */
 void Database::delData(string key)
 {
     char *err = 0;
     // insert the rows of data into the database
-    string cmd = "DELETE FROM " + table + " WHERE " + keyAttribute + "=" + "'" + key + "'";
+    string cmd = "DELETE FROM " + table + " WHERE " + keyAttribute + "=" + "\"" + key + "\"";
     Logger::instance().log(cmd);
     sqlite3_exec(db, cmd.c_str(), nullptr, 0, &err);
 
     if (err != SQLITE_OK)
     {
-        cerr << "\nDatabase - error executing command: " + cmd + "\n"
-             << sqlite3_errmsg(db) << "\n";
+        cerr << "Database - error executing command: " + cmd << endl
+             << sqlite3_errmsg(db) << endl;
     }
 }
 
-// exists(table, data) determines if an entry of data exists
-// @param table is the table of data
-// @param data are the matching conditions for the input vs stored data
-// @return bool whether or not the data exists in the database
-bool Database::exists(string table, vector<string> data)
+/**
+ * @brief Determines existence of data
+ * @details Determines if a row of data exists in an associated table
+ * based on some given arguments used for matching
+ * @param arguments is the vector containing conditions to match for
+ * @return whether or not the row of data exists
+ */
+bool Database::exists(vector<string> arguments)
 {
     char *err = 0;
     string cond = ""; // used for the sql command as the SELECT condition
 
     // parsing/formatting the conditions as a sql command
-    int len = data.size();
+    int len = arguments.size();
     for (int i = 0; i < len; i++)
     {
-        string s = data.back();
-        data.pop_back();
+        string s = arguments.back();
+        arguments.pop_back();
         cond += s;
         if (i < len - 1)
         {
             cond += " AND ";
         }
     }
-
-    // cerr << "\nDatabase: condition is " + cond +"\n";
 
     string cmd = "SELECT * FROM " + table + " WHERE " + cond;
     sqlite3_stmt *stmnt;
@@ -199,18 +213,22 @@ bool Database::exists(string table, vector<string> data)
     bool found = (sqlite3_step(stmnt) == SQLITE_ROW);
     sqlite3_finalize(stmnt);
 
-    if (found && (result == SQLITE_OK))
-    {
-        // cerr << "found row from " + cmd + "\n";
-    }
-
     return (found && (result == SQLITE_OK));
 }
 
+/**
+ * @brief Gets all data from table
+ * @details Loads all rows of data in any table that is associated
+ * with the given username and returns a 2d vector representation of it
+ * @param username is the username of the data has to be associated with
+ * @return the data table represented by a 2d vector
+ */
 vector<vector<string>> Database::readAllUser(string username)
 {
-    int err = 0;                            
-    string read_all_cmd = "SELECT * FROM " + table + " WHERE username='" + username + "'"; // sqlite statement to get all data from table
+    int err = 0;
+    // sqlite statement to get all data from table
+    string read_all_cmd = "SELECT * FROM " + table +
+                          " WHERE username='" + username + "'";
     const int len = read_all_cmd.length();
     sqlite3_stmt *stmnt;
     vector<vector<string>> data; // stores found log messages to be returned
@@ -219,14 +237,15 @@ vector<vector<string>> Database::readAllUser(string username)
     err = sqlite3_prepare(db, read_all_cmd.c_str(), len, &stmnt, nullptr);
     if (err != SQLITE_OK)
     {
-        cerr << "Could not prepare: " << sqlite3_errmsg(db) << "\n";
+        cerr << "Could not prepare: " << sqlite3_errmsg(db) << endl;
     }
 
     int i = 0;
-    while (sqlite3_step(stmnt) == SQLITE_ROW)
+    while (sqlite3_step(stmnt) == SQLITE_ROW) // iterates rows
     {
         vector<string> row;
-        for (int i = 0; i < cols; i++) {
+        for (int i = 0; i < cols; i++) // iterates columns
+        {
             string cell = (const char *)sqlite3_column_text(stmnt, i);
             row.push_back(cell);
         }
@@ -236,7 +255,7 @@ vector<vector<string>> Database::readAllUser(string username)
     err = sqlite3_finalize(stmnt);
     if (err != SQLITE_OK)
     {
-        cerr << "Could not finalize: " << sqlite3_errmsg(db) << "\n";
+        cerr << "Could not finalize: " << sqlite3_errmsg(db) << endl;
     }
 
     return data;

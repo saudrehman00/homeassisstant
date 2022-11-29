@@ -1,58 +1,67 @@
-/* Jun Shao
-* 251258566
-* November 7 2022
-* Authenticate contains the logic for authenticating a given
-* username and password from the login UI
-*/
-
 #include "Authenticate.h"
 
-using namespace Wt;
-using namespace std;
+using std::cerr;
+using std::endl;
+using std::string;
+using Wt::WApplication;
 
-// Authenticate() is the constructor for an Authenticate object
-// @param nothing
-// @return nothing
-Authenticate::Authenticate() {}
-
-// ~Authenticate() is the destructor for an Authenticate object
-// @param nothing
-// @return nothing
+/**
+ * @brief Default destructor
+ * @details Default destructor for deleting an Authenticate object
+ * but does not do anything
+ * @param nothing
+ * @return nothing
+ */
 Authenticate::~Authenticate() {}
 
-// startAuth() processes the validitiy username or password
-// @param nothing
-// @return nothing
-void Authenticate::startAuth() {
+/**
+ * @brief Simulate authentication behaviour
+ * @details Gets user information from input and authenticates or registers
+ * @param nothing
+ * @return nothing
+ */
+void Authenticate::startAuth()
+{
     WApplication *app = WApplication::instance();
-    LoginForm* f = app->root()->addNew<LoginForm>();
+    LoginForm *f = app->root()->addNew<LoginForm>();
 
     // function that determines if the main window should be launched
-    auto verify = [f, app] {
+    auto verify = [f, app]
+    {
         string username = f->getUserInput();
         string password = f->getPassInput();
         LoginInfo info(username, password);
-        
+
         // determines if the user is registering or logging in
         string page = f->getTitle();
         bool exists = info.exists(); // determines if the user exists
 
-        // cerr << "\nAuthenticate: username found.\n";
-        if (exists && page == "Login") {
-             cerr << "\nAuthenticate: checking password.\n";
-            if (info.authenticate()) {
-                cerr << "\nAuthenticate: password correct.\n";
+        if (exists && page == "Login")
+        {
+            cerr << "Authenticate: checking password." << endl;
+            if (info.authenticate())
+            {
+                cerr << "Authenticate: password correct." << endl;
                 app->root()->removeWidget(f);
                 app->root()->addNew<MainUI>(username);
+                cerr << "started session for" + username << endl;
                 Logger::instance().log(username + " started a session.");
-            } else {
+            }
+            else
+            {
                 f->getHelp()->setText("Please check that your username or password is correct.");
             }
-        } else if (exists && page == "Register") {
+        }
+        else if (exists && page == "Register")
+        {
             f->getHelp()->setText("That username already exists!");
-        } else if (!exists && page == "Login") {
+        }
+        else if (!exists && page == "Login")
+        {
             f->getHelp()->setText("Username doesn't exist.");
-        } else if (!exists && page == "Register") {
+        }
+        else if (!exists && page == "Register")
+        {
             info.saveData();
             f->getHelp()->setText("Registration complete!");
         }

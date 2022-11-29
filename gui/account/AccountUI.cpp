@@ -117,7 +117,7 @@ string AccountUI::getNewPass() {
 // @param nothing
 // @return bool whether or not the username is saved
 bool AccountUI::accountExists() {
-    return db.exists("LoginInfo", {"username=\"" + username + "\""});
+    return db.exists({"username=\"" + username + "\""});
 }
 
 void AccountUI::changing(){

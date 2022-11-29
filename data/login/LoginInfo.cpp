@@ -63,7 +63,7 @@ bool LoginInfo::authenticate() {
     string matchPass = "encryptedPassword=\"" + encryptedPassword + "\"";
     // cerr << "\nLoginInfo: querying db.\n";
     bool correct = false;
-    if (db.exists("LoginInfo", {matchUser, matchPass})) {
+    if (db.exists({matchUser, matchPass})) {
         lastLogin = loginTime();
         correct = true;
     }
@@ -74,7 +74,7 @@ bool LoginInfo::authenticate() {
 // @param nothing
 // @return bool whether or not the username is saved
 bool LoginInfo::exists() {
-    return db.exists("LoginInfo", {"username=\"" + username + "\""});
+    return db.exists({"username=\"" + username + "\""});
 }
 
 // work in progress method

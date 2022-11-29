@@ -1,6 +1,9 @@
 #include "WeatherUI.h"
 
-using namespace std;
+using std::string;
+using std::cout;
+using std::endl;
+using std::make_unique;
 using namespace Wt;
 
 namespace
@@ -17,6 +20,7 @@ namespace
 
 WeatherUI::WeatherUI(string username) : WContainerWidget(), username(username)
 {
+    cout << "rendering WeatherUI" << endl;
     setStyleClass("text-white d-flex flex-row justify-content-center w-auto");
 
     icons["Clouds"] = "../images/weather/cloud.png";
@@ -25,17 +29,20 @@ WeatherUI::WeatherUI(string username) : WContainerWidget(), username(username)
     icons["Clear"] = "../images/weather/sun.png";
 
     LocationInfo info(username);
+    cout << "got LocationInfo: " << info.getLat() << ", " << info.getLon() << endl;
     if (!info.getLat().empty())
     {
         WeatherRequester *wr = new WeatherRequester(info.getLat(), info.getLon());
         Request r(wr->getHost(), wr);
         weather = r.getData();
+        cout << "executed WeatherRequester" << endl;
 
         if (weather.size() > 0)
         {
             const int LEN = weather.size();
             for (int i = 0; i < LEN; i++)
             {
+                cout << "rendering day: 1 of " + LEN << endl;
                 if (i % 8 == 0)
                 {
                     WContainerWidget *day = this->addWidget(make_unique<WContainerWidget>());

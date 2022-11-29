@@ -1,15 +1,17 @@
-/* Jun Shao
-* 251258566
-* September 18 2022
-* Header file containing member and function delcarations for LogMessage implementation
-*/
+/**
+ * @brief Messages with timestamps
+ * @details The LogMessage object holds a message as a string
+ * and a timestamp as a string
+ * @author Jun Shao
+ */
 
 #ifndef LOG_MESSAGE_H
 #define LOG_MESSAGE_H
 
 #include <string>
 
-class LogMessage {
+class LogMessage
+{
 private:
     std::string msg, time;
 
